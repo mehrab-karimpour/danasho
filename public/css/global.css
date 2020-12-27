@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Shabnam';
+  src: url(/fonts/Shabnam.eot?1aca6e81d81dd682a05d8c15352c0d9e);
+  /* IE9 Compat Modes */
+  src: url(/fonts/Shabnam.eot?1aca6e81d81dd682a05d8c15352c0d9e) format("embedded-opentype"), url(/fonts/Shabnam.woff?c8714f9a6f829f58a9100d4645a6da19) format("woff"), url(/fonts/Shabnam.ttf?7b18a4a8f65b3f5eac92df3c91fe4400) format("truetype");
+}
+
+a,
+div,
+li,
+ul,
+span,
+input,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Shabnam;
+}
+
+.nav-brand::before {
+  display: none !important;
+  opacity: 0;
+}
+
