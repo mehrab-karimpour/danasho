@@ -7,7 +7,6 @@
 @section('client.content')
     <div class="container">
         <div class="row">
-
             <header class="col-12">
                 <div class="navigation-wrap bg-light start-header start-style">
                     <div class="container">
@@ -19,7 +18,8 @@
                                     <div class="navbar-brand">
                                         <ul class="navbar-nav text-center">
                                             <li class="nav-item nav-brand mr-2">
-                                                <a class="nav-link nav-brand" href="/auth/register">ایجاد حساب کاربری</a>
+                                                <a class="nav-link nav-brand" href="/auth/register">ایجاد حساب
+                                                    کاربری</a>
                                             </li>
                                             <li class="nav-item nav-brand ml-2">
                                                 <a class="nav-link nav-brand" href="/auth/login">ورود</a>
@@ -68,11 +68,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="section full-height">
+                <div class="section full-height position-absolute">
                     <div class="absolute-center">
-                        <div class="section">
-
-                        </div>
                         <div class="section mt-5">
                             <div class="container">
                                 <div class="row">
@@ -86,12 +83,61 @@
                         </div>
                     </div>
                 </div>
-
-
             </header>
-
         </div>
     </div>
+
+    <div id="slider">
+
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+
+            </ul>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/image/slide1.jpg" alt="Los Angeles">
+                    <div class="carousel-caption">
+                        <h3>Los Angeles</h3>
+                        <p>We had such a great time in LA!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/image/slide3.jpg" alt="Chicago">
+                    <div class="carousel-caption">
+                        <h3>Chicago</h3>
+                        <p>Thank you, Chicago!</p>
+                    </div>
+                </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+    <fieldset class="container-fluid">
+        <h3 class="text-center online-class-text mt-2">کلاس انلاین</h3>
+        <br>
+        <section class="row" id="select-class">
+            <div>
+                پایه تحصیلی و عنوان درس
+            </div>
+            <div>
+                مدت زمان کلاس و هزینه
+            </div>
+            <div>
+                زمان برگزاری کلاس
+            </div>
+            <div>
+                ثبت درخواست
+            </div>
+        </section>
+    </fieldset>
 @endsection
 
 @section('client.script')

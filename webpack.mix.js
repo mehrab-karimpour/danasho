@@ -22,11 +22,19 @@ mix.combine([
     'resources/js/app/login.js'
 ], 'public/js/custom.js')
 
+mix.combine([
+    'resources/js/dependenci/slider.js',
+], 'public/js/slider.js')
+
 mix.sass('resources/sass/client.scss', 'public/css');
-mix.sass('resources/sass/global.scss', 'public/css');
+mix.sass('resources/sass/global.scss', 'public/css/global.css');
+mix.sass('resources/sass/slider.scss', 'public/css');
+mix.sass('resources/sass/mobile.scss', 'public/css/mobile.css');
 
 
-mix.copyDirectory('resources/font','public/js');
+mix.copyDirectory('resources/font', 'public/js/font/');
+mix.copyDirectory('resources/js/dependenci', 'public/js');
+mix.copyDirectory('resources/image/', 'public/image/');
 
 
 

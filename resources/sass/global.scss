@@ -11,8 +11,77 @@ a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6 {
     font-family: Shabnam;
 }
 
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
 .nav-brand::before {
     display: none !important;
     opacity: 0;
 }
+
+.position-absolute {
+    position: absolute !important;
+    top: 5% !important;
+    right: 5% !important;
+}
+
+#slider {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 75vh !important;
+
+    > div {
+        height: 100%;
+
+        > div {
+            height: 100%;
+
+            > div {
+                height: 100%;
+
+                > img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+
+.online-class-text {
+    font-weight: 800;
+    font-size: 45px;
+}
+
+#select-class {
+    direction: rtl;
+
+    > div {
+        text-align: center;
+        width: 21%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border: 1px solid #64b485;
+        border-radius: 16px;
+        padding: 2%;
+        margin: 0 2%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
