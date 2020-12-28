@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\indexController;
+use App\Http\Controllers\onlineClassController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [indexController::class, 'index']);
 
 
+// routes select online class
+Route::prefix('/onlineClass')->group(function () {
+    Route::post('/step1/one',[onlineClassController::class,'getGrade']);
+});

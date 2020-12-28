@@ -2,6 +2,8 @@
 
 @section('client.css')
     <link rel="stylesheet" href="{{asset('css/header.css')}}">
+    <link rel="stylesheet" href="{{asset('css/index.css')}}">
+
 @endsection
 
 @section('client.content')
@@ -13,7 +15,6 @@
                         <div class="row">
                             <div class="col-12">
                                 <nav class="navbar navbar-expand-md navbar-light">
-
                                     {{--   navbar brand  --}}
                                     <div class="navbar-brand">
                                         <ul class="navbar-nav text-center">
@@ -68,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="section full-height position-absolute">
+                {{--<div class="section full-height position-absolute">
                     <div class="absolute-center">
                         <div class="section mt-5">
                             <div class="container">
@@ -82,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </header>
         </div>
     </div>
@@ -123,23 +124,34 @@
     <fieldset class="container-fluid">
         <h3 class="text-center online-class-text mt-2">کلاس انلاین</h3>
         <br>
-        <section class="row" id="select-class">
-            <div>
+        <section id="select-class">
+            <div class="grade">
                 پایه تحصیلی و عنوان درس
             </div>
-            <div>
+            <div class="time">
                 مدت زمان کلاس و هزینه
             </div>
-            <div>
+            <div class="date">
                 زمان برگزاری کلاس
             </div>
-            <div>
+            <div class="set-record">
                 ثبت درخواست
             </div>
         </section>
     </fieldset>
+
+    @include('Client.index.partials.error-select')
+
+    <section class="col-12 col-md-5 col-xl-4" id="online-items">
+        <ul class='list-group'>
+
+        </ul>
+        <button class="btn btn-secondary"> بعدی</button>
+    </section>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
 @endsection
 
 @section('client.script')
     <script src="{{asset('js/header.js')}}"></script>
+    <script src="{{asset('js/index.js')}}"></script>
 @endsection
