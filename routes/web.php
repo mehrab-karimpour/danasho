@@ -16,12 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 // index page
 Route::get('/', [indexController::class, 'index']);
-Route::get('/', function () {
-    return \App\Models\Grade::all();
-});
 
 
 // routes select online class
 Route::prefix('/onlineClass')->group(function () {
-    Route::post('/step1/one', [onlineClassController::class, 'getGrade']);
+    Route::post('/step1/one',[onlineClassController::class,'getGrade']);
 });
