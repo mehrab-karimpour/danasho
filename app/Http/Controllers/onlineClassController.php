@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class onlineClassController extends Controller
 {
-    public function getGrade()
+    public function getGrade(Request $request): \Illuminate\Http\JsonResponse
     {
         try {
             return response()->json(getGrades());

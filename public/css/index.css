@@ -57,11 +57,20 @@
   z-index: 1001;
 }
 
-#online-items > ul > li:hover {
+#online-items > div {
+  align-items: center;
+  height: 90%;
+}
+
+#online-items > div > ul {
+  width: 100%;
+}
+
+#online-items > div > ul > li:hover {
   background: #bdd5bf;
 }
 
-#online-items > ul > li {
+#online-items > div > ul > li {
   direction: rtl;
   text-align: right;
   cursor: pointer;

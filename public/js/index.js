@@ -3,9 +3,8 @@ class index {
 
     }
 
+    //  in this function we checked before items has selected .appendItems
     checkSelect = (step) => {
-
-        //  in this function we checked before items has selected .
 
         let constSelected = $('.online-selected').length;
         if (step > constSelected + 1) {
@@ -29,7 +28,7 @@ class index {
             });
     }
 
-    appendItems = (result) => {
+    static appendItems = (result) => {
 
         let onlineItems = $('#online-items');
         onlineItems.fadeIn(200);
@@ -37,7 +36,7 @@ class index {
         $.each(result, function (key, value) {
             let tag = "<li class='list-group-item' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
-            $('#online-items>ul').append(tag);
+            $('#online-items>div>ul').append(tag);
         });
     }
 
@@ -81,15 +80,16 @@ class index {
 class Step1 extends index {
     constructor() {
         super();
+
     }
 
     stepOneStart() {
         this.ajaxStart();
-        this.post('/onlineClass/step1/one', {}).done(function (result) {
-            let thisClass = new Step1();
-            thisClass.appendItems(result);
-        });
+        this.post('/GetGrades', {}).done(function (result) {
+           // let thisClass = new Step1();
 
+            index.appendItems(result);
+        });
     }
 
 }

@@ -55,17 +55,25 @@
     right: 0;
     left: 0;
     z-index: 1001;
-    >ul{
-        >li:hover{
-            background:#bdd5bf;
-        }
-        >li{
-            direction: rtl;
-            text-align: right;
-            cursor: pointer;
+
+    > div {
+        align-items: center;
+        height: 90%;
+        > ul {
+            width: 100%;
+            > li:hover {
+                background: #bdd5bf;
+            }
+
+            > li {
+                direction: rtl;
+                text-align: right;
+                cursor: pointer;
+            }
         }
     }
-    >button{
+
+    > button {
         position: absolute;
         bottom: 0;
         margin-bottom: 3%;

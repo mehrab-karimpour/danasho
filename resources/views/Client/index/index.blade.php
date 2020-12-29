@@ -143,11 +143,15 @@
     @include('Client.index.partials.error-select')
 
     <section class="col-12 col-md-5 col-xl-4" id="online-items">
-        <ul class='list-group'>
+        <div class="col-12 d-flex justify-content-center">
+            <ul class='list-group'>
 
-        </ul>
+            </ul>
+        </div>
         <button class="btn btn-secondary"> بعدی</button>
     </section>
+
+
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
 @endsection
 
