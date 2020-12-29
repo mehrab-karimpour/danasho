@@ -122,6 +122,7 @@
         </div>
     </div>
     <fieldset class="container-fluid">
+        @csrf
         <h3 class="text-center online-class-text mt-2">کلاس انلاین</h3>
         <br>
         <section id="select-class">

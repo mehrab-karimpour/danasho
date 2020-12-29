@@ -17,7 +17,6 @@
 </head>
 <body>
 
-@csrf
 
 @yield('client.content')
 
