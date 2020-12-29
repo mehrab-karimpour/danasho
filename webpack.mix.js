@@ -42,6 +42,13 @@ mix.sass('resources/sass/mobile.scss', 'public/css/mobile.css');
 mix.sass('resources/sass/index.scss', 'public/css/index.css');
 
 
+mix.styles([
+    'public/css/header.css',
+], 'public/css/header.css');
+
+
+
+
 mix.copyDirectory('resources/font', 'public/js/font/');
 mix.copyDirectory('resources/js/dependenci', 'public/js');
 mix.copyDirectory('resources/image/', 'public/image/');
