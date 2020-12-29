@@ -67,7 +67,8 @@ body {
   font-size: 45px;
 }
 
-.ajax-back {
+.ajax-back,
+#ajax-leader-back {
   background: rgba(0, 0, 40, 0.4);
   width: 100%;
   top: 0;
@@ -84,5 +85,20 @@ body {
 
 .fa-times {
   transform: scale(1.1);
+}
+
+#ajax-leader-back {
+  z-index: 2000 !important;
+}
+
+#ajax-loader {
+  position: fixed;
+  margin: 0 auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2001;
+  display: none;
 }
 

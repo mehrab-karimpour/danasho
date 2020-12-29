@@ -22,9 +22,7 @@ class index {
         return $.post(
             url,
             data,
-            function (msg) {
-
-            });
+           );
     }
 
     static appendItems = (result, turn = 1) => {
@@ -33,24 +31,31 @@ class index {
         onlineItems.fadeIn(200);
         $('#online-items>div>ul').empty();
 
-         $('#turn').val(turn);
+        $('#turn').val(turn);
         $.each(result, function (key, value) {
             let tag = "<li onclick='recordEvent(this)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
             $('#online-items>div>ul').append(tag);
         });
+        index.ajaxLoaderEnd();
+
     }
 
-    ajaxBackStart = () => {
-        $('.ajax-back').fadeIn(200);
+    static ajaxBackStart = () => {
+        $(document).ajaxStart(function () {
+            $('#ajax-loader').fadeIn();
+            $('#ajax-leader-back').fadeIn(200);
+        })
     }
-    ajaxBackend = () => {
-        $('.ajax-back').fadeOut(200);
+    static ajaxBackEnd = () => {
+        $('#ajax-loader').fadeOut();
+        $('#ajax-leader-back').fadeOut(200);
     }
 
     // show ajax items
     ajaxStart = () => {
         $(document).ajaxStart(function () {
+            $('#ajax-loader').fadeIn();
             $('.ajax-back').fadeIn(200);
         })
     }
@@ -63,18 +68,13 @@ class index {
         $(item).fadeIn();
     }
 
-    // hide ajax items
-    ajaxEnd = () => {
-        $('.ajax-back').fadeOut(200);
-    }
 
-
-    observeTurn = () => {
+    static ajaxLoaderEnd = () => {
+        $('#ajax-loader').fadeOut();
 
     }
 
-    showMessage = () => {
 
-    }
+
 
 }

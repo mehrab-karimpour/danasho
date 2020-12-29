@@ -154,7 +154,7 @@
         <button class="btn btn-secondary"> بعدی</button>
     </section>
 
-
+    @include('partials.ajax-loader')
     <br><br><br><br><br><br><br><br><br><br><br><br><br>
 @endsection
 

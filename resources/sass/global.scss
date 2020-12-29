@@ -72,8 +72,24 @@ body {
     cursor: pointer;
 }
 
-.fa-times{
+.fa-times {
     transform: scale(1.1);
+}
+
+#ajax-leader-back{
+    @extend .ajax-back;
+    z-index: 2000!important;
+}
+
+#ajax-loader {
+    position: fixed;
+    margin: 0 auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2001;
+    display: none;
 }
 
 

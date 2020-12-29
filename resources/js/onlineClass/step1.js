@@ -21,13 +21,14 @@ class Step1 extends index {
     recordHandle = (tag) => {
         let turn = $('#turn').val();
         let dataID = $(tag).attr("data-id");
-
         let step = $(tag).text();
         let data = {'turn': turn, 'step': step, 'dataID': dataID};
+
+        index.ajaxBackStart()
         this.post('/online/recordHandle', data).done(function (result) {
-            console.log(result)
-             index.appendItems(result[0],result[1]);
+            index.appendItems(result[0], result[1]);
         });
+        index.ajaxBackEnd();
     }
 
 }
