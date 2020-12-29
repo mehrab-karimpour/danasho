@@ -19,6 +19,7 @@ Route::get('/', [indexController::class, 'index']);
 
 
 // routes select online class
-
-Route::post('/GetGrades', [onlineClassController::class, 'getGrade']);
+Route::prefix('/online')->group(function () {
+    Route::post('/GetGrades', [onlineClassController::class, 'getGrade']);
+});
 

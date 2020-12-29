@@ -18,11 +18,7 @@ class index {
     }
 
     //  handle post request
-    post = (url = '', dataq = {}) => {
-        //data['_token'] =
-        let token = $("input[name='_token']").val();
-        //console.log(data)
-        let data = {"_token": token}
+    post = (url = '', data = {}) => {
         return $.post(
             url,
             data,
@@ -88,8 +84,8 @@ class Step1 extends index {
 
     stepOneStart() {
         this.ajaxStart();
-        this.post('/GetGrades', {}).done(function (result) {
-           // let thisClass = new Step1();
+        this.post('/online/GetGrades', {}).done(function (result) {
+            // let thisClass = new Step1();
 
             index.appendItems(result);
         });
