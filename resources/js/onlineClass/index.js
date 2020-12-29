@@ -18,8 +18,11 @@ class index {
     }
 
     //  handle post request
-    post = (url = '', data = {}) => {
-        data['_token'] = $("input[name='_token']").val();
+    post = (url = '', dataq = {}) => {
+        //data['_token'] =
+        let token = $("input[name='_token']").val();
+        //console.log(data)
+        let data = {"_token": token}
         return $.post(
             url,
             data,

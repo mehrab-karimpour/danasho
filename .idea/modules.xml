@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/danasho.iml" filepath="$PROJECT_DIR$/.idea/danasho.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../laravel/danasho/.idea/danasho_project.iml" filepath="$PROJECT_DIR$/../laravel/danasho/.idea/danasho_project.iml" />
     </modules>
   </component>
 </project>
