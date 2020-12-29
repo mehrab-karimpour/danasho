@@ -32,7 +32,7 @@ class onlineClassController extends Controller
                 $data = Session::get("onlineClass");
                 $data['unit'] = $request->step;
                 Session::put('onlineClass', $data);
-                return response()->json([getLessons($request->dataID), 2]);
+                return response()->json([getLessons($request->dataID), 3]);
                 break;
             default:
                 return "error";
