@@ -12,7 +12,7 @@ const mix = require('laravel-mix');
  */
 
 
-mix.combine([
+/*mix.combine([
     'resources/js/jquery-3.5.1.min.js',
     'resources/js/bootstrap.min.js'
 ], 'public/js/app.js')
@@ -31,9 +31,14 @@ mix.combine([
     'resources/js/onlineClass/eventHandler.js',
 ], 'public/js/index.js')
 
+
 mix.combine([
     'resources/js/dependenci/slider.js',
 ], 'public/js/slider.js')
+
+mix.combine([
+    'public/js/header.js',
+], 'public/js/header.js')*/
 
 mix.sass('resources/sass/client.scss', 'public/css');
 mix.sass('resources/sass/global.scss', 'public/css/global.css');
@@ -47,6 +52,7 @@ mix.styles([
 ], 'public/css/header.css');
 
 
+/*
 
 
 mix.copyDirectory('resources/font', 'public/js/font/');
@@ -54,6 +60,7 @@ mix.copyDirectory('resources/js/dependenci', 'public/js');
 mix.copyDirectory('resources/image/', 'public/image/');
 
 
+*/
 
 
 
