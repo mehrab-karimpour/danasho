@@ -19,11 +19,16 @@
                                     <div class="navbar-brand">
                                         <ul class="navbar-nav text-center">
                                             <li class="nav-item nav-brand mr-2">
-                                                <a class="nav-link nav-brand" href="/auth/register">ایجاد حساب
-                                                    کاربری</a>
+                                                <a class="nav-link nav-brand" href="/auth/register">
+                                                    ثبت نام
+                                                    <i class="fas fa-user-plus"></i>
+                                                </a>
                                             </li>
                                             <li class="nav-item nav-brand ml-2">
-                                                <a class="nav-link nav-brand" href="/auth/login">ورود</a>
+                                                <a class="nav-link nav-brand" href="/auth/login">
+                                                    ورود
+                                                    <i class="fas fa-sign-in-alt"></i>
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -49,7 +54,10 @@
                                             <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
                                                    role="button" aria-haspopup="true" aria-expanded="false">
-                                                    <strong>خدمات</strong>
+                                                    <strong>
+                                                        <i class="fas fa-chevron-down"></i>
+                                                        خدمات
+                                                    </strong>
                                                 </a>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="#">تست</a>
@@ -123,19 +131,26 @@
     </div>
     <fieldset class="container-fluid">
         @csrf
-        <h3 class="text-center online-class-text mt-2">کلاس انلاین</h3>
+        <h4 class="text-center online-class-text">
+            کلاس انلاین
+            <i class="fas fa-video ml-3 pt-3"></i>
+        </h4>
         <br>
         <section id="select-class">
             <div class="grade">
+                <i class="fas fa-user-graduate ml-2"></i>
                 پایه تحصیلی و عنوان درس
             </div>
             <div class="time">
+                <i class="fas fa-hourglass-start ml-2"></i>
                 مدت زمان کلاس و هزینه
             </div>
             <div class="date">
+                <i class="fas fa-calendar-alt ml-2"></i>
                 زمان برگزاری کلاس
             </div>
             <div class="set-record">
+                <i class="fas fa-edit ml-2"></i>
                 ثبت درخواست
             </div>
         </section>
