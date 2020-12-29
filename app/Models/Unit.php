@@ -14,12 +14,12 @@ class Unit extends Model
         'grade_id'
     ];
 
-    public function grade()
+    public function grade(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Grade::class);
     }
 
-    public function lessons()
+    public function lessons(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Lesson::class);
     }

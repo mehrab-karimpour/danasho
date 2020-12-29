@@ -13,12 +13,12 @@ class Grade extends Model
         'title'
     ];
 
-    public function units()
+    public function units(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Unit::class);
     }
 
-    public function prices()
+    public function prices(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Price::class);
     }

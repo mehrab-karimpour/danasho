@@ -144,6 +144,8 @@
     @include('Client.index.partials.error-select')
 
     <section class="col-12 col-md-5 col-xl-4" id="online-items">
+        <input type="text" id="turn" name="turn" value="1">
+        <span class="d-block mt-2 ml-1 "><i class="fas fa-times cursor-pointer"></i></span>
         <div class="col-12 d-flex justify-content-center">
             <ul class='list-group'>
 

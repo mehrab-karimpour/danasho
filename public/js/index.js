@@ -27,13 +27,15 @@ class index {
             });
     }
 
-    static appendItems = (result) => {
+    static appendItems = (result, turn = 1) => {
 
         let onlineItems = $('#online-items');
         onlineItems.fadeIn(200);
-        $('#online-items>ul').empty();
+        $('#online-items>div>ul').empty();
+
+         $('#turn').val(turn);
         $.each(result, function (key, value) {
-            let tag = "<li class='list-group-item' data-id='" + value['id'] + "'" +
+            let tag = "<li onclick='recordEvent(this)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
             $('#online-items>div>ul').append(tag);
         });
@@ -53,18 +55,19 @@ class index {
         })
     }
 
+    lengthLi = () => {
+        return $('#online-items>div>ul').find("li").length;
+    }
+
+    showItem = (item) => {
+        $(item).fadeIn();
+    }
+
     // hide ajax items
     ajaxEnd = () => {
         $('.ajax-back').fadeOut(200);
     }
 
-    hideWindow = () => {
-
-    }
-
-    showWindows = () => {
-
-    }
 
     observeTurn = () => {
 
@@ -83,11 +86,28 @@ class Step1 extends index {
     }
 
     stepOneStart() {
-        this.ajaxStart();
-        this.post('/online/GetGrades', {}).done(function (result) {
-            // let thisClass = new Step1();
 
-            index.appendItems(result);
+        if (this.lengthLi() < 1) {
+            this.ajaxStart();
+            this.post('/online/GetGrades', {}).done(function (result) {
+                index.appendItems(result);
+
+            });
+        } else {
+            this.ajaxBackStart();
+            this.showItem("#online-items");
+        }
+    }
+
+    recordHandle = (tag) => {
+        let turn = $('#turn').val();
+        let dataID = $(tag).attr("data-id");
+
+        let step = $(tag).text();
+        let data = {'turn': turn, 'step': step, 'dataID': dataID};
+        this.post('/online/recordHandle', data).done(function (result) {
+            console.log(result)
+             index.appendItems(result[0],result[1]);
         });
     }
 
@@ -97,10 +117,19 @@ class Step1 extends index {
 
 
 
-$(function () {
-    let step1 = new Step1();
+let step1 = new Step1();
 
-    $('.grade').click(function () {
-        step1.stepOneStart();
-    })
-})
+$('.grade').click(function () {
+    step1.stepOneStart();
+});
+
+$('.fa-times').click(function () {
+    $('#online-items').fadeOut();
+    step1.ajaxEnd();
+});
+
+function recordEvent(tag) {
+    step1.recordHandle(tag);
+}
+
+

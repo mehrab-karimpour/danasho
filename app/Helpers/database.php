@@ -1,9 +1,10 @@
 <?php
 
 
-function getUnits()
+function getUnits($gradeID)
 {
-    return \App\Models\Unit::all();
+    $grade = \App\Models\Grade::find($gradeID);
+    return $grade->units;
 }
 
 function getGrades()
@@ -16,9 +17,10 @@ function getTimes()
     return \App\Models\Time::all();
 }
 
-function getLessons()
+function getLessons($unitID)
 {
-    return \App\Models\Lesson::all();
+    $lesson = \App\Models\Unit::find($unitID);
+    return $lesson->lessons;
 }
 
 function getPrices($gradeID)

@@ -27,13 +27,15 @@ class index {
             });
     }
 
-    static appendItems = (result) => {
+    static appendItems = (result, turn = 1) => {
 
         let onlineItems = $('#online-items');
         onlineItems.fadeIn(200);
-        $('#online-items>ul').empty();
+        $('#online-items>div>ul').empty();
+
+         $('#turn').val(turn);
         $.each(result, function (key, value) {
-            let tag = "<li class='list-group-item' data-id='" + value['id'] + "'" +
+            let tag = "<li onclick='recordEvent(this)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
             $('#online-items>div>ul').append(tag);
         });
@@ -53,18 +55,19 @@ class index {
         })
     }
 
+    lengthLi = () => {
+        return $('#online-items>div>ul').find("li").length;
+    }
+
+    showItem = (item) => {
+        $(item).fadeIn();
+    }
+
     // hide ajax items
     ajaxEnd = () => {
         $('.ajax-back').fadeOut(200);
     }
 
-    hideWindow = () => {
-
-    }
-
-    showWindows = () => {
-
-    }
 
     observeTurn = () => {
 

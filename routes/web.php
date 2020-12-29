@@ -17,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 // index page
 Route::get('/', [indexController::class, 'index']);
 
+Route::get('/s', [indexController::class, 'set']);
 
 // routes select online class
 Route::prefix('/online')->group(function () {
     Route::post('/GetGrades', [onlineClassController::class, 'getGrade']);
+    Route::post('back', [onlineClassController::class, 'back']);
+    Route::post('/recordHandle',[onlineClassController::class,'recordHandle']);
 });
 
