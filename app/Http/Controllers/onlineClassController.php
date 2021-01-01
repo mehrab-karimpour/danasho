@@ -86,20 +86,13 @@ class onlineClassController extends Controller
         return response()->json([getUnits($request->dataID), 2]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function recordUnit(Request $request): \Illuminate\Http\JsonResponse
     {
         recordUpdate(Session::get('id'), 'unit', $request->step);
         return response()->json([getLessons($request->dataID), 3]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function recordLesson(Request $request): \Illuminate\Http\JsonResponse
     {
         recordUpdate(Session::get('id'), 'lesson', $request->step);
@@ -118,10 +111,7 @@ class onlineClassController extends Controller
         return response()->json([$allTimes, 4]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function recordPriceAndTime(Request $request): \Illuminate\Http\JsonResponse
     {
         recordUpdate(Session::get('id'), 'time', $request->step);
@@ -137,10 +127,7 @@ class onlineClassController extends Controller
         return response()->json([$days, 5]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function recordDate(Request $request): \Illuminate\Http\JsonResponse
     {
         Session::put('day', $request->step);
