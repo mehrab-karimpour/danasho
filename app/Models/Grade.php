@@ -18,7 +18,7 @@ class Grade extends Model
         return $this->hasMany(Unit::class);
     }
 
-    public function prices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function price(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Price::class);
     }

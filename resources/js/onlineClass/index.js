@@ -22,7 +22,7 @@ class index {
         return $.post(
             url,
             data,
-           );
+        );
     }
 
     static appendItems = (result, turn = 1) => {
@@ -37,8 +37,16 @@ class index {
                 ">" + value['title'] + "</li>";
             $('#online-items>div>ul').append(tag);
         });
-        index.ajaxLoaderEnd();
+        setTimeout(() => {
+            index.ajaxLoaderEnd();
+        }, 200)
 
+    }
+
+    static disableTomorrowDate = () => {
+        let TomorrowItem = $('#list-group>li').eq(0);
+        TomorrowItem.eq(0).addClass("bg-danger");
+        TomorrowItem.removeAttr("onClick");
     }
 
     static ajaxBackStart = () => {
@@ -65,6 +73,7 @@ class index {
     }
 
     showItem = (item) => {
+        $('.ajax-back').fadeIn(200);
         $(item).fadeIn();
     }
 
@@ -74,7 +83,23 @@ class index {
 
     }
 
+    static endRecordSteps = () => {
+        $('.online-steps-close').click();
+        $('.ajax-back').fadeIn(0);
+        $('#online-items-end-step').fadeIn(100);
+    }
 
+     endRecordManager = () => {
+         if ($('.set-record').hasClass('bg-warning')) {
+             $('.ajax-back').fadeIn(0);
+             $('#online-items-end-step').fadeIn(100);
+         }
+    }
+
+    closeItem = (item) => {
+        $(item).fadeOut();
+        $('.ajax-back').fadeOut();
+    }
 
 
 }

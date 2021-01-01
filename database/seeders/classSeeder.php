@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\DatePeriod;
 use App\Models\Grade;
 use App\Models\Lesson;
 use App\Models\Price;
+use App\Models\Time;
 use App\Models\Unit;
 use Illuminate\Database\Seeder;
 
@@ -82,6 +84,34 @@ class classSeeder extends Seeder
         $lesson->title = 'نگارش اول ابتدایی';
         $lesson->save();
 
+        $price = new time();
+        $price->title = "15";
+        $price->save();
+
+        $price = new time();
+        $price->title = "30";
+        $price->save();
+
+        $price = new time();
+        $price->title = "45";
+        $price->save();
+
+        $price = new time();
+        $price->title = "60";
+        $price->save();
+
+        $period = new DatePeriod();
+        $period->title = "ساعت 9:00 تا 15:000";
+        $period->period_key = 15;
+        $period->save();
+        $period = new DatePeriod();
+        $period->title = "ساعت 15:00 تا 18:000";
+        $period->period_key = 18;
+        $period->save();
+        $period = new DatePeriod();
+        $period->title = "ساعت 18:00 تا 22:000";
+        $period->period_key = 22;
+        $period->save();
 
     }
 }

@@ -18,7 +18,8 @@ h3,
 h4,
 h5,
 h6,
-button {
+button,
+strong {
   font-family: Shabnam;
 }
 
@@ -100,5 +101,9 @@ body {
   left: 0;
   z-index: 2001;
   display: none;
+}
+
+.direction-rtl {
+  direction: rtl;
 }
 

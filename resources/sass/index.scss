@@ -59,8 +59,10 @@
     > div {
         align-items: center;
         height: 90%;
+
         > ul {
             width: 100%;
+
             > li:hover {
                 background: #bdd5bf;
             }
@@ -80,6 +82,33 @@
     }
 }
 
+#online-items-end-step {
+    @extend #online-items;
+    height: auto !important;
+    >p{
+        font-weight: bold;
+    }
+    > div {
+        direction: rtl;
+        > div {
+            direction: ltr;
+            display: flex;
+            justify-content: flex-end;
+
+            > input {
+                transform: scale(1.1);
+                margin: 5% 0 0 5%;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.item-selected {
+    background: #8ef8b1;
+    transition: all 1s;
+    transform: scale(1.1);
+}
 
 @media (max-width: 768px) {
 

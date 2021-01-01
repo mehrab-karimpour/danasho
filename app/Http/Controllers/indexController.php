@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 

@@ -141,11 +141,11 @@
                 <i class="fas fa-user-graduate ml-2"></i>
                 پایه تحصیلی و عنوان درس
             </div>
-            <div class="time">
+            <div class="time public-items">
                 <i class="fas fa-hourglass-start ml-2"></i>
                 مدت زمان کلاس و هزینه
             </div>
-            <div class="date">
+            <div class="date public-items">
                 <i class="fas fa-calendar-alt ml-2"></i>
                 زمان برگزاری کلاس
             </div>
@@ -158,11 +158,53 @@
 
     @include('Client.index.partials.error-select')
 
+    <section class="col-12 col-md-10 col-xl-8 p-2" id="online-items-end-step">
+        <span class="d-block mt-2 ml-1 "><i class="fas fa-times end-step-close cursor-pointer"></i></span>
+        <h5 class="text-center direction-rtl">جهت افزایش کیفیت کلاس لطفا موارد زیر را تکمیل نمایید :</h5>
+        <hr class="m-2">
+        <p class="text-right direction-rtl">سطح خود را انتخاب کنید</p>
+        <label for="level" class="text-center"></label>
+        <div class="d-flex justify-content-around col-12">
+            <div>
+                <p>ضعیف</p>
+                <input name="level" class="custom-radio" id="level" type="radio">
+            </div>
+            <div>
+                <p>متوسط</p>
+                <input name="level" class="custom-radio" id="level" type="radio">
+            </div>
+            <div>
+                <p>خوب</p>
+                <input name="level" class="custom-radio" id="level" type="radio">
+            </div>
+            <div>
+                <p>عالی</p>
+                <input name="level" class="custom-radio" id="level" type="radio">
+            </div>
+
+        </div>
+        <p class="text-right direction-rtl mt-2">تصویر سوالاتی که قصد رفع اشکال انها را دارید اپلود کنید .</p>
+        <div class="d-flex justify-content-center col-12">
+            <div class="col-12 col-md-3 col-xl-2">
+                <label for="questions"></label>
+                <input type="file" class="form-control" name="img" id="questions">
+            </div>
+        </div>
+        <p class="text-right direction-rtl mt-2">هر گونه توضیح تکمیلی که به بهبود کیفیت کلاس شما کمک میکند را در زیر وارد کنید </p>
+        <p class="text-right m-0 p-0">(میتواند شامل مبحث مورد نطر باشد )</p>
+        <label for="description"></label>
+        <textarea class="form-control" name="description" id="description" placeholder="لطفا توصیحات خود را وارد کنید"></textarea>
+        <div class="d-flex justify-content-around col-12 mt-2">
+            <button class="btn btn-secondary">مرحله قبل</button>
+            <button class="btn btn-primary">مرحله بعد</button>
+        </div>
+    </section>
+
     <section class="col-12 col-md-5 col-xl-4" id="online-items">
         <input type="text" id="turn" name="turn" value="1">
-        <span class="d-block mt-2 ml-1 "><i class="fas fa-times cursor-pointer"></i></span>
+        <span class="d-block mt-2 ml-1 "><i class="fas fa-times online-steps-close cursor-pointer"></i></span>
         <div class="col-12 d-flex justify-content-center">
-            <ul class='list-group'>
+            <ul class='list-group' id="list-group">
 
             </ul>
         </div>
