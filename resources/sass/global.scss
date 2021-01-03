@@ -7,7 +7,7 @@
 
 }
 
-a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button ,strong{
+a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, strong {
     font-family: Shabnam;
 }
 
@@ -96,7 +96,13 @@ body {
     direction: rtl;
 }
 
+.form-validate-error {
+    border: 1px solid #db3e45;
+}
 
+.form-validate-success {
+    border: 1px solid #4cdb7c;
+}
 
 
 

@@ -23,6 +23,8 @@ Route::get('/s', [indexController::class, 'set']);
 Route::prefix('/online')->group(function () {
     Route::post('/GetGrades', [onlineClassController::class, 'getGrade']);
     Route::post('back', [onlineClassController::class, 'back']);
-    Route::post('/recordHandle',[onlineClassController::class,'recordHandle']);
+    Route::post('/getTime',[onlineClassController::class,'getTime']);
+    Route::post('/getDate',[onlineClassController::class,'getDate']);
+    Route::post('/recordHandle',[onlineClassController::class,'recordStepOneHandle']);
 });
 

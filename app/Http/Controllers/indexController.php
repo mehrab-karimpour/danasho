@@ -10,6 +10,7 @@ class indexController extends Controller
 {
     public function index(): \Illuminate\Http\Response
     {
+        Session::remove('id');
         return response()->view('Client.index.index');
     }
 

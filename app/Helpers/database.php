@@ -14,6 +14,7 @@ function insertNewOnlineClass($grade)
     ]);
 }
 
+
 function recordUpdate($classId, $item, $value)
 {
     return \App\Models\Online::where('id', '=', $classId)->update([
@@ -32,6 +33,8 @@ function getUnits($gradeID)
     $grade = \App\Models\Grade::find($gradeID);
     return $grade->units;
 }
+
+
 
 
 function getGrades()

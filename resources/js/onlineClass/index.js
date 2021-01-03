@@ -30,17 +30,22 @@ class index {
         let onlineItems = $('#online-items');
         onlineItems.fadeIn(200);
         $('#online-items>div>ul').empty();
-
+        window.turn = turn;
         $('#turn').val(turn);
         $.each(result, function (key, value) {
-            let tag = "<li onclick='recordEvent(this)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+            let tag = "<li onclick='recordEvent(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
             $('#online-items>div>ul').append(tag);
         });
         setTimeout(() => {
             index.ajaxLoaderEnd();
-        }, 200)
+        }, 200);
 
+        if (turn===5){
+            let firstDateItem=$('#online-items>div>ul li').eq(0);
+            firstDateItem.removeAttr("onclick");
+            firstDateItem.addClass('bg-danger');
+        }
     }
 
     static disableTomorrowDate = () => {
@@ -89,16 +94,31 @@ class index {
         $('#online-items-end-step').fadeIn(100);
     }
 
-     endRecordManager = () => {
-         if ($('.set-record').hasClass('bg-warning')) {
-             $('.ajax-back').fadeIn(0);
-             $('#online-items-end-step').fadeIn(100);
-         }
+    endRecordManager = () => {
+        if ($('.set-record').hasClass('bg-warning')) {
+            $('.ajax-back').fadeIn(0);
+            $('#online-items-end-step').fadeIn(100);
+        }
     }
 
     closeItem = (item) => {
         $(item).fadeOut();
         $('.ajax-back').fadeOut();
+    }
+
+
+    static completedStep = (stepTitle, stepItem) => {
+        $(stepItem).text(stepTitle);
+        $(stepItem).addClass('item-selected');
+
+    }
+
+    completing = (stepItem) => {
+        $(stepItem).addClass('bg-warning');
+    }
+
+    static completeEnd = (stepItem) => {
+        $(stepItem).removeClass('bg-warning');
     }
 
 

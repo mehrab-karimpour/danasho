@@ -7,95 +7,67 @@
 @endsection
 
 @section('client.content')
-    <div class="container">
-        <div class="row">
-            <header class="col-12">
-                <div class="navigation-wrap bg-light start-header start-style">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <nav class="navbar navbar-expand-md navbar-light">
-                                    {{--   navbar brand  --}}
-                                    <div class="navbar-brand">
-                                        <ul class="navbar-nav text-center">
-                                            <li class="nav-item nav-brand mr-2">
-                                                <a class="nav-link nav-brand" href="/auth/register">
-                                                    ثبت نام
-                                                    <i class="fas fa-user-plus"></i>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item nav-brand ml-2">
-                                                <a class="nav-link nav-brand" href="/auth/login">
-                                                    ورود
-                                                    <i class="fas fa-sign-in-alt"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
+    <div class="navigation-wrap bg-light start-header start-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md navbar-light">
+
+                        <a class="navbar-brand" href="" target="_blank">
+                            ورود
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                        <a class="navbar-brand" href="" target="_blank">
+                            ثبت نام
+                            <i class="fa fa-user-plus"></i>
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto py-4 py-md-0">
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        تماس با ما
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#"></a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
                                     </div>
-
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                            aria-expanded="false" aria-label="Toggle navigation">
-                                        <span class="navbar-toggler-icon"></span>
-                                    </button>
-
-                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <ul class="navbar-nav ml-auto col-md-8 py-4 py-md-0">
-
-                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                                <a class="nav-link" href="#"><strong>تماس با ما</strong></a>
-                                            </li>
-                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                                <a class="nav-link" href="#"><strong>سوالات متداول</strong></a>
-                                            </li>
-                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                                <a class="nav-link" href="#"><strong>قوانین</strong></a>
-                                            </li>
-                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-                                                   role="button" aria-haspopup="true" aria-expanded="false">
-                                                    <strong>
-                                                        <i class="fas fa-chevron-down"></i>
-                                                        خدمات
-                                                    </strong>
-                                                </a>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">تست</a>
-                                                    <a class="dropdown-item" href="#">تست</a>
-                                                    <a class="dropdown-item" href="#">تست</a>
-                                                    <a class="dropdown-item" href="#">تست</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                                <a class="nav-link" href="#"><strong>داناشو</strong></a>
-                                            </li>
-                                        </ul>
+                                </li>
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link" href="#">سوالات متداول</a>
+                                </li>
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link" href="#">قوانین</a>
+                                </li>
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-chevron-down"></i>
+                                        خدمات
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">خدمات</a>
+                                        <a class="dropdown-item" href="#">خدمات </a>
+                                        <a class="dropdown-item" href="#">خدمات</a>
+                                        <a class="dropdown-item" href="#">خدمات</a>
                                     </div>
-
-                                </nav>
-                            </div>
+                                </li>
+                                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                    <a class="nav-link" href="#">داناشو</a>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
+
+                    </nav>
                 </div>
-                {{--<div class="section full-height position-absolute">
-                    <div class="absolute-center">
-                        <div class="section mt-5">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div id="switch">
-                                            <div id="circle"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>--}}
-            </header>
+            </div>
         </div>
     </div>
-
     <div id="slider">
 
         <div id="demo" class="carousel slide" data-ride="carousel">
@@ -131,11 +103,11 @@
     </div>
     <fieldset class="container-fluid">
         @csrf
-        <h4 class="text-center online-class-text">
+        <h5 class="text-center online-class-text">
             کلاس انلاین
             <i class="fas fa-video ml-3 pt-3"></i>
-        </h4>
-        <br>
+        </h5>
+
         <section id="select-class">
             <div class="grade">
                 <i class="fas fa-user-graduate ml-2"></i>
@@ -201,14 +173,21 @@
     </section>
 
     <section class="col-12 col-md-5 col-xl-4" id="online-items">
-        <input type="text" id="turn" name="turn" value="1">
+        <input type="hidden" id="turn" name="turn" value="1">
+        <input type="hidden" id="edit" name="edit" value="0">
         <span class="d-block mt-2 ml-1 "><i class="fas fa-times online-steps-close cursor-pointer"></i></span>
         <div class="col-12 d-flex justify-content-center">
-            <ul class='list-group' id="list-group">
+            <ul class='list-group m-0 p-0' id="list-group">
 
             </ul>
         </div>
-        <button class="btn btn-secondary"> بعدی</button>
+        <div class="col-12 col-md-4 col-xl-2 circle-select">
+            <span class="circle-select-active"></span>
+            <span></span>
+            <span></span>
+        </div>
+        <br>
+        {{--<button class="btn float-right btn-secondary mb-5"> بعدی</button>--}}
     </section>
 
     @include('partials.ajax-loader')

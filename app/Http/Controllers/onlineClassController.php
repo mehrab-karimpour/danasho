@@ -23,13 +23,48 @@ class onlineClassController extends Controller
         }
     }
 
-    public function recordHandle(Request $request)
+    public function getDate()
+    {
+        $week = [0, 1, 2, 3, 4, 5, 6, 7];
+        $days = [];
+        foreach ($week as $item) {
+            $days[]['title'] = Verta::now()->addDays($item)->formatWord('l') . ' ' . Verta::now()->addDays($item)->format('d-m-Y');
+        }
+        foreach ($week as $key => $day) {
+            $days[$key]['id'] = Carbon::now()->addDays($day)->format('Y-m-d');
+        }
+        return response()->json([$days, 5]);
+    }
+
+    public function getTime(Request $request)
+    {
+        $price = DB::table('prices')
+            ->where('grade_id', '=', Session::get('gradeId'))
+            ->first();
+
+        $allTimes = getTimes();
+        foreach ($allTimes as $key => $time) {
+            $time = $time->title;
+            $p = ($time / 15) * intval($price->title);
+            $allTimes[$key]->title = "$time دقیقه $p هزار تومان ";
+            $allTimes[$key]->id = $time;
+        }
+        return response()->json([$allTimes, 4]);
+
+    }
+
+    public function recordStepOneHandle(Request $request)
     {
 
         switch ($request->turn) {
-            case 1:
+            case "1":
                 // record grade
-                return $this->recordGrade($request);
+
+                if (Session::get('id')) {
+                    return $this->editGrade($request);
+                } else {
+                    return $this->recordGrade($request);
+                }
                 break;
 
             case 2:
@@ -40,28 +75,25 @@ class onlineClassController extends Controller
             case 3:
                 // record lesson
                 return $this->recordLesson($request);
-
+                break;
             case 4:
-                // record price and time
+                // record date and price
                 return $this->recordPriceAndTime($request);
                 break;
-
             case 5:
                 // record date
                 return $this->recordDate($request);
                 break;
             case 6:
-                // record period
-                recordUpdate(Session::get('id'), 'period', $request->dataID);
-
-                return ['success', 7, Session::get('day').' '.$request->step];
+                // record date
+                return $this->recordPeriod($request);
                 break;
+
 
             default:
                 return "error";
+
         }
-
-
     }
 
     public function back(Request $request)
@@ -116,10 +148,10 @@ class onlineClassController extends Controller
     {
         recordUpdate(Session::get('id'), 'time', $request->step);
         recordUpdate(Session::get('id'), 'price', calculatePrice(Session::get('gradeId'), $request->dataID));
-        $week = [1, 2, 3, 4, 5, 6, 7];
+        $week = [0, 1, 2, 3, 4, 5, 6, 7];
         $days = [];
         foreach ($week as $item) {
-            $days[]['title'] = Verta::now()->addDays($item)->formatWord('l') . ' ' . Verta::now()->addDays($item)->format('y-m-d');
+            $days[]['title'] = Verta::now()->addDays($item)->formatWord('l') . ' ' . Verta::now()->addDays($item)->format('d-m-Y');
         }
         foreach ($week as $key => $day) {
             $days[$key]['id'] = Carbon::now()->addDays($day)->format('Y-m-d');
@@ -133,6 +165,24 @@ class onlineClassController extends Controller
         Session::put('day', $request->step);
         recordUpdate(Session::get('id'), 'day', $request->step);
         recordUpdate(Session::get('id'), 'date', $request->dataID);
+        Session::put('day', $request->step);
         return response()->json([getDatePeriods(), 6]);
+    }
+
+    public function recordPeriod(Request $request)
+    {
+        recordUpdate(Session::get('id'), 'period', $request->dataID);
+        $day = Session::get('day');
+        return response()->json(["$day  $request->step", 6]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function editGrade(Request $request): \Illuminate\Http\JsonResponse
+    {
+        recordUpdate(Session::get('id'), 'grade', $request->step);
+        return response()->json([getUnits($request->dataID), 2]);
     }
 }

@@ -1,27 +1,89 @@
 let step1 = new Step1();
-
-$('.grade').click(function () {
-    step1.stepOneStart();
-});
-
-$('.public-items').click(function () {
-    step1.turnManager(this);
-})
-
-$('.set-record').click(function () {
-    step1.endRecordManager();
-})
+let step2 = new Step2();
+let step3 = new Step3();
 
 $('.online-steps-close').click(function () {
-   step1.closeItem("#online-items");
+    step1.closeItem("#online-items");
+})
+
+$('.grade').click(function () {
+    let parentCircleSelect=$('.circle-select');
+    parentCircleSelect.empty();
+    parentCircleSelect.append("<span class='circle-select-active'></span><span></span><span></span>")
+    step1.gradeHandle();
 });
 
-$('.end-step-close').click(function () {
-   step1.closeItem("#online-items-end-step");
-});
+$('.time').click(function () {
+    let parentCircleSelect=$('.circle-select');
+    parentCircleSelect.empty();
+    parentCircleSelect.append("<span class='circle-select-active'></span>")
+    if ($(this).hasClass('item-selected')) {
+        $('#turn').val(4);
+        step2.timeEdit();
+    }else if ($('.grade').hasClass('item-selected')){
+        step2.timeHandle();
+    }
+    else {
+        beforeItemNotSelectedShowError();
+    }
+})
 
-function recordEvent(tag) {
-    step1.recordHandle(tag);
+$('.date').click(function () {
+    let parentCircleSelect=$('.circle-select');
+    parentCircleSelect.empty();
+    parentCircleSelect.append("<span class='circle-select-active'></span><span></span>")
+    if ($('.time').hasClass('item-selected')) {
+        step3.dateHandle();
+    } else {
+        step3.getDate();
+    }
+})
+
+
+$('.set-record').click(function () {
+    if ($(this).hasClass('item-selected')) {
+        //$('#turn').val(8);
+        //step2.timeEdit();
+    }else if ($('.date').hasClass('item-selected')){
+        //step2.timeHandle();
+    }
+    else {
+        beforeItemNotSelectedShowError();
+    }
+})
+
+
+function beforeItemNotSelectedShowError() {
+    alert("لطفا آیتم قبلی را انتخاب نمیایید !");
+}
+
+
+function recordEvent(tag, turn) {
+    let step = $(tag).text();
+    let dataID = $(tag).attr('data-id');
+    let data = {'turn': turn, 'step': step, 'dataID': dataID};
+
+    switch (turn) {
+        case 1 :
+            step1.stepOneHandle('/online/recordHandle', data);
+            break;
+        case 2 :
+            step1.stepOneHandle('/online/recordHandle', data);
+            break;
+        case 3 :
+            step1.stepOneHandle('/online/recordHandle', data);
+            break;
+        case 4:
+            step2.stepTwoHandle('/online/recordHandle', data);
+            break;
+        case 5:
+            step3.stepTreeHandle('/online/recordHandle', data);
+            break;
+        case 6:
+            step3.stepTreeHandle('/online/recordHandle', data);
+            break;
+
+    }
 }
 
 

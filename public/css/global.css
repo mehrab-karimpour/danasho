@@ -107,3 +107,11 @@ body {
   direction: rtl;
 }
 
+.form-validate-error {
+  border: 1px solid #db3e45;
+}
+
+.form-validate-success {
+  border: 1px solid #4cdb7c;
+}
+

@@ -15,7 +15,7 @@
     @yield('client.css')
     <script src="{{asset('js/app.js')}}"></script>
 </head>
-<body>
+<body class="hero-anime">
 
 
 @yield('client.content')

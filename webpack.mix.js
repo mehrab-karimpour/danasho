@@ -33,11 +33,11 @@ mix.combine([
 
 
 mix.combine([
-    'resources/js/dependenci/slider.js',
-], 'public/js/slider.js')
+    'resources/js/validate.js',
+], 'public/js/validate.js')
 
 mix.combine([
-    'public/js/header.js',
+    'resources/js/dependenci/header.js',
 ], 'public/js/header.js')
 
 mix.sass('resources/sass/client.scss', 'public/css');
@@ -48,7 +48,7 @@ mix.sass('resources/sass/index.scss', 'public/css/index.css');
 
 
 mix.styles([
-    'public/css/header.css',
+    'resources/sass/header.scss',
 ], 'public/css/header.css');
 
 
