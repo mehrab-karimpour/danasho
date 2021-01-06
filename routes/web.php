@@ -19,6 +19,7 @@ Route::get('/', [indexController::class, 'index']);
 
 Route::get('/s', [indexController::class, 'set']);
 
+
 // routes select online class
 Route::prefix('/online')->group(function () {
     Route::post('/GetGrades', [onlineClassController::class, 'getGrade']);
@@ -26,5 +27,7 @@ Route::prefix('/online')->group(function () {
     Route::post('/getTime',[onlineClassController::class,'getTime']);
     Route::post('/getDate',[onlineClassController::class,'getDate']);
     Route::post('/recordHandle',[onlineClassController::class,'recordStepOneHandle']);
+    Route::post('/descriptionHandle',[onlineClassController::class,'descriptionHandle']);
+    Route::post('/recordNameMobile',[onlineClassController::class,'recordNameMobile']);
 });
 

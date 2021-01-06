@@ -19,7 +19,9 @@ h4,
 h5,
 h6,
 button,
-strong {
+strong,
+label,
+p {
   font-family: Shabnam;
 }
 
@@ -113,5 +115,21 @@ body {
 
 .form-validate-success {
   border: 1px solid #4cdb7c;
+}
+
+.form-danger {
+  box-shadow: 0 0 10px 0 #db3e45;
+}
+
+.form-success {
+  box-shadow: 0 0 10px 0 #4cdb7c;
+}
+
+.mt-8 {
+  margin-top: 1% !important;
+}
+
+.opacity-0 {
+  opacity: 0;
 }
 

@@ -7,7 +7,7 @@
 
 }
 
-a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, strong {
+a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, strong, label, p {
     font-family: Shabnam;
 }
 
@@ -104,7 +104,21 @@ body {
     border: 1px solid #4cdb7c;
 }
 
+.form-danger {
+    box-shadow: 0 0 10px 0 #db3e45;
+}
 
+.form-success{
+    box-shadow: 0 0 10px 0 #4cdb7c;
+}
+
+.mt-8 {
+    margin-top: 1% !important;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
 
 
 

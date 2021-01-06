@@ -22,14 +22,17 @@
                             <i class="fa fa-user-plus"></i>
                         </a>
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto py-4 py-md-0">
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
                                         تماس با ما
                                     </a>
                                     <div class="dropdown-menu">
@@ -46,7 +49,8 @@
                                     <a class="nav-link" href="#">قوانین</a>
                                 </li>
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-chevron-down"></i>
                                         خدمات
                                     </a>
@@ -130,45 +134,98 @@
 
     @include('Client.index.partials.error-select')
 
-    <section class="col-12 col-md-10 col-xl-8 p-2" id="online-items-end-step">
+    <section class="col-12 mt-8 col-md-10 col-xl-8 p-2 end-step-section "
+             id="last-step-record">
+        <span class="d-block mt-2 ml-1 "><i class="fas fa-times end-step-close cursor-pointer"></i></span>
+        <h5 class="text-center direction-rtl">لطفا مشخصات خود را وارد نمایید </h5>
+        <br>
+        <div class="form-item-parent">
+            <div class="col-12 col-md-8 m-0 m-auto d-md-flex d-block justify-content-around">
+                <input type="text" class="form-control col-6" name="name" id="name"
+                       placeholder="نام کامل">
+                <label for="name" class="col-6 text-right">نام و نام خانوادگی خود را وارد کنید</label>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="form-item-parent">
+            <div class="col-12 col-md-8 m-0 m-auto d-md-flex d-block justify-content-around">
+                <input type="number" class="form-control col-6" name="mobile" id="mobile"
+                       placeholder="شماره تماس">
+                <label for="mobile" class="col-6 text-right">شماره تماس خود را وارد کنید</label>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-item-parent dont-show-password-section" id="password-verify-parent">
+            <div class="col-12 col-md-8 m-0 m-auto d-md-flex d-block justify-content-around">
+                <input type="password" class="form-control col-6 text-center" name="password" id="password"
+                       placeholder="_________">
+                <label for="password" class="col-6 text-right">رمز ارسال شده را وارد نمایید</label>
+            </div>
+            <div class="d-flex justify-content-center mt-2" id="timer-parent">
+                <span class="timer">56</span>
+            </div>
+        </div>
+        <br>
+
+        <br>
+        <div class="d-flex justify-content-start col-12 mt-2">
+            <button class="btn btn-primary last-record__submit">تایید</button>
+        </div>
+    </section>
+
+
+    <section class="col-12 col-md-10 col-xl-8 p-2 end-step-section" id="online-items-end-step">
         <span class="d-block mt-2 ml-1 "><i class="fas fa-times end-step-close cursor-pointer"></i></span>
         <h5 class="text-center direction-rtl">جهت افزایش کیفیت کلاس لطفا موارد زیر را تکمیل نمایید :</h5>
         <hr class="m-2">
-        <p class="text-right direction-rtl">سطح خود را انتخاب کنید</p>
+        <p class="text-right direction-rtl">سطح خود را انتخاب کنید <small
+                class="text-warning">(لطفا این فیلد را کامل کنید)</small></p>
         <label for="level" class="text-center"></label>
-        <div class="d-flex justify-content-around col-12">
-            <div>
-                <p>ضعیف</p>
-                <input name="level" class="custom-radio" id="level" type="radio">
-            </div>
-            <div>
-                <p>متوسط</p>
-                <input name="level" class="custom-radio" id="level" type="radio">
-            </div>
-            <div>
-                <p>خوب</p>
-                <input name="level" class="custom-radio" id="level" type="radio">
-            </div>
-            <div>
-                <p>عالی</p>
-                <input name="level" class="custom-radio" id="level" type="radio">
-            </div>
-
-        </div>
-        <p class="text-right direction-rtl mt-2">تصویر سوالاتی که قصد رفع اشکال انها را دارید اپلود کنید .</p>
-        <div class="d-flex justify-content-center col-12">
-            <div class="col-12 col-md-3 col-xl-2">
-                <label for="questions"></label>
-                <input type="file" class="form-control" name="img" id="questions">
+        <div class="form-item-parent">
+            <div class="d-flex justify-content-around col-12">
+                <div>
+                    <p>ضعیف</p>
+                    <input name="level" value="ضعیف" class="custom-radio" id="level" type="radio">
+                </div>
+                <div>
+                    <p>متوسط</p>
+                    <input name="level" value="متوسط" class="custom-radio" id="level" type="radio">
+                </div>
+                <div>
+                    <p>خوب</p>
+                    <input name="level" value="خوب" class="custom-radio" id="level" type="radio">
+                </div>
+                <div>
+                    <p>عالی</p>
+                    <input name="level" value="عالی" class="custom-radio" id="level" type="radio">
+                </div>
             </div>
         </div>
-        <p class="text-right direction-rtl mt-2">هر گونه توضیح تکمیلی که به بهبود کیفیت کلاس شما کمک میکند را در زیر وارد کنید </p>
-        <p class="text-right m-0 p-0">(میتواند شامل مبحث مورد نطر باشد )</p>
+        <p class="text-right direction-rtl mt-2">تصویر سوالاتی که قصد رفع اشکال انها را دارید اپلود کنید .<small
+                class="text-success">(اختیاری)</small></p>
+        <div class="form-item-parent">
+            <div class="d-flex justify-content-center col-12">
+                <div class="col-12 col-md-3 col-xl-2">
+                    <label for="questions"></label>
+                    <input type="file" class="form-control" name="img" id="questions">
+                </div>
+            </div>
+        </div>
+        <p class="text-right direction-rtl mt-2">هر گونه توضیح تکمیلی که به بهبود کیفیت کلاس شما کمک میکند را در زیر
+            وارد کنید </p>
+        <p class="text-right m-0 p-0">(میتواند شامل مبحث مورد نطر باشد ) <small
+                class="text-warning">(لطفا این فیلد را کامل کنید)</small></p>
         <label for="description"></label>
-        <textarea class="form-control" name="description" id="description" placeholder="لطفا توصیحات خود را وارد کنید"></textarea>
+        <div class="form-item-parent">
+            <textarea class="form-control" name="description" id="description"
+                      placeholder="لطفا توصیحات خود را وارد کنید"></textarea>
+        </div>
         <div class="d-flex justify-content-around col-12 mt-2">
             <button class="btn btn-secondary">مرحله قبل</button>
-            <button class="btn btn-primary">مرحله بعد</button>
+            <button class="btn btn-primary next-record">مرحله بعد</button>
         </div>
     </section>
 

@@ -22,8 +22,10 @@ mix.combine([
     'resources/js/app/login.js'
 ], 'public/js/custom.js')
 
+
 mix.combine([
     'resources/js/onlineClass/index.js',
+    'resources/js/validate.js',
     'resources/js/onlineClass/step1.js',
     'resources/js/onlineClass/step2.js',
     'resources/js/onlineClass/step3.js',
@@ -31,10 +33,6 @@ mix.combine([
     'resources/js/onlineClass/eventHandler.js',
 ], 'public/js/index.js')
 
-
-mix.combine([
-    'resources/js/validate.js',
-], 'public/js/validate.js')
 
 mix.combine([
     'resources/js/dependenci/header.js',

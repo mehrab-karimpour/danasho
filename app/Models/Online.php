@@ -9,7 +9,7 @@ class Online extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
+    protected $fillable = [
         'grade',
         'unit',
         'lesson',
@@ -17,7 +17,9 @@ class Online extends Model
         'day',
         'date',
         'level',
+        'description',
         'name',
         'mobile',
     ];
+
 }

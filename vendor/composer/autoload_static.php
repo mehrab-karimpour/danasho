@@ -530,6 +530,7 @@ class ComposerStaticInit3f72ec22ae14c8f9ad261d742088daca
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\sendVerify' => __DIR__ . '/../..' . '/app/Events/sendVerify.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\indexController' => __DIR__ . '/../..' . '/app/Http/Controllers/indexController.php',

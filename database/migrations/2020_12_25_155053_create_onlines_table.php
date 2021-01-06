@@ -15,7 +15,7 @@ class CreateOnlinesTable extends Migration
     {
         Schema::create('onlines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->integer('user_id')->nullable();
             $table->string('grade')->nullable();
             $table->string('unit')->nullable();
             $table->string('lesson')->nullable();
@@ -25,8 +25,9 @@ class CreateOnlinesTable extends Migration
             $table->date('date')->nullable();
             $table->string('period')->nullable();
             $table->string('level')->nullable();
+            $table->text('description')->nullable();
             $table->string('name')->nullable();
-            $table->integer('mobile')->nullable();
+            $table->string('mobile')->nullable();
             $table->timestamps();
         });
     }

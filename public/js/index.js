@@ -124,6 +124,110 @@ class index {
 
 }
 
+class validate extends index {
+    constructor(props) {
+        super(props);
+    }
+
+    addClassError = (item, classError) => {
+        item.addClass(classError);
+    }
+
+
+    removeClassError = (item, classError) => {
+        item.removeClass(classError);
+    }
+
+    formValidation = (formInfo = {}) => {
+        let item;
+        let param;
+        for (let i = 0; i <= Object.keys(formInfo).pop(); i++) {
+            item = $("*[name='" + formInfo[i].name + "']");
+            let valItem = item.val();
+            param = formInfo[i]; // parameter requirement is array . this array can be 'require' ,'string' ,'numeric'
+            if (param['required'] === "required") {
+                if (valItem === '') {
+                    this.addClassError(item, 'form-danger');
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
+            }
+            if (param['type'] === "radio") {
+
+                $("body").find("input[type=radio]").each(function (key, value) {
+                    if ($(this).prop('checked')) {
+                        return window.radioValid = true;
+                    }
+                });
+                if (window.radioValid) {
+
+                    this.removeClassError(item, 'form-danger');
+                } else {
+                    let parent = item.parents(".form-item-parent");
+                    parent.find('p.text-danger').remove();
+                    parent.append("<p class='text-danger'>" + param['message'] + "</p>");
+                    this.addClassError(item, 'form-danger')
+                }
+
+            }
+            if (param['type'] === "string") {
+                if ($.isNumeric(valItem)) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
+            }
+            if (param['type'] === "numeric") {
+                if (!$.isNumeric(valItem)) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
+            }
+            if (valItem.length > param['max']) {
+                this.addClassError(item, 'form-danger')
+            } else {
+                this.removeClassError(item, 'form-danger');
+            }
+            if (valItem.length < param['min']) {
+                this.addClassError(item, 'form-danger')
+            } else {
+                this.removeClassError(item, 'form-danger');
+            }
+
+
+            if (item.hasClass('form-danger')) {
+                let parent = item.parents(".form-item-parent");
+                parent.find('p.text-danger').remove();
+                parent.append("<p class='text-danger'>" + param['message'] + "</p>");
+            }
+        }
+
+        return !$('body *').hasClass('form-danger');
+    }
+}
+
+
+/*let v = new validate();
+v.formValidation({
+    0: {
+        'name': 'email',
+        'require': 'require',
+        'type': 'string',
+        'max': 15,
+        'min': 15,
+        'message': "لطفا فیلد ایمیل را به درستی وارد نمایید"
+    },
+    1: {
+        'name': 'mobile',
+        'require': 'require',
+        'type': 'numeric',
+        'max': 4,
+        'min': 1,
+        'message': "لطفا فیلد ایمیل را به درستی وارد نمایید"
+    }
+});*/
+
 class Step1 extends index {
     constructor() {
         super();
@@ -273,39 +377,135 @@ class Step3 extends index {
 
 }
 
+class Step4 extends validate {
+
+    constructor(props) {
+        super(props);
+    }
+
+    validateForm = (step = '') => {
+
+        let arrayForm = {};
+        if (step === '') {
+            arrayForm = {
+                0: {
+                    'name': 'description',
+                    'required': 'required',
+                    'type': 'string',
+                    'max': 255,
+                    'min': 5,
+                    'message': "لطفا توضیحات را وارد کنید ."
+                }, 1: {
+                    'name': 'level',
+                    'required': 'required',
+                    'type': 'radio',
+                    'max': 255,
+                    'min': 1,
+                    'message': "لطفا سطح خود را انتخاب کنید ."
+                }
+            };
+        } else if ('step2') {
+            arrayForm = {
+                0: {
+                    'name': 'name',
+                    'required': 'required',
+                    'type': 'string',
+                    'max': 255,
+                    'min': 5,
+                    'message': "لطفا نام خود را وارد کنید ."
+                }, 1: {
+                    'name': 'mobile',
+                    'required': 'required',
+                    'type': '',
+                    'max': 11,
+                    'min': 11,
+                    'message': "لطفا شماره تماس خود را به درستی وارد کنید"
+                }
+            };
+        }
+
+
+        return this.formValidation(arrayForm);
+    }
+    lastRecordHandleStepTwo = () => {
+        if (this.validateForm("step2")) {
+            let name = $('#name').val();
+            let mobile = $('#mobile').val();
+            let data = {name: name, mobile: mobile};
+            this.post('/online/recordNameMobile', data).done((response) => {
+                if (response['status'] === 'success') {
+                    Step4.ajaxBackEnd();
+                    $('.last-record__submit').text('تایید رمز ارسال شده ');
+                    $('#password-verify-parent').removeClass('dont-show-password-section');
+
+                    let i = 60;
+                    let timer = setInterval(() => {
+                        let TimerSection=$('.timer');
+                        TimerSection.text(i);
+                        i--;
+                        if (i === 0) {
+                            $('.last-record__submit').remove();
+                            $("#timer-parent").append("<p class='text-center direction-rtl text-danger'>متاسفانه فرصت ارسال رمز عبور به اتمام رسید ! لطفا مجددا تلاش بفرمایید </p>")
+                            clearInterval(timer);
+                            TimerSection.remove();
+                            return false;
+                        }
+                    }, 1000)
+                }
+            });
+        }
+    }
+
+    lastRecordHandleStepOne = () => {
+        if (this.validateForm()) {
+            let description = $("textarea[name='description']").val();
+            let level = $("input[name='level']:checked").val();
+            let data = {description: description, level: level};
+            this.post('/online/descriptionHandle', data).done((response) => {
+                Step4.ajaxBackEnd();
+                if (response['status'] === 'success') {
+                    $('#online-items-end-step').fadeOut();
+                    $('#last-step-record').fadeIn();
+                }
+            });
+        }
+    }
+
+}
 
 let step1 = new Step1();
 let step2 = new Step2();
 let step3 = new Step3();
+let step4 = new Step4();
+
 
 $('.online-steps-close').click(function () {
     step1.closeItem("#online-items");
 })
 
 $('.grade').click(function () {
-    let parentCircleSelect=$('.circle-select');
+    let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span><span></span><span></span>")
     step1.gradeHandle();
 });
 
 $('.time').click(function () {
-    let parentCircleSelect=$('.circle-select');
+    let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span>")
     if ($(this).hasClass('item-selected')) {
         $('#turn').val(4);
         step2.timeEdit();
-    }else if ($('.grade').hasClass('item-selected')){
+    } else if ($('.grade').hasClass('item-selected')) {
         step2.timeHandle();
-    }
-    else {
+    } else {
         beforeItemNotSelectedShowError();
     }
 })
 
 $('.date').click(function () {
-    let parentCircleSelect=$('.circle-select');
+    let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span><span></span>")
     if ($('.time').hasClass('item-selected')) {
@@ -317,16 +517,35 @@ $('.date').click(function () {
 
 
 $('.set-record').click(function () {
-    if ($(this).hasClass('item-selected')) {
-        //$('#turn').val(8);
-        //step2.timeEdit();
-    }else if ($('.date').hasClass('item-selected')){
-        //step2.timeHandle();
-    }
-    else {
+    if ($('.date').hasClass('item-selected')) {
+        $('.ajax-back').fadeIn(200);
+        $('#online-items-end-step').fadeIn();
+    } else {
         beforeItemNotSelectedShowError();
     }
+});
+
+$('.end-step-close').click(function () {
+    step1.closeItem('.ajax-back');
+    step1.closeItem('.end-step-section');
 })
+
+$('.next-record').click(function () {
+    if ($('.date').hasClass('item-selected')) {
+        step4.lastRecordHandleStepOne();
+    } else {
+        beforeItemNotSelectedShowError();
+    }
+});
+
+/*$("#name , #mobile , #password").change(function () {
+    //step4.lastRecordHandleStepTwo();
+    alert("ok");
+});*/
+
+$('.last-record__submit').click(function () {
+    step4.lastRecordHandleStepTwo();
+});
 
 
 function beforeItemNotSelectedShowError() {

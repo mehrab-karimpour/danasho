@@ -2,16 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\sendVerify;
+use App\Models\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class onlineClassController extends Controller
 {
     public $onlineClassId;
+    protected $mobile;
+    protected $password;
+    protected $name;
+
+    public function EndRecord(Request $request)
+    {
+        $this->mobile = Session::get('mobile');
+        $this->password = $request->password;
+        $this->name = Session::get('name');
+        try {
+            recordUpdate(Session::get('id'), 'mobile', $this->mobile);
+            recordUpdate(Session::get('id'), 'name', $this->name);
+
+            $user = User::where('mobile', $request->mobile)->firstOr(function () {
+
+                User::create([
+                    'mobile' => $this->mobile,
+                    'password' => Hash::make($this->password),
+                    'name' => $this->name
+                ]);
+            });
+            recordUpdate(Session::get('id'), 'user_id', $user->id);
+
+
+        } catch (\Exception $e) {
+
+        }
+
+    }
+
+    public function recordNameMobile(Request $request)
+    {
+
+        recordUpdate(Session::get('id'), 'name', $request->name);
+        recordUpdate(Session::get('id'), 'mobile', $request->mobile);
+
+        if (User::where('mobile', "09180131109")->exists()) {
+            $password = rand(100000, 999999);
+        } else {
+            $password = rand(1000, 9999);
+        }
+        Session::put('verifyPassword', $password);
+        //event(sendVerify::class);
+        return response()->json(['status' => 'success']);
+    }
+
+    public function descriptionHandle(Request $request)
+    {
+        try {
+            recordUpdate(Session::get('id'), 'level', $request->level);
+            recordUpdate(Session::get('id'), 'description', $request->description);
+            return response()->json(["status" => 'success'], 201);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json(["status" => 'error'], 422);
+        }
+    }
 
     public function getGrade(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -25,7 +85,9 @@ class onlineClassController extends Controller
 
     public function getDate()
     {
-        $week = [0, 1, 2, 3, 4, 5, 6, 7];
+        for ($j = 0; $j < 7; $j++) {
+            $week[] = $j;
+        }
         $days = [];
         foreach ($week as $item) {
             $days[]['title'] = Verta::now()->addDays($item)->formatWord('l') . ' ' . Verta::now()->addDays($item)->format('d-m-Y');
@@ -162,10 +224,10 @@ class onlineClassController extends Controller
 
     public function recordDate(Request $request): \Illuminate\Http\JsonResponse
     {
-        Session::put('day', $request->step);
+
         recordUpdate(Session::get('id'), 'day', $request->step);
         recordUpdate(Session::get('id'), 'date', $request->dataID);
-        Session::put('day', $request->step);
+
         return response()->json([getDatePeriods(), 6]);
     }
 

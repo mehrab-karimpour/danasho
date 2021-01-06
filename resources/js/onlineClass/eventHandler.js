@@ -1,35 +1,36 @@
 let step1 = new Step1();
 let step2 = new Step2();
 let step3 = new Step3();
+let step4 = new Step4();
+
 
 $('.online-steps-close').click(function () {
     step1.closeItem("#online-items");
 })
 
 $('.grade').click(function () {
-    let parentCircleSelect=$('.circle-select');
+    let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span><span></span><span></span>")
     step1.gradeHandle();
 });
 
 $('.time').click(function () {
-    let parentCircleSelect=$('.circle-select');
+    let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span>")
     if ($(this).hasClass('item-selected')) {
         $('#turn').val(4);
         step2.timeEdit();
-    }else if ($('.grade').hasClass('item-selected')){
+    } else if ($('.grade').hasClass('item-selected')) {
         step2.timeHandle();
-    }
-    else {
+    } else {
         beforeItemNotSelectedShowError();
     }
 })
 
 $('.date').click(function () {
-    let parentCircleSelect=$('.circle-select');
+    let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span><span></span>")
     if ($('.time').hasClass('item-selected')) {
@@ -41,16 +42,35 @@ $('.date').click(function () {
 
 
 $('.set-record').click(function () {
-    if ($(this).hasClass('item-selected')) {
-        //$('#turn').val(8);
-        //step2.timeEdit();
-    }else if ($('.date').hasClass('item-selected')){
-        //step2.timeHandle();
-    }
-    else {
+    if ($('.date').hasClass('item-selected')) {
+        $('.ajax-back').fadeIn(200);
+        $('#online-items-end-step').fadeIn();
+    } else {
         beforeItemNotSelectedShowError();
     }
+});
+
+$('.end-step-close').click(function () {
+    step1.closeItem('.ajax-back');
+    step1.closeItem('.end-step-section');
 })
+
+$('.next-record').click(function () {
+    if ($('.date').hasClass('item-selected')) {
+        step4.lastRecordHandleStepOne();
+    } else {
+        beforeItemNotSelectedShowError();
+    }
+});
+
+/*$("#name , #mobile , #password").change(function () {
+    //step4.lastRecordHandleStepTwo();
+    alert("ok");
+});*/
+
+$('.last-record__submit').click(function () {
+    step4.lastRecordHandleStepTwo();
+});
 
 
 function beforeItemNotSelectedShowError() {

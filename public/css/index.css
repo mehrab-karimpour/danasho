@@ -43,6 +43,7 @@
 }
 
 #online-items,
+#last-step-record,
 #online-items-end-step {
   margin: 0 auto;
   height: auto;
@@ -58,30 +59,39 @@
 }
 
 #online-items > div,
+#last-step-record > div,
 #online-items-end-step > div {
   align-items: center;
   height: 90%;
 }
 
 #online-items > div > ul,
+#last-step-record > div > ul,
 #online-items-end-step > div > ul {
   width: 100%;
 }
 
 #online-items > div > ul > li:hover,
+#last-step-record > div > ul > li:hover,
 #online-items-end-step > div > ul > li:hover {
   background: #bdd5bf;
 }
 
 #online-items > div > ul > li,
+#last-step-record > div > ul > li,
 #online-items-end-step > div > ul > li {
   direction: rtl;
   text-align: right;
   cursor: pointer;
 }
 
+#last-step-record input {
+  text-align: right;
+}
+
 #online-items-end-step {
   height: auto !important;
+  top: 2% !important;
 }
 
 #online-items-end-step > p {
@@ -108,7 +118,7 @@
   cursor: pointer;
 }
 
-#online-items-end-step > textarea {
+#online-items-end-step > div > textarea {
   min-height: 18vh;
   text-align: right;
 }
@@ -183,6 +193,24 @@
   background: #8ef8b1;
   transition: all 1s;
   transform: scale(1.1);
+}
+
+.dont-show-password-section {
+  opacity: 0;
+  position: absolute;
+}
+
+.timer {
+  background: #3fee9b;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  width: 45px;
+  height: 45px;
 }
 
 @media (max-width: 768px) {
