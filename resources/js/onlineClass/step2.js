@@ -27,6 +27,7 @@ class Step2 extends index {
             index.completeEnd('.time');
             index.completedStep(data['step'], '.time');
             window.date = result;
+            index.ajaxBackEnd();
         });
     }
 }

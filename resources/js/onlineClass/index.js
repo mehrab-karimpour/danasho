@@ -69,6 +69,7 @@ class index {
     ajaxStart = () => {
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
+            $('#ajax-leader-back').fadeIn(200);
             $('.ajax-back').fadeIn(200);
         })
     }

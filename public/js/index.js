@@ -69,6 +69,7 @@ class index {
     ajaxStart = () => {
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
+            $('#ajax-leader-back').fadeIn(200);
             $('.ajax-back').fadeIn(200);
         })
     }
@@ -239,9 +240,9 @@ class Step1 extends index {
         step1.completing('.grade');
         this.ajaxStart();
         this.post('/online/GetGrades', {}).done(function (result) {
+            index.ajaxBackEnd();
             window.grades = result;
             index.appendItems(result);
-
         });
     }
 
@@ -250,7 +251,6 @@ class Step1 extends index {
         this.post(url, data).done(function (result) {
             window.grades = result;
             if (data['turn'] === 3) {
-                index.ajaxLoaderEnd();
                 $("#online-items").fadeOut();
                 $('.ajax-back').fadeOut();
                 index.completeEnd('.grade');
@@ -271,6 +271,7 @@ class Step1 extends index {
                     circleSelect.eq(2).addClass("circle-select-active");
                     break;
             }
+            index.ajaxBackEnd();
         });
     }
 
@@ -307,6 +308,7 @@ class Step2 extends index {
             index.completeEnd('.time');
             index.completedStep(data['step'], '.time');
             window.date = result;
+            index.ajaxBackEnd();
         });
     }
 }
@@ -346,6 +348,7 @@ class Step3 extends index {
                     circleSelect.eq(1).addClass("circle-select-active");
                     break;
             }
+            index.ajaxBackEnd();
         });
     }
 
@@ -369,8 +372,7 @@ class Step3 extends index {
             setTimeout(() => {
                 index.ajaxLoaderEnd();
             }, 200)
-
-
+            index.ajaxBackEnd();
         });
 
     }

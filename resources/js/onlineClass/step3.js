@@ -33,6 +33,7 @@ class Step3 extends index {
                     circleSelect.eq(1).addClass("circle-select-active");
                     break;
             }
+            index.ajaxBackEnd();
         });
     }
 
@@ -56,8 +57,7 @@ class Step3 extends index {
             setTimeout(() => {
                 index.ajaxLoaderEnd();
             }, 200)
-
-
+            index.ajaxBackEnd();
         });
 
     }

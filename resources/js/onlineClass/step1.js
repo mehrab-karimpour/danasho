@@ -9,9 +9,9 @@ class Step1 extends index {
         step1.completing('.grade');
         this.ajaxStart();
         this.post('/online/GetGrades', {}).done(function (result) {
+            index.ajaxBackEnd();
             window.grades = result;
             index.appendItems(result);
-
         });
     }
 
@@ -20,7 +20,6 @@ class Step1 extends index {
         this.post(url, data).done(function (result) {
             window.grades = result;
             if (data['turn'] === 3) {
-                index.ajaxLoaderEnd();
                 $("#online-items").fadeOut();
                 $('.ajax-back').fadeOut();
                 index.completeEnd('.grade');
@@ -41,6 +40,7 @@ class Step1 extends index {
                     circleSelect.eq(2).addClass("circle-select-active");
                     break;
             }
+            index.ajaxBackEnd();
         });
     }
 
