@@ -13,9 +13,8 @@ class indexController extends Controller
 {
     public function index(): \Illuminate\Http\Response
     {
-        Session::remove('id');
-        Session::remove('gradeId');
-        Session::remove('verifyPassword');
+
+        Session::flush();
 
         return response()->view('Client.index.index');
     }
