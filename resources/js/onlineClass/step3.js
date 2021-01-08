@@ -4,14 +4,21 @@ class Step3 extends index {
     }
 
     dateHandle = () => {
+        $('.step-title').text('انتخاب روز  مورد نظر');
         this.ajaxStart();
         this.completing('.date');
         index.appendItems(window.date[0], window.date[1]);
         this.showItem('#online-items');
+
     }
 
     stepTreeHandle = (url, data) => {
-
+        $('.step-title').text('انتخاب محدوده زمانی مورد نظر');
+        let firstDateSelected = $('#list-group li').eq(1).text();
+        let firstPeriodSelect = 0;
+        if (firstDateSelected === data['step']) {
+            firstPeriodSelect = 1;
+        }
         this.ajaxStart();
         this.post(url, data).done(function (result) {
             window.grades = result;
@@ -35,12 +42,26 @@ class Step3 extends index {
             }
             index.ajaxBackEnd();
         });
+        this.goBack();
+        if (firstPeriodSelect === 1) {
+            setTimeout(() => {
+                const onePeriodItem=$('#list-group li').eq(0);
+                onePeriodItem.addClass('bg-danger');
+                onePeriodItem.removeAttr('onclick');
+
+            }, 300)
+        }
+    }
+
+    goBack = () => {
+        let goBack = $('.go-back');
+        goBack.empty();
+        goBack.append("<button onclick='goBackDate()' class='btn float-right  btn-secondary mb-5'> قبلی</button>");
     }
 
     getDate = () => {
         this.ajaxStart();
         this.post('/online/getDate', {}).done(function (result) {
-            console.log(result);
             let onlineItems = $('#online-items');
             onlineItems.fadeIn(200);
             $('#online-items>div>ul').empty();
@@ -51,7 +72,7 @@ class Step3 extends index {
                     ">" + value['title'] + "</li>";
                 $('#online-items>div>ul').append(tag);
             });
-            let firstDateItem=$('#online-items>div>ul li').eq(0);
+            let firstDateItem = $('#online-items>div>ul li').eq(0);
             firstDateItem.removeAttr("onclick");
             firstDateItem.addClass('bg-danger');
             setTimeout(() => {

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class indexController extends Controller
 {
+
     public function index(): \Illuminate\Http\Response
     {
         return response()->view('Client.index.index');

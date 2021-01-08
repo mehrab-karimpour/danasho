@@ -33,7 +33,7 @@ class classSeeder extends Seeder
         //  set  price
         $price = new Price();
         $price->grade_id = $gradeOne->id;
-        $price->title = '7000';
+        $price->title = '7';
         $price->save();
 
 

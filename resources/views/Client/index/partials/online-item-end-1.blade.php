@@ -1,4 +1,4 @@
-<section class="col-12 col-md-10 col-xl-8 p-2 end-step-section" id="online-items-end-step">
+<section class="col-12 col-md-10  col-xl-8 p-2 end-step-section" id="online-items-end-step">
     <span class="d-block mt-2 ml-1 "><i class="fas fa-times end-step-close cursor-pointer"></i></span>
     <h5 class="text-center direction-rtl">جهت افزایش کیفیت کلاس لطفا موارد زیر را تکمیل نمایید :</h5>
     <hr class="m-2">
@@ -45,7 +45,8 @@
                       placeholder="لطفا توصیحات خود را وارد کنید"></textarea>
     </div>
     <div class="d-flex justify-content-around col-12 mt-2">
-        <button class="btn btn-secondary">مرحله قبل</button>
         <button class="btn btn-primary next-record">مرحله بعد</button>
+
     </div>
+
 </section>

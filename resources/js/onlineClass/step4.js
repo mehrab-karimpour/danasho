@@ -49,6 +49,7 @@ class Step4 extends validate {
         return this.formValidation(arrayForm);
     }
     lastRecordHandleStepTwo = () => {
+
         if (this.validateForm("step2")) {
             let name = $('#name').val();
             let mobile = $('#mobile').val();

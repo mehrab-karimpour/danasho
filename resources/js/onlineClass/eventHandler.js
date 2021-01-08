@@ -8,6 +8,17 @@ $('.online-steps-close').click(function () {
     step1.closeItem("#online-items");
 })
 
+function goBackGrade() {
+    $('.grade').click();
+}
+
+function goBackDate() {
+    $('.date').click();
+}
+function goBackEnd() {
+    $('.set-record').click();
+}
+
 $('.grade').click(function () {
     let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
@@ -16,6 +27,7 @@ $('.grade').click(function () {
 });
 
 $('.time').click(function () {
+    $('.go-back').empty();
     let parentCircleSelect = $('.circle-select');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active'></span>")
@@ -42,6 +54,8 @@ $('.date').click(function () {
 
 
 $('.set-record').click(function () {
+
+    $('.go-back').empty();
     if ($('.date').hasClass('item-selected')) {
         $('.ajax-back').fadeIn(200);
         $('#online-items-end-step').fadeIn();
