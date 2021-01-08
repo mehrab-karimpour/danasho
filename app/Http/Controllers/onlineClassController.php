@@ -191,15 +191,8 @@ class onlineClassController extends Controller
     {
         recordUpdate(Session::get('id'), 'lesson', $request->step);
         $grade_id = Session::get('gradeId');
-        $grade = 1;
-        switch ($grade_id) {
-            case "2":
-                $grade = 2;
-                break;
-            case "3":
-                $grade = 3;
-                break;
-        }
+
+        $grade = $this->getGradeID($grade_id);
         $price = DB::table('prices')
             ->where('grade_id', $grade)
             ->first();
@@ -217,8 +210,9 @@ class onlineClassController extends Controller
 
     public function recordPriceAndTime(Request $request): \Illuminate\Http\JsonResponse
     {
+        $grade_id=$this->getGradeID(Session::get('gradeId'));
         recordUpdate(Session::get('id'), 'time', $request->step);
-        recordUpdate(Session::get('id'), 'price', calculatePrice(Session::get('gradeId'), $request->dataID));
+        recordUpdate(Session::get('id'), 'price', calculatePrice($grade_id, $request->dataID));
         $week = [0, 1, 2, 3, 4, 5, 6, 7];
         $days = [];
         foreach ($week as $item) {
@@ -255,5 +249,23 @@ class onlineClassController extends Controller
     {
         recordUpdate(Session::get('id'), 'grade', $request->step);
         return response()->json([getUnits($request->dataID), 2]);
+    }
+
+    /**
+     * @param $grade_id
+     * @return int
+     */
+    public function getGradeID($grade_id): int
+    {
+        $grade = 1;
+        switch ($grade_id) {
+            case "2":
+                $grade = 2;
+                break;
+            case "3":
+                $grade = 3;
+                break;
+        }
+        return $grade;
     }
 }
