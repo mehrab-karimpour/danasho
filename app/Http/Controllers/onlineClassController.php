@@ -190,9 +190,20 @@ class onlineClassController extends Controller
     public function recordLesson(Request $request): \Illuminate\Http\JsonResponse
     {
         recordUpdate(Session::get('id'), 'lesson', $request->step);
-
+        $grade_id = Session::get('gradeId');
+        switch ($grade_id) {
+            case "1":
+                $grade_id = 1;
+                break;
+            case "2":
+                $grade_id = 2;
+                break;
+            case "3":
+                $grade_id = 3;
+                break;
+        }
         $price = DB::table('prices')
-            ->where('grade_id', Session::get('gradeId'))
+            ->where('grade_id', $grade_id)
             ->first();
 
         $allTimes = getTimes();
