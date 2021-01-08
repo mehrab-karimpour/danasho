@@ -32,7 +32,7 @@ class indexController extends Controller
         $price = DB::table('prices')
             ->where('grade_id', $grade)
             ->first();
-        echo $price->ttile;
+        echo $price->title;
 
     }
 }
