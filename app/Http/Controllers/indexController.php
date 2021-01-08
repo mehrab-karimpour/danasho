@@ -19,12 +19,9 @@ class indexController extends Controller
     public function set()
     {
         Session::put('id', "34");
-
+        $grade = 1;
         $grade_id = Session::get('id');
         switch ($grade_id) {
-            case "1":
-                $grade = 1;
-                break;
             case "2":
                 $grade = 2;
                 break;

@@ -191,10 +191,8 @@ class onlineClassController extends Controller
     {
         recordUpdate(Session::get('id'), 'lesson', $request->step);
         $grade_id = Session::get('gradeId');
+        $grade = 1;
         switch ($grade_id) {
-            case "1":
-                $grade = 1;
-                break;
             case "2":
                 $grade = 2;
                 break;
