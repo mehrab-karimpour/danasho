@@ -35,7 +35,7 @@
     <br>
 
     <br>
-    <div class="d-flex justify-content-start col-12 mt-2">
-        <button class="btn btn-primary last-record__submit">تایید</button>
+    <div class="d-flex justify-content-center col-12 mt-2">
+        <button class="btn btn-primary mr-4 ml-4 last-record__submit">تایید</button>
     </div>
 </section>
