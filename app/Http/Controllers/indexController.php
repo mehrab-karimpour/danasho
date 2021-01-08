@@ -22,14 +22,6 @@ class indexController extends Controller
 
     public function set()
     {
-        Session::put('id',"1");
-        $id=Session::get('id');
-        $id=intval($id);
 
-        $price = DB::table('prices')
-            ->where('grade_id', $id)
-            ->first();
-
-        dd($price->title);
     }
 }

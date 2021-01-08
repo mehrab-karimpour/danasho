@@ -191,7 +191,7 @@ class onlineClassController extends Controller
     {
         recordUpdate(Session::get('id'), 'lesson', $request->step);
         $grade_id = Session::get('gradeId');
-        $grade_id = intval($grade_id);
+        settype($grade_id, "integer");
         $price = DB::table('prices')
             ->where('grade_id', $grade_id)
             ->first();
