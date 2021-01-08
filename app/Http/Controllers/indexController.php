@@ -13,14 +13,29 @@ class indexController extends Controller
 {
     public function index(): \Illuminate\Http\Response
     {
-
-        Session::flush();
-
         return response()->view('Client.index.index');
     }
 
     public function set()
     {
+        Session::put('id', "34");
+
+        $grade_id = Session::get('id');
+        switch ($grade_id) {
+            case "1":
+                $grade = 1;
+                break;
+            case "2":
+                $grade = 2;
+                break;
+            case "3":
+                $grade = 3;
+                break;
+        }
+        $price = DB::table('prices')
+            ->where('grade_id', $grade)
+            ->first();
+        echo $price->ttile;
 
     }
 }
