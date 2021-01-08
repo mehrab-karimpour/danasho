@@ -193,7 +193,7 @@ class onlineClassController extends Controller
         $grade_id = Session::get('gradeId');
         settype($grade_id, "integer");
         $price = DB::table('prices')
-            ->where('grade_id', $grade_id)
+            ->where('grade_id', 1)
             ->first();
 
         $allTimes = getTimes();
