@@ -1,4 +1,4 @@
-<section class="col-12 mt-8 d-block col-md-10 col-xl-8 p-2 end-step-section "
+<section class="col-12 mt-8 col-md-10 col-xl-8 p-2 end-step-section "
          id="last-step-record">
     <span class="d-block mt-2 ml-1 "><i class="fas fa-times end-step-close cursor-pointer"></i></span>
     <h5 class="text-center direction-rtl">لطفا مشخصات خود را وارد نمایید </h5>
