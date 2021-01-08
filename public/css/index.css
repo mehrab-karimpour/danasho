@@ -85,13 +85,24 @@
   cursor: pointer;
 }
 
+#last-step-record {
+  overflow: auto;
+  height: 95vh !important;
+  padding-bottom: 2%;
+}
+
+#last-step-record > div {
+  height: auto !important;
+}
+
 #last-step-record input {
   text-align: right;
 }
 
 #online-items-end-step {
-  height: auto !important;
+  height: 95vh !important;
   top: 2% !important;
+  overflow: auto;
 }
 
 #online-items-end-step > p {
@@ -100,6 +111,7 @@
 
 #online-items-end-step > div {
   direction: rtl;
+  height: auto !important;
 }
 
 #online-items-end-step > div > div {
@@ -214,6 +226,10 @@
 }
 
 @media (max-width: 768px) {
+  #online-items-end-step p {
+    font-size: 14px;
+  }
+
   #select-class {
     direction: rtl;
     display: block;

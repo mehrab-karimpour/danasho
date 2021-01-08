@@ -81,7 +81,12 @@
 
 #last-step-record {
     @extend #online-items;
-
+    overflow: auto;
+    height: 95vh!important;
+    padding-bottom: 2%;
+    >div{
+        height: auto!important;
+    }
     input {
         text-align: right;
     }
@@ -89,8 +94,9 @@
 
 #online-items-end-step {
     @extend #online-items;
-    height: auto !important;
+    height: 95vh !important;
     top: 2% !important;
+    overflow: auto;
 
     > p {
         font-weight: bold;
@@ -98,6 +104,7 @@
 
     > div {
         direction: rtl;
+        height: auto !important;
 
         > div {
             direction: ltr;
@@ -177,7 +184,7 @@
     transform: scale(1.1);
 }
 
-.dont-show-password-section{
+.dont-show-password-section {
     opacity: 0;
     position: absolute;
 }
@@ -196,6 +203,12 @@
 }
 
 @media (max-width: 768px) {
+
+    #online-items-end-step {
+        p{
+            font-size: 14px;
+        }
+    }
 
     #select-class {
         direction: rtl;
