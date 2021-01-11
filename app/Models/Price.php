@@ -11,7 +11,8 @@ class Price extends Model
 
     protected $fillable = [
         'title',
-        'grade_id'
+        'grade_id',
+        'type'
     ];
 
     public function grade()

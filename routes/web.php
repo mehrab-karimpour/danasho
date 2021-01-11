@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\indexController;
+use App\Http\Controllers\offlineClassController;
 use App\Http\Controllers\onlineClassController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,9 @@ Route::prefix('/online')->group(function () {
     Route::post('/recordHandle',[onlineClassController::class,'recordStepOneHandle']);
     Route::post('/descriptionHandle',[onlineClassController::class,'descriptionHandle']);
     Route::post('/recordNameMobile',[onlineClassController::class,'recordNameMobile']);
+});
+
+Route::prefix('/offline')->group(function () {
+    Route::post('/recordHandle', [offlineClassController::class, 'recordStepOne']);
 });
 

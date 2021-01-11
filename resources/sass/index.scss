@@ -18,6 +18,14 @@
     }
 }
 
+#select-class-offline {
+    @extend #select-class;
+
+    > div {
+
+    }
+}
+
 .error-select {
     position: absolute;
     width: 55%;
@@ -79,14 +87,22 @@
     }
 }
 
+// offline items
+
+#offline-items{
+    @extend #online-items;
+}
+
 #last-step-record {
     @extend #online-items;
     overflow: auto;
-    height: 65vh!important;
+    height: 65vh !important;
     padding-bottom: 2%;
-    >div{
-        height: auto!important;
+
+    > div {
+        height: auto !important;
     }
+
     input {
         text-align: right;
     }
@@ -165,12 +181,12 @@
         border: 1px solid #299b65;
         display: block;
         width: 24px;
-        height: 18px;
+        height: 24px;
         margin: 2px;
     }
 }
 
-.circle-select-active {
+.circle-select-active, .circle-select-active-offline {
     background: #299b65;
 }
 
@@ -205,7 +221,7 @@
 @media (max-width: 768px) {
 
     #online-items-end-step {
-        p{
+        p {
             font-size: 14px;
         }
     }

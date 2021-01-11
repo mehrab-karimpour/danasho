@@ -1,9 +1,11 @@
-#select-class {
+#select-class,
+#select-class-offline {
   direction: rtl;
   display: flex;
 }
 
-#select-class > div {
+#select-class > div,
+#select-class-offline > div {
   text-align: center;
   width: 21%;
   display: flex;
@@ -38,11 +40,13 @@
   color: #c1494a;
 }
 
-#select-class::-webkit-scrollbar {
+#select-class::-webkit-scrollbar,
+#select-class-offline::-webkit-scrollbar {
   display: none;
 }
 
 #online-items,
+#offline-items,
 #last-step-record,
 #online-items-end-step {
   margin: 0 auto;
@@ -59,6 +63,7 @@
 }
 
 #online-items > div,
+#offline-items > div,
 #last-step-record > div,
 #online-items-end-step > div {
   align-items: center;
@@ -66,18 +71,21 @@
 }
 
 #online-items > div > ul,
+#offline-items > div > ul,
 #last-step-record > div > ul,
 #online-items-end-step > div > ul {
   width: 100%;
 }
 
 #online-items > div > ul > li:hover,
+#offline-items > div > ul > li:hover,
 #last-step-record > div > ul > li:hover,
 #online-items-end-step > div > ul > li:hover {
   background: #bdd5bf;
 }
 
 #online-items > div > ul > li,
+#offline-items > div > ul > li,
 #last-step-record > div > ul > li,
 #online-items-end-step > div > ul > li {
   direction: rtl;
@@ -188,11 +196,12 @@
   border: 1px solid #299b65;
   display: block;
   width: 24px;
-  height: 18px;
+  height: 24px;
   margin: 2px;
 }
 
-.circle-select-active {
+.circle-select-active,
+.circle-select-active-offline {
   background: #299b65;
 }
 
@@ -230,12 +239,14 @@
     font-size: 14px;
   }
 
-  #select-class {
+  #select-class,
+  #select-class-offline {
     direction: rtl;
     display: block;
   }
 
-  #select-class > div {
+  #select-class > div,
+  #select-class-offline > div {
     width: 100%;
     margin-top: 1%;
   }

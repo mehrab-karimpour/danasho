@@ -13,6 +13,10 @@ function insertNewOnlineClass($grade)
         'grade' => $grade
     ]);
 }
+function insertNewOfflineClass($grade)
+{
+    return "";
+}
 
 
 function recordUpdate($classId, $item, $value)

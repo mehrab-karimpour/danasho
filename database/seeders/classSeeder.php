@@ -33,7 +33,14 @@ class classSeeder extends Seeder
         //  set  price
         $price = new Price();
         $price->grade_id = $gradeOne->id;
+        $price->type = "onlineClass";
         $price->title = '7';
+        $price->save();
+
+        $price = new Price();
+        $price->grade_id = $gradeOne->id;
+        $price->type = "offlineClass";
+        $price->title = '5';
         $price->save();
 
 

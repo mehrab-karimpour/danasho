@@ -15,6 +15,7 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
+            $table->char("type", 255);
             $table->foreignId('grade_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->timestamps();

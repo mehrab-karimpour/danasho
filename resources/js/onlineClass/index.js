@@ -41,8 +41,8 @@ class index {
             index.ajaxLoaderEnd();
         }, 200);
 
-        if (turn===5){
-            let firstDateItem=$('#online-items>div>ul li').eq(0);
+        if (turn === 5) {
+            let firstDateItem = $('#online-items>div>ul li').eq(0);
             firstDateItem.removeAttr("onclick");
             firstDateItem.addClass('bg-danger');
         }
@@ -86,7 +86,6 @@ class index {
 
     static ajaxLoaderEnd = () => {
         $('#ajax-loader').fadeOut();
-
     }
 
     static endRecordSteps = () => {

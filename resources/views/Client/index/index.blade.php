@@ -68,44 +68,25 @@
         </div>
     </div>
     @include('Client.index.partials.slider')
-    <fieldset class="container-fluid">
-        @csrf
-        <h2 class="text-center online-class-text">
-            کلاس انلاین
-            <i class="fas fa-video ml-3 pt-3"></i>
-        </h2>
 
-        <section id="select-class">
-            <div class="grade">
-                <i class="fas fa-user-graduate ml-2"></i>
-                پایه تحصیلی و عنوان درس
-            </div>
-            <div class="time public-items">
-                <i class="fas fa-hourglass-start ml-2"></i>
-                مدت زمان کلاس و هزینه
-            </div>
-            <div class="date public-items">
-                <i class="fas fa-calendar-alt ml-2"></i>
-                زمان برگزاری کلاس
-            </div>
-            <div class="set-record">
-                <i class="fas fa-edit ml-2"></i>
-                ثبت درخواست
-            </div>
-        </section>
-    </fieldset>
+    @include('Client.index.onlineClass.index')
 
     @include('Client.index.partials.error-select')
 
-    @include('Client.index.partials.online-item-end-2')
+    @include('Client.index.onlineClass.online-item-end-2')
 
-    @include('Client.index.partials.online-item-end-1')
+    @include('Client.index.onlineClass.online-item-end-1')
 
-    @include('Client.index.partials.online-items')
+    @include('Client.index.onlineClass.online-items')
 
     @include('partials.ajax-loader')
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br>
+
+    @include('Client.index.offlineClass.index')
+    @include('Client.index.offlineClass.offline-items')
+
+    <br><br><br><br><br><br><br><br><br><br>
 
 @endsection
 

@@ -100,8 +100,9 @@ class onlineClassController extends Controller
 
     public function getTime(Request $request)
     {
+        $grade_id=$this->getGradeID(Session::get('gradeId'));
         $price = DB::table('prices')
-            ->where('grade_id', '=', Session::get('gradeId'))
+            ->where('grade_id', '=', $grade_id)
             ->first();
 
         $allTimes = getTimes();

@@ -12,12 +12,15 @@ class Step2 extends index {
     }
 
     timeEdit = () => {
+
         $('.step-title').text('انتخاب مدت زمان کلاس انلاین و هزینه آن');
 
         this.ajaxStart();
         this.post('/online/getTime', {}).done(function (result) {
             index.appendItems(result[0], result[1]);
         });
+        $('#ajax-loader').fadeOut();
+        $('#ajax-leader-back').fadeOut(200);
     }
 
 
