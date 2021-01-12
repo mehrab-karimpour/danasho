@@ -23,7 +23,7 @@ function insertNewOfflineClass($grade)
 
 function recordOfflineUpdate($classId, $item, $value)
 {
-    return \App\Models\offline::where('id', '=', $classId)->update([
+    return \App\Models\Offline::where('id', '=', $classId)->update([
         "$item" => $value
     ]);
 }
