@@ -27,7 +27,7 @@ class indexOffline {
     }
 
     // append item in sections
-    static appendItems = (result, turn = 1) => {
+    static offlineAppendItems = (result, turn = 1) => {
 
         let offlineItems = $('#offline-items');
         offlineItems.fadeIn(200);
@@ -47,6 +47,12 @@ class indexOffline {
 
     static ajaxLoaderEnd = () => {
         $('#ajax-loader').fadeOut();
+    }
+
+    static completedStep = (stepTitle, stepItem) => {
+        $(stepItem).text(stepTitle);
+        $(stepItem).addClass('item-selected');
+
     }
 
     static ajaxBackEnd = () => {

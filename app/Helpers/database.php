@@ -13,9 +13,19 @@ function insertNewOnlineClass($grade)
         'grade' => $grade
     ]);
 }
+
 function insertNewOfflineClass($grade)
 {
-    return "";
+    return \App\Models\Offline::create([
+        'grade' => $grade
+    ]);
+}
+
+function recordOfflineUpdate($classId, $item, $value)
+{
+    return \App\Models\offline::where('id', '=', $classId)->update([
+        "$item" => $value
+    ]);
 }
 
 
@@ -37,8 +47,6 @@ function getUnits($gradeID)
     $grade = \App\Models\Grade::find($gradeID);
     return $grade->units;
 }
-
-
 
 
 function getGrades()

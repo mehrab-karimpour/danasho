@@ -11,7 +11,7 @@
         </ul>
     </div>
     <div class="col-6 col-md-4 col-xl-2 circle-select-offline">
-        <span class="circle-select-active"></span>
+        <span class="circle-select-active-offline"></span>
         <span></span>
         <span></span>
     </div>

@@ -9,19 +9,19 @@ const offlineRecordEvent = (tag, turn) => {
             StepOff_1.stepOneHandle('/offline/recordHandle', data);
             break;
         case 2 :
-            step1.stepOneHandle('/offline/recordHandle', data);
+            StepOff_1.stepOneHandle('/offline/recordHandle', data);
             break;
         case 3 :
-            step1.stepOneHandle('/offline/recordHandle', data);
+            StepOff_1.stepOneHandle('/offline/recordHandle', data);
             break;
         case 4:
-            step2.stepTwoHandle('/offline/recordHandle', data);
+            //step2.stepTwoHandle('/offline/recordHandle', data);
             break;
         case 5:
-            step3.stepTreeHandle('/offline/recordHandle', data);
+            //step3.stepTreeHandle('/offline/recordHandle', data);
             break;
         case 6:
-            step3.stepTreeHandle('/offline/recordHandle', data);
+            //step3.stepTreeHandle('/offline/recordHandle', data);
             break;
 
     }
