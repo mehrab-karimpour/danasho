@@ -28,8 +28,30 @@ const offlineRecordEvent = (tag, turn) => {
 }
 
 $('.grade-offline').click(function () {
+    $('.go-back-offline').empty();
+    let circleSelect = $('.circle-select-offline span');
+    circleSelect.removeClass('circle-select-active');
+    circleSelect.eq(0).addClass('circle-select-active');
     let parentCircleSelect = $('.circle-select-indexOffline');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active-indexOffline'></span><span></span><span></span>")
     StepOff_1.gradeHandle();
 });
+
+$('.question-count').click(() => {
+    if ($('.grade-offline').hasClass('item-selected')) {
+
+    } else {
+        beforeItemNotSelectedShowError();
+    }
+})
+
+function beforeItemNotSelectedShowError() {
+    alert("لطفا آیتم قبلی را انتخاب نمیایید !");
+}
+
+// go back sections
+
+const goBackGradeOffline = () => {
+    $('.grade-offline').click();
+}

@@ -89,7 +89,7 @@
 
 // offline items
 
-#offline-items{
+#offline-items {
     @extend #online-items;
 }
 
@@ -186,8 +186,12 @@
     }
 }
 
-.circle-select-active, .circle-select-active-offline {
+.circle-select-active {
     background: #299b65;
+}
+
+.circle-select-offline {
+    @extend .circle-select;
 }
 
 .bg-warning {

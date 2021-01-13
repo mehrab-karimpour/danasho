@@ -725,8 +725,14 @@ class StepOffline_1 extends indexOffline {
         window.grades = {};
     }
 
+    static goBackMaker = () => {
+        let goBack = $('.go-back-offline');
+        goBack.empty();
+        goBack.append("<button onclick='goBackGradeOffline()' class='btn float-right btn-secondary mb-5'> قبلی</button>");
+    }
+
     gradeHandle = () => {
-        $('.step-title-indexOffline').text('انتخاب مقطع تحصیلی');
+        $('.step-title-offline').text('انتخاب مقطع تحصیلی');
         this.completing('.grade-offline');
         let turn = $("input[name='turn-indexOffline']").val();
 
@@ -741,7 +747,6 @@ class StepOffline_1 extends indexOffline {
         this.ajaxStart();
         this.post(url, data).done(function (result) {
             window.offlinegrades = result;
-
             if (data['turn'] === 3) {
                 $("#offline-items").fadeOut();
                 $('.ajax-back').fadeOut();
@@ -751,17 +756,17 @@ class StepOffline_1 extends indexOffline {
             } else {
                 indexOffline.offlineAppendItems(result[0], result[1]);
             }
-
             let circleSelect = $('.circle-select-offline span');
-            circleSelect.removeClass('circle-select-active-offline');
-            const stepTitle=$('.step-title');
+            circleSelect.removeClass('circle-select-active');
+            const stepTitle = $('.step-title-offline');
             switch (data['turn']) {
                 case 1:
-                    circleSelect.eq(1).addClass("circle-select-active-offline");
+                    StepOffline_1.goBackMaker();
+                    circleSelect.eq(1).addClass("circle-select-active");
                     stepTitle.text('انتخاب پایه  تحصیلی');
                     break;
                 case 2:
-                    circleSelect.eq(2).addClass("circle-select-active-offline");
+                    circleSelect.eq(2).addClass("circle-select-active");
                     stepTitle.text('انتخاب درس');
                     break;
             }
@@ -771,11 +776,7 @@ class StepOffline_1 extends indexOffline {
         this.goBackMaker();
     }
 
-    goBackMaker = () => {
-        let goBack = $('.go-back');
-        goBack.empty();
-        goBack.append("<button onclick='goBackGrade()' class='btn float-right btn-secondary mb-5'> قبلی</button>");
-    }
+
 }
 
 
@@ -811,8 +812,30 @@ const offlineRecordEvent = (tag, turn) => {
 }
 
 $('.grade-offline').click(function () {
+    $('.go-back-offline').empty();
+    let circleSelect = $('.circle-select-offline span');
+    circleSelect.removeClass('circle-select-active');
+    circleSelect.eq(0).addClass('circle-select-active');
     let parentCircleSelect = $('.circle-select-indexOffline');
     parentCircleSelect.empty();
     parentCircleSelect.append("<span class='circle-select-active-indexOffline'></span><span></span><span></span>")
     StepOff_1.gradeHandle();
 });
+
+$('.question-count').click(() => {
+    if ($('.grade-offline').hasClass('item-selected')) {
+
+    } else {
+        beforeItemNotSelectedShowError();
+    }
+})
+
+function beforeItemNotSelectedShowError() {
+    alert("لطفا آیتم قبلی را انتخاب نمیایید !");
+}
+
+// go back sections
+
+const goBackGradeOffline = () => {
+    $('.grade-offline').click();
+}
