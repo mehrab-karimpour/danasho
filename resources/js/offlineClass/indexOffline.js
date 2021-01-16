@@ -28,16 +28,16 @@ class indexOffline {
 
     // append item in sections
     static offlineAppendItems = (result, turn = 1) => {
-
-        let offlineItems = $('#offline-items');
-        offlineItems.fadeIn(200);
-        $('#offline-items>div>ul').empty();
-        window.turn_offline = turn;
-        $('#turn-indexOffline').val(turn);
+        let offlineItems = $('#offline-items'); // modal section .
+        offlineItems.fadeIn(200);               // show modal
+        $('#offline-items>div>ul').empty();     // list item may be empty . because we want append new item ans saved before items.
+        $('#turn-offline').val(turn);      // We took turns managing the items
+        window.turn = turn;
         $.each(result, function (key, value) {
-            let tag = "<li onclick='offlineRecordEvent(this,window.turn_offline)' class='list-group-item indexOffline-items-select' data-id='" + value['id'] + "'" +
+            let tag = "<li onclick='offlineRecorder(this,window.turn)' " +
+                "class='list-group-item indexOffline-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
-            $('#offline-items>div>ul').append(tag);
+            $('#list-group-offline').append(tag);
         });
         setTimeout(() => {
             indexOffline.ajaxLoaderEnd();
@@ -45,8 +45,30 @@ class indexOffline {
 
     }
 
+    /*
+    * ajaxBack : A black layer that is placed behind the modal .
+    * */
+    ajaxBack = () => {
+        $('.ajax-back').fadeIn(200);
+    }
+
+    /*
+    * show ajax loader and show background ajax loader
+    * */
+    ajaxStart = () => {
+        $(document).ajaxStart(function () {
+            $('#ajax-loader').fadeIn();
+            $('#ajax-leader-back').fadeIn(200);
+            $('.ajax-back').fadeIn(200);
+        });
+    }
+
+    /*
+    * ajax and . ajax loader icon and ajax main background
+    * */
     static ajaxLoaderEnd = () => {
         $('#ajax-loader').fadeOut();
+        $('#ajax-leader-back').fadeOut(200);
     }
 
     static completedStep = (stepTitle, stepItem) => {
@@ -67,16 +89,6 @@ class indexOffline {
     static completeEnd = (stepItem) => {
         $(stepItem).removeClass('bg-warning');
     }
-
-    // show ajax items
-    ajaxStart = () => {
-        $(document).ajaxStart(function () {
-            $('#ajax-loader').fadeIn();
-            $('#ajax-leader-back').fadeIn(200);
-            $('.ajax-back').fadeIn(200);
-        })
-    }
-
 
 
 }

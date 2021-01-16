@@ -12,10 +12,6 @@ const mix = require('laravel-mix');
  */
 
 
-mix.combine([
-    'resources/js/jquery-3.5.1.min.js',
-    'resources/js/bootstrap.min.js'
-], 'public/js/app.js')
 
 mix.combine([
     'resources/js/app/index.js',

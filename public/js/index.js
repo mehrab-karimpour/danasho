@@ -666,16 +666,16 @@ class indexOffline {
 
     // append item in sections
     static offlineAppendItems = (result, turn = 1) => {
-
-        let offlineItems = $('#offline-items');
-        offlineItems.fadeIn(200);
-        $('#offline-items>div>ul').empty();
-        window.turn_offline = turn;
-        $('#turn-indexOffline').val(turn);
+        let offlineItems = $('#offline-items'); // modal section .
+        offlineItems.fadeIn(200);               // show modal
+        $('#offline-items>div>ul').empty();     // list item may be empty . because we want append new item ans saved before items.
+        $('#turn-offline').val(turn);      // We took turns managing the items
+        window.turn = turn;
         $.each(result, function (key, value) {
-            let tag = "<li onclick='offlineRecordEvent(this,window.turn_offline)' class='list-group-item indexOffline-items-select' data-id='" + value['id'] + "'" +
+            let tag = "<li onclick='offlineRecorder(this,window.turn)' " +
+                "class='list-group-item indexOffline-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
-            $('#offline-items>div>ul').append(tag);
+            $('#list-group-offline').append(tag);
         });
         setTimeout(() => {
             indexOffline.ajaxLoaderEnd();
@@ -683,8 +683,30 @@ class indexOffline {
 
     }
 
+    /*
+    * ajaxBack : A black layer that is placed behind the modal .
+    * */
+    ajaxBack = () => {
+        $('.ajax-back').fadeIn(200);
+    }
+
+    /*
+    * show ajax loader and show background ajax loader
+    * */
+    ajaxStart = () => {
+        $(document).ajaxStart(function () {
+            $('#ajax-loader').fadeIn();
+            $('#ajax-leader-back').fadeIn(200);
+            $('.ajax-back').fadeIn(200);
+        });
+    }
+
+    /*
+    * ajax and . ajax loader icon and ajax main background
+    * */
     static ajaxLoaderEnd = () => {
         $('#ajax-loader').fadeOut();
+        $('#ajax-leader-back').fadeOut(200);
     }
 
     static completedStep = (stepTitle, stepItem) => {
@@ -706,16 +728,6 @@ class indexOffline {
         $(stepItem).removeClass('bg-warning');
     }
 
-    // show ajax items
-    ajaxStart = () => {
-        $(document).ajaxStart(function () {
-            $('#ajax-loader').fadeIn();
-            $('#ajax-leader-back').fadeIn(200);
-            $('.ajax-back').fadeIn(200);
-        })
-    }
-
-
 
 }
 
@@ -725,117 +737,295 @@ class StepOffline_1 extends indexOffline {
         window.grades = {};
     }
 
-    static goBackMaker = () => {
-        let goBack = $('.go-back-offline');
-        goBack.empty();
-        goBack.append("<button onclick='goBackGradeOffline()' class='btn float-right btn-secondary mb-5'> قبلی</button>");
+    /*
+     * every step has two main method . 1:start  , 2:handle
+     * start method mey be constructor for every section .
+     * handle method handled other items .
+     * */
+    static endStep = (stepTitle) => {
+        indexOffline.completeEnd('.grade-offline');
+        indexOffline.completedStep(stepTitle, '.grade-offline');
+        $('#offline-items').fadeOut();
+        $('.ajax-back').fadeOut();
     }
 
-    gradeHandle = () => {
-        $('.step-title-offline').text('انتخاب مقطع تحصیلی');
-        this.completing('.grade-offline');
-        let turn = $("input[name='turn-indexOffline']").val();
-
+    startStep = (turn) => {
+        $('.step-title-offline').text("انتخاب مقطع تحصیلی");
+        $('.go-back-offline').empty();
         this.ajaxStart();
-        this.post('/online/GetGrades', {}).done(function (result) {
-            indexOffline.ajaxBackEnd();
+        const data = {'turn': turn};
+        this.post('/online/GetGrades', data).then(function (result) {
             indexOffline.offlineAppendItems(result);
         });
+        indexOffline.ajaxLoaderEnd();
     }
 
-    stepOneHandle = (url, data) => {
+    handleStep = (url, data) => {
         this.ajaxStart();
-        this.post(url, data).done(function (result) {
-            window.offlinegrades = result;
+        this.post('/offline/recordHandle', data).then(function (result) {
             if (data['turn'] === 3) {
-                $("#offline-items").fadeOut();
-                $('.ajax-back').fadeOut();
-                indexOffline.completeEnd('.grade-offline');
-                indexOffline.completedStep(data['step'], '.grade-offline');
-                window.time = result;
+                StepOffline_1.endStep(data['step']);
+
+                // saved all questions in window.offlineQuestions because step two we have handel questions
+                window.offlineQuestions = result;
             } else {
                 indexOffline.offlineAppendItems(result[0], result[1]);
             }
-            let circleSelect = $('.circle-select-offline span');
-            circleSelect.removeClass('circle-select-active');
-            const stepTitle = $('.step-title-offline');
-            switch (data['turn']) {
-                case 1:
-                    StepOffline_1.goBackMaker();
-                    circleSelect.eq(1).addClass("circle-select-active");
-                    stepTitle.text('انتخاب پایه  تحصیلی');
-                    break;
-                case 2:
-                    circleSelect.eq(2).addClass("circle-select-active");
-                    stepTitle.text('انتخاب درس');
-                    break;
-            }
-            indexOffline.ajaxBackEnd();
-
         });
-        this.goBackMaker();
+        indexOffline.ajaxLoaderEnd();
+        /*
+        * handle circle select .
+        * */
+        let circleSelect = $('.circle-select-offline span');
+        circleSelect.removeClass('circle-select-active');
+        const stepTitle=$('.step-title-offline');
+        switch (data['turn']) {
+            case 1:
+                circleSelect.eq(1).addClass("circle-select-active");
+                stepTitle.text('انتخاب پایه  تحصیلی');
+                break;
+            case 2:
+                circleSelect.eq(2).addClass("circle-select-active");
+                stepTitle.text('انتخاب درس');
+                break;
+        }
     }
 
 
 }
 
+class StepOffline_2 extends indexOffline {
+    constructor() {
+        super();
+    }
+
+    /*
+    *    END
+    * */
+    static endStep = (stepTitle) => {
+        indexOffline.completeEnd('.question-count');
+        indexOffline.completedStep(stepTitle, '.question-count');
+        const offlineItem = $('#offline-items');
+        offlineItem.fadeOut();
+        $('.ajax-back').fadeOut();
+        offlineItem.empty();
+        offlineItem.append("<br><h5 class='step-title-offline text-center'>انتخاب روز مورد نظر</h5><input type='hidden'  id='turn-offline' name='turn-offline' value='6'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
+    }
 
 
+    startStep = (turn) => {
+        $('.step-title-offline').text('انتخاب تعداد سوال و هزینه آن ');
+        $('.go-back-offline').empty();
+        $('.ajax-back').fadeIn();
+        indexOffline.offlineAppendItems(window.offlineQuestions[0], window.offlineQuestions[1]);
+    }
 
-const StepOff_1 = new StepOffline_1();
+    handleStep = (url, data, file = 0) => {
+        if (file === 1) {
+            /*
+            * upload image questions
+            * */
+            const question_file = data.files[0];
+            let formData = new FormData;
+            formData.append('question_file', question_file);
+            formData.append('turn', "5");
 
-const offlineRecordEvent = (tag, turn) => {
-    let step = $(tag).text();
-    let dataID = $(tag).attr('data-id');
-    let data = {'turn': turn, 'step': step, 'dataID': dataID};
-    switch (turn) {
-        case 1 :
-            StepOff_1.stepOneHandle('/offline/recordHandle', data);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                async: true,
+                dataType: 'json',
+                processData: false,
+                cache: false,
+                contentType: false,
+                success: function (msg) {
+                    window.offlineDate = msg;
+                    StepOffline_2.endStep(window.stepTwoText);
+                },
+                fail: function (msg) {
+                }
+            });
+            StepOffline_2.ajaxBackEnd();
+
+
+        } else {
+            window.stepTwoText = data['step'];
+            $('#offline-items').empty();
+            window.uploadFileSection = "<h6>تصاویر سوالاتی که قصد رفع اشکال انها را دارید اپلود نمایید </h6><br><br><input " +
+                "class='form-control' type='file' name='question-file' />";
+
+            this.post('/offline/recordHandle', data).then(function (result) {
+                $('#turn-offline').val(result[1]);
+                $('#offline-items').append(result);
+                $('.step-title-offline').text('ارسال سوالات');
+                indexOffline.ajaxBackEnd();
+            });
+        }
+    }
+
+}
+
+class StepOffline_3 extends indexOffline {
+    constructor() {
+        super();
+    }
+
+    static endStep = (stepTitle) => {
+
+    }
+
+    startStep = () => {
+        $('.ajax-back').fadeIn(0);
+        indexOffline.offlineAppendItems(window.offlineDate[0], window.offlineDate[1]);
+        let firstItem = $('#list-group-offline li').eq(0);
+        firstItem.removeAttr('onclick');
+        firstItem.addClass('bg-danger');
+    }
+
+    handleStep = (url, data) => {
+        let circleSelect = $('.circle-select-offline span');
+        circleSelect.removeClass("circle-select-active");
+        circleSelect.eq(1).addClass("circle-select-active");
+        $('.step-title-offline').text('انتخاب محدوده زمانی مورد نظر');
+        this.post(url, data).then(function (result) {
+            indexOffline.offlineAppendItems(result[0], result[1]);
+            if (result[2] === 1) {
+                let firstItem = $('#list-group-offline li').eq(0);
+                firstItem.removeAttr('onclick');
+                firstItem.addClass('bg-danger');
+            }
+        });
+    }
+
+}
+
+
+const stepOne = new StepOffline_1();
+const stepTwo = new StepOffline_2();
+const stepThree = new StepOffline_3();
+
+/*
+* get turn for easy management steps and items
+* */
+
+const Turn = () => {
+    return $('#turn-offline').val();
+}
+
+/*
+* grades and units lessons .
+* */
+One = (item, turn) => {
+    stepOne.completing('.grade-offline');
+    // we have create it .
+    stepOne.startStep(turn);
+}
+/*
+* count questions and prices
+* */
+Two = (item) => {
+    stepTwo.completing('.question-count');
+    stepTwo.startStep();
+}
+
+/*
+* date get response questions
+* */
+Three = (item) => {
+    stepThree.completing('date-get-answer');
+    stepThree.startStep();
+}
+
+
+/*
+* go record request
+* */
+Four = () => {
+    alert('four')
+}
+
+itemHandle = (stepNumber, tag) => {
+    const thisTag = $(tag);
+    const turn = Turn();
+    let circleSelect = $('.circle-select-offline span');
+
+    switch (stepNumber) {
+        case 1:
+            One(thisTag, turn);
             break;
-        case 2 :
-            StepOff_1.stepOneHandle('/offline/recordHandle', data);
+        case 2:
+            circleSelect.eq(0).remove();
+            circleSelect.eq(1).addClass("circle-select-active");
+            Two(thisTag, turn);
             break;
-        case 3 :
-            StepOff_1.stepOneHandle('/offline/recordHandle', data);
+        case 3:
+            circleSelect.eq(0).remove();
+            circleSelect.eq(1).addClass("circle-select-active");
+            Three(thisTag, turn);
             break;
         case 4:
-            //step2.stepTwoHandle('/offline/recordHandle', data);
+            Four(thisTag, turn);
             break;
-        case 5:
-            //step3.stepTreeHandle('/offline/recordHandle', data);
+    }
+}
+
+/*
+* this method passed data to steps files for record all items .
+* */
+
+offlineRecorder = (tag, turn) => {
+    const step = $(tag).text();
+    const dataID = $(tag).attr('data-id');
+    const data = {'turn': turn, 'step': step, 'dataID': dataID};
+    const goBackButtonParent = $('.go-back-offline');
+    switch (turn) {
+        case 1 :
+            window.offlineGrade = $('.grade-offline');
+            goBackButtonParent.empty();
+            goBackButtonParent.append("<button class='btn btn-secondary' onclick='itemHandle(1,window.offlineGrade)'>بازگشت به عقب</button>")
+            stepOne.handleStep('/offline/recordHandle', data);
             break;
-        case 6:
-            //step3.stepTreeHandle('/offline/recordHandle', data);
+        case 2 :
+            stepOne.handleStep('/offline/recordHandle', data);
             break;
+        case 3 :
+            stepOne.handleStep('/offline/recordHandle', data);
+            break;
+        case 4 :
+            stepTwo.handleStep('/offline/recordHandle', data);
+            break;
+        case 6 :
+            stepThree.handleStep('/offline/recordHandle', data);
+            break;
+        case 7 :
+            stepThree.handleStep('/offline/recordHandle', data);
+            break;
+
 
     }
 }
 
-$('.grade-offline').click(function () {
-    $('.go-back-offline').empty();
-    let circleSelect = $('.circle-select-offline span');
-    circleSelect.removeClass('circle-select-active');
-    circleSelect.eq(0).addClass('circle-select-active');
-    let parentCircleSelect = $('.circle-select-indexOffline');
-    parentCircleSelect.empty();
-    parentCircleSelect.append("<span class='circle-select-active-indexOffline'></span><span></span><span></span>")
-    StepOff_1.gradeHandle();
-});
+/*
+* upload question file
+* */
 
-$('.question-count').click(() => {
-    if ($('.grade-offline').hasClass('item-selected')) {
+const uploadQuestionFile = (tag) => {
+    stepTwo.handleStep('/offline/recordHandle', tag, 1)
+}
 
-    } else {
-        beforeItemNotSelectedShowError();
-    }
+
+/*
+* close modal offline
+* */
+const offlineModalClose = () => {
+    $("#offline-items").fadeOut();
+    $('.ajax-back').fadeOut();
+}
+
+$(() => {
+    $('.ajax-back').click(() => {
+        offlineModalClose();
+    });
 })
 
-function beforeItemNotSelectedShowError() {
-    alert("لطفا آیتم قبلی را انتخاب نمیایید !");
-}
-
-// go back sections
-
-const goBackGradeOffline = () => {
-    $('.grade-offline').click();
-}

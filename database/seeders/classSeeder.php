@@ -6,6 +6,7 @@ use App\Models\DatePeriod;
 use App\Models\Grade;
 use App\Models\Lesson;
 use App\Models\Price;
+use App\Models\Question;
 use App\Models\Time;
 use App\Models\Unit;
 use Illuminate\Database\Seeder;
@@ -119,6 +120,23 @@ class classSeeder extends Seeder
         $period->title = "ساعت 18:00 تا 22:000";
         $period->period_key = 22;
         $period->save();
+
+        $question = new Question();
+        $question->title = 1;
+        $question->save();
+
+        $question = new Question();
+        $question->title = 3;
+        $question->save();
+
+        $question = new Question();
+        $question->title = 6;
+        $question->save();
+
+        $question = new Question();
+        $question->title = 9;
+        $question->save();
+
 
     }
 }

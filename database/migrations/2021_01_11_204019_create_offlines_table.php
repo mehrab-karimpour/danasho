@@ -19,11 +19,12 @@ class CreateOfflinesTable extends Migration
             $table->string('grade')->nullable();
             $table->string('unit')->nullable();
             $table->string('lesson')->nullable();
-            $table->string('count-question')->nullable();
-            $table->string('get-answer-date')->nullable();
+            $table->string('question_id')->nullable();
+            $table->string('question_file')->nullable();
+            $table->string('get_answer_date')->nullable();
             $table->string('price')->nullable();
             $table->string('day')->nullable();
-            $table->string('get-answer-period')->nullable();
+            $table->string('get_answer_period')->nullable();
             $table->timestamps();
         });
     }

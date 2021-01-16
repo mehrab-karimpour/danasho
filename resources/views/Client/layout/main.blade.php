@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/global.css')}}">
     <link rel="stylesheet" href="{{asset('css/mobile.css')}}">
     @yield('client.css')
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
 </head>
 <body class="hero-anime">
 

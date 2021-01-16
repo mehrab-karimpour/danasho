@@ -28,6 +28,12 @@ function recordOfflineUpdate($classId, $item, $value)
     ]);
 }
 
+function getQuestions()
+{
+    return \App\Models\Question::all();
+}
+
+
 
 function recordUpdate($classId, $item, $value)
 {

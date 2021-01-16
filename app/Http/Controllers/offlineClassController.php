@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class offlineClassController extends Controller
 {
@@ -19,38 +24,110 @@ class offlineClassController extends Controller
                     return $this->recordGrade($request);
                 }
                 break;
-            case 2:
+            case "2":
                 //record unit
                 return $this->recordUnit($request);
                 break;
 
-            case 3:
+            case "3":
                 // record lesson
                 return $this->recordLesson($request);
+                break;
+            case "4":
+                // record lesson
+                return $this->recordQuestion($request);
+                break;
+            case "5":
+                // record question file
+                return $this->uploadQuestionFile($request);
+                break;
+            case "6":
+                // record get date answer
+                return $this->uploadGetDateAnswer($request);
+                break;
+            case "7":
+                // record get period answer
+                return $this->uploadGetPeriodAnswer($request);
                 break;
             default :
                 return "error";
         }
     }
 
+    public function uploadGetPeriodAnswer(Request $request)
+    {
+        $offline_id = Session::get('offline-id');
+        recordOfflineUpdate($offline_id, 'get_answer_period', $request->dataID);
+
+        if ($request->dataID === Carbon::now()->addDay()->format('Y-m-d')) {
+            return response()->json([getDatePeriods(), 7, 1]);
+        } else {
+            return response()->json([getDatePeriods(), 7, 0]);
+        }
+    }
+
+    public function uploadGetDateAnswer(Request $request)
+    {
+        $offline_id = Session::get('offline-id');
+        recordOfflineUpdate($offline_id, 'get_answer_date', $request->dataID);
+
+        if ($request->dataID === Carbon::now()->addDay()->format('Y-m-d')) {
+            return response()->json([getDatePeriods(), 7, 1]);
+        } else {
+            return response()->json([getDatePeriods(), 7, 0]);
+        }
+    }
+
+    public function uploadQuestionFile(Request $request)
+    {
+        try {
+            $offline_id = Session::get('offline-id');
+            $file = $request->file('question_file');
+            $filePath = $file->getClientOriginalExtension();
+            if (Storage::exists("offline/$offline_id/$file")) {
+                $fileName = Verta::now()->format('y_m_d_h_i') . '.' . $filePath;
+            } else {
+                $fileName = Verta::now()->format('y_m_d') . '.' . $filePath;
+            }
+            recordOfflineUpdate($offline_id, 'question_file', $fileName);
+            $file->storeAs("offline/$offline_id/", $fileName);
+
+            /*
+             * return date weekly .
+             * */
+            $week = [];
+            for ($i = 0; $i < 8; $i++) {
+                $week[] = $i;
+            }
+            $days = [];
+            foreach ($week as $item) {
+                $days[]['title'] = Verta::now()->addDays($item)->formatWord('l') . ' ' . Verta::now()->addDays($item)->format('d-m-Y');
+            }
+            foreach ($week as $key => $day) {
+                $days[$key]['id'] = Carbon::now()->addDays($day)->format('Y-m-d');
+            }
+            return response()->json([$days, 6]);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json(['status' => 'error'], 422);
+        }
+    }
+
+    public function recordQuestion(Request $request)//: \Illuminate\Http\JsonResponse
+    {
+        $offline_id = Session::get('offline-id');
+        recordOfflineUpdate($offline_id, 'question_id', $request->dataID);
+        return response()->view('Client.index.offlineClass.upload-questions');
+    }
+
     public function recordLesson(Request $request): \Illuminate\Http\JsonResponse
     {
-        recordOfflineUpdate(Session::get('offline-id'), 'lesson', $request->step);
-        $grade_id = Session::get('gradeId');
-
-        $grade = $this->getGradeID($grade_id);
-        $price = DB::table('prices')
-            ->where('grade_id', $grade)
-            ->first();
-
-        $allTimes = getTimes();
-        foreach ($allTimes as $key => $time) {
-            $time = $time->title;
-            $p = ($time / 15) * intval($price->title);
-            $allTimes[$key]->title = "$time دقیقه $p هزار تومان ";
-            $allTimes[$key]->id = $time;
-        }
-        return response()->json([$allTimes, 4]);
+        $offline_id = Session::get('offline-id');
+        $grade_id = $this->getGradeID(Session::get('offline-gradeId'));
+        recordOfflineUpdate($offline_id, 'lesson', $request->step);
+        $questions = Question::all();
+        $questions = calculateOfflineQuestion($questions, $grade_id);
+        return response()->json([$questions, 4]);
     }
 
     public function recordUnit(Request $request): \Illuminate\Http\JsonResponse
@@ -72,8 +149,8 @@ class offlineClassController extends Controller
     public function recordGrade(Request $request): \Illuminate\Http\JsonResponse
     {
 
-        $insert = insertNewOfflineClass($request->step);
-        Session::put('offline-id', $insert->id);
+        $newOfflineClass = insertNewOfflineClass($request->step);
+        Session::put('offline-id', $newOfflineClass->id);
         Session::put('offline-gradeId', $request->dataID);
         return response()->json([getUnits($request->dataID), 2]);
     }

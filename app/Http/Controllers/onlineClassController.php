@@ -100,7 +100,7 @@ class onlineClassController extends Controller
 
     public function getTime(Request $request)
     {
-        $grade_id=$this->getGradeID(Session::get('gradeId'));
+        $grade_id = $this->getGradeID(Session::get('gradeId'));
         $price = DB::table('prices')
             ->where('grade_id', '=', $grade_id)
             ->first();
@@ -196,6 +196,7 @@ class onlineClassController extends Controller
         $grade = $this->getGradeID($grade_id);
         $price = DB::table('prices')
             ->where('grade_id', $grade)
+            ->where('type', '=', 'onlineClass')
             ->first();
 
         $allTimes = getTimes();
@@ -211,7 +212,7 @@ class onlineClassController extends Controller
 
     public function recordPriceAndTime(Request $request): \Illuminate\Http\JsonResponse
     {
-        $grade_id=$this->getGradeID(Session::get('gradeId'));
+        $grade_id = $this->getGradeID(Session::get('gradeId'));
         recordUpdate(Session::get('id'), 'time', $request->step);
         recordUpdate(Session::get('id'), 'price', calculatePrice($grade_id, $request->dataID));
         $week = [0, 1, 2, 3, 4, 5, 6, 7];
