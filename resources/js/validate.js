@@ -69,11 +69,12 @@ class validate extends index {
                 this.removeClassError(item, 'form-danger');
             }
 
-
+            let parent = item.parents(".form-item-parent");
             if (item.hasClass('form-danger')) {
-                let parent = item.parents(".form-item-parent");
                 parent.find('p.text-danger').remove();
                 parent.append("<p class='text-danger'>" + param['message'] + "</p>");
+            }else{
+                parent.find('p.text-danger').remove();
             }
         }
 

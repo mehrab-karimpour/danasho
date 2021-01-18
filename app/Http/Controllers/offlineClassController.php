@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -56,20 +57,44 @@ class offlineClassController extends Controller
                 // record get period answer
                 return $this->uploadVerifyToken($request);
                 break;
+            case "9":
+                // record get period answer
+                return $this->uploadCreateOfflineClass($request);
+                break;
             default :
                 return "error";
         }
+    }
+
+    public function uploadCreateOfflineClass(Request $request)
+    {
+        if (Session::get("verify-token-offline") === $request->offline_verify_token) {
+            $user = User::firstOrNew(['mobile' => Session::get('mobile')]);
+            $user->name = Session::get('name');
+            $user->password = Hash::make(Session::get('verify-token-offline'));
+            $user->save();
+            $offline_id = Session::get('offline-id');
+            recordOfflineUpdate($offline_id, 'user_id', $user->id);
+            return response(['status' => 'success']);
+        } else {
+            return response(['status' => 'error']);
+        }
+
     }
 
     public function uploadVerifyToken(Request $request)
     {
         if (User::where('mobile', $request->mobile)->exists()) {
             $verifyToken = rand(4000, 4999);
+            Session::put('user-exist', 'yes');
         } else {
             $verifyToken = rand(600000, 699999);
+            Session::put('user-exist', 'no');
         }
+        Session::put('mobile', $request->mobile);
+        Session::put('name', $request->name);
         Session::put('verify-token-offline', $verifyToken);
-        return response(['status' => 'success', $verifyToken]);
+        return response(['status' => 'success']);
     }
 
     public function uploadGetPeriodAnswer(Request $request)

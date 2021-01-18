@@ -23,21 +23,7 @@ class indexController extends Controller
 
     public function set()
     {
-        Session::put('id', "34");
-        $grade = 1;
-        $grade_id = Session::get('id');
-        switch ($grade_id) {
-            case "2":
-                $grade = 2;
-                break;
-            case "3":
-                $grade = 3;
-                break;
-        }
-        $price = DB::table('prices')
-            ->where('grade_id', $grade)
-            ->first();
-        echo $price->title;
+        return Session::get('verify-token-offline');
 
     }
 }

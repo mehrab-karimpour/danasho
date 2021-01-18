@@ -222,7 +222,8 @@
   position: absolute;
 }
 
-.timer {
+.timer,
+.offline-timer {
   background: #3fee9b;
   text-align: center;
   display: flex;

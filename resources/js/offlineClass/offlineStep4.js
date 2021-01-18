@@ -3,8 +3,10 @@ class StepOffline_4 extends indexOffline {
         super(props);
     }
 
-    static endStep = (stepTitle) => {
-
+    endStep = (url, data) => {
+        this.post(url, data).then((response) => {
+            console.log(response);
+        });
     }
 
     startStep = () => {
@@ -37,19 +39,24 @@ class StepOffline_4 extends indexOffline {
         })) {
             const mobileOffline = $('#offline_mobile').val();
             const nameOffline = $('#offline_name').val();
-            const data = {mobile: mobileOffline, name: nameOffline};
+            const data = {mobile: mobileOffline, name: nameOffline, turn: "8"};
             this.post(url, data).then((response) => {
-                if (response[0]['status'] === "success") {
-                    const tag = "<div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_verify_token' type='text' name='offline_verify_token' placeholder='رمز تایید را وارد کنید'><label for='offline_verify_token' class='col-12 text-right direction-rtl col-md-6'>شماره موبایل خود را وارد کنید : </label></div><div class='d-flex justify-content-center mt-2' id='timer-parent'><span class='offline-timer'>46</span></div>";
+                if (response['status'] === "success") {
+                    $('#turn-offline').val("9");
+                    const lastRecord = $('.last-record__submit-offline');
+                    lastRecord.removeAttr("onclick");
+                    lastRecord.attr("onclick", "offlineRecorder(this,9)");
+                    StepOffline_4.ajaxBackEnd();
+                    const tag = "<div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_verify_token' type='text' name='offline_verify_token' placeholder='رمز تایید را وارد کنید'><label for='offline_verify_token' class='col-12 text-right direction-rtl col-md-6'>رمز ارسال شده را وارد نمایید </label></div><div class='d-flex justify-content-center mt-2' id='timer-parent'><span class='offline-timer'></span></div>";
                     $('#verify-code-offline').append(tag);
-                    let i = 60;
+                    let i = 120;
                     let timer = setInterval(() => {
                         let TimerSection = $('.offline-timer');
                         TimerSection.text(i);
                         i--;
                         if (i === 0) {
                             $('.last-record__submit-offline').remove();
-                            $("#timer-parent-offline").append("<p class='text-center direction-rtl text-danger'>متاسفانه فرصت ارسال رمز عبور به اتمام رسید ! لطفا مجددا تلاش بفرمایید </p>")
+                            $(".timer-parent-offline").append("<p class='text-center direction-rtl text-danger'>متاسفانه فرصت ارسال رمز عبور به اتمام رسید ! لطفا مجددا تلاش بفرمایید </p>")
                             clearInterval(timer);
                             TimerSection.remove();
                             return false;

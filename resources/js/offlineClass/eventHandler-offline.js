@@ -103,6 +103,11 @@ offlineRecorder = (tag, turn) => {
         case 8 :
             stepFour.handleStep('/offline/recordHandle', data);
             break;
+        case 9 :
+            const offline_verify_token = $("input[name='offline_verify_token']").val();
+            let dataWithPassword = {'offline_verify_token':offline_verify_token,'turn': turn, 'step': step, 'dataID': dataID};
+            stepFour.endStep('/offline/recordHandle', dataWithPassword);
+            break;
     }
 }
 

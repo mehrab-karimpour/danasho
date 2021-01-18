@@ -195,11 +195,12 @@ class validate extends index {
                 this.removeClassError(item, 'form-danger');
             }
 
-
+            let parent = item.parents(".form-item-parent");
             if (item.hasClass('form-danger')) {
-                let parent = item.parents(".form-item-parent");
                 parent.find('p.text-danger').remove();
                 parent.append("<p class='text-danger'>" + param['message'] + "</p>");
+            }else{
+                parent.find('p.text-danger').remove();
             }
         }
 
@@ -880,7 +881,7 @@ class StepOffline_3 extends indexOffline {
         $('.ajax-back').fadeOut();
         offlineItem.css("opacity", "0");
         offlineItem.empty();
-        offlineItem.append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden' id='turn-offline' name='turn-offline' value='1'><input type='hidden' id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_name' type='text' placeholder='نام'><label for='offline_name' class='col-12 text-right direction-rtl col-md-6'>نام و نام خانوادگی : </label></div><br><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_name' type='text' placeholder='شماره تماس  '><label for='offline_name' class='col-12 text-right direction-rtl col-md-6'>شماره موبایل خود را وارد کنید : </label></div><div class='col-12 d-flex justify-content-around'><br><br><br><br><br><br><br><button class='btn btn-primary' onclick='offlineRecorder(this,8)'>تایید</brbutton><button class='btn btn-secondary'>بازگشت به مرحله قبل</button></div><div class='col-12 d-flex justify-content-around' id='verify-code-offline'></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span></div><br><div class='go-back-offline text-right'></div><br/>");
+        offlineItem.append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden' id='turn-offline' name='turn-offline' value='1'><input type='hidden' id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='form-item-parent'><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' name='offline_name' id='offline_name' type='text' placeholder='نام '><label for='offline_name' class='col-12 text-right direction-rtl col-md-6'>نام و نام خانوادگی :</label></div></div><br><div class='form-item-parent'><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_mobile' type='number' name='offline_mobile' placeholder='شماره موبایل '><label for='offline_mobile' class='col-12 text-right direction-rtl col-md-6'>شماره موبایل خود را وارد کنید : </label></div></div><br><div class='col-12' id='verify-code-offline'></div><br><div class='form-item-parent'></div><div class='timer-parent-offline form-item-parent'></div><div class='col-12 d-flex justify-content-around'><br><br><br><br><br><br><br><button class='btn btn-primary last-record__submit-offline' onclick='offlineRecorder(this,8)'>تایید</button><button class='btn btn-secondary'>بازگشت به مرحله قبل</button></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span></div><br><div class='go-back-offline text-right'></div><br/>");
         setTimeout(() => {
             $('#offline-items').fadeOut();
         }, 1000);
@@ -923,8 +924,10 @@ class StepOffline_4 extends indexOffline {
         super(props);
     }
 
-    static endStep = (stepTitle) => {
-
+    endStep = (url, data) => {
+        this.post(url, data).then((response) => {
+            console.log(response);
+        });
     }
 
     startStep = () => {
@@ -957,19 +960,24 @@ class StepOffline_4 extends indexOffline {
         })) {
             const mobileOffline = $('#offline_mobile').val();
             const nameOffline = $('#offline_name').val();
-            const data = {mobile: mobileOffline, name: nameOffline};
+            const data = {mobile: mobileOffline, name: nameOffline, turn: "8"};
             this.post(url, data).then((response) => {
-                if (response[0]['status'] === "success") {
-                    const tag = "<div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_verify_token' type='text' name='offline_verify_token' placeholder='رمز تایید را وارد کنید'><label for='offline_verify_token' class='col-12 text-right direction-rtl col-md-6'>شماره موبایل خود را وارد کنید : </label></div><div class='d-flex justify-content-center mt-2' id='timer-parent'><span class='offline-timer'>46</span></div>";
+                if (response['status'] === "success") {
+                    $('#turn-offline').val("9");
+                    const lastRecord = $('.last-record__submit-offline');
+                    lastRecord.removeAttr("onclick");
+                    lastRecord.attr("onclick", "offlineRecorder(this,9)");
+                    StepOffline_4.ajaxBackEnd();
+                    const tag = "<div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_verify_token' type='text' name='offline_verify_token' placeholder='رمز تایید را وارد کنید'><label for='offline_verify_token' class='col-12 text-right direction-rtl col-md-6'>رمز ارسال شده را وارد نمایید </label></div><div class='d-flex justify-content-center mt-2' id='timer-parent'><span class='offline-timer'></span></div>";
                     $('#verify-code-offline').append(tag);
-                    let i = 60;
+                    let i = 120;
                     let timer = setInterval(() => {
                         let TimerSection = $('.offline-timer');
                         TimerSection.text(i);
                         i--;
                         if (i === 0) {
                             $('.last-record__submit-offline').remove();
-                            $("#timer-parent-offline").append("<p class='text-center direction-rtl text-danger'>متاسفانه فرصت ارسال رمز عبور به اتمام رسید ! لطفا مجددا تلاش بفرمایید </p>")
+                            $(".timer-parent-offline").append("<p class='text-center direction-rtl text-danger'>متاسفانه فرصت ارسال رمز عبور به اتمام رسید ! لطفا مجددا تلاش بفرمایید </p>")
                             clearInterval(timer);
                             TimerSection.remove();
                             return false;
@@ -1087,6 +1095,11 @@ offlineRecorder = (tag, turn) => {
             break;
         case 8 :
             stepFour.handleStep('/offline/recordHandle', data);
+            break;
+        case 9 :
+            const offline_verify_token = $("input[name='offline_verify_token']").val();
+            let dataWithPassword = {'offline_verify_token':offline_verify_token,'turn': turn, 'step': step, 'dataID': dataID};
+            stepFour.endStep('/offline/recordHandle', dataWithPassword);
             break;
     }
 }
