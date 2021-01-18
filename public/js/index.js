@@ -895,6 +895,9 @@ class StepOffline_3 extends indexOffline {
     }
 
     handleStep = (url, data) => {
+        let goBack = $('.go-back-offline');
+        goBack.empty();
+        goBack.append("<button class='btn btn-secondary' onclick='itemHandle(3,window.offlineDate,3)'>بازگشت به عقب</button>");
         let circleSelect = $('.circle-select-offline span');
         circleSelect.removeClass("circle-select-active");
         circleSelect.eq(1).addClass("circle-select-active");
@@ -1032,6 +1035,7 @@ Three = (item) => {
 * go record request
 * */
 Four = () => {
+    alert("ok");
     stepFour.completing('get-record-offline');
     stepFour.startStep();
 }
@@ -1040,7 +1044,7 @@ itemHandle = (stepNumber, tag, edit = '') => {
     const thisTag = $(tag);
     const turn = Turn();
     let circleSelect = $('.circle-select-offline span');
-
+    const offlineItems = $('#offline-items');
     switch (stepNumber) {
         case 1:
             One(thisTag, turn);
@@ -1050,14 +1054,24 @@ itemHandle = (stepNumber, tag, edit = '') => {
                 circleSelect.eq(0).remove();
                 circleSelect.eq(1).addClass("circle-select-active");
             } else {
-                $('#offline-items').empty();
-                $('#offline-items').append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden'  id='turn-offline' name='turn-offline' value='1'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
+                offlineItems.empty();
+                offlineItems.append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden'  id='turn-offline' name='turn-offline' value='1'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
             }
             Two(thisTag, turn);
             break;
         case 3:
-            circleSelect.eq(0).remove();
-            circleSelect.eq(1).addClass("circle-select-active");
+            if (edit === 3) {
+                circleSelect.removeClass("circle-select-active");
+                circleSelect.eq(0).addClass("circle-select-active");
+            } else {
+                circleSelect.eq(0).remove();
+                circleSelect.eq(1).addClass("circle-select-active");
+            }
+            if ($('.date-get-answer').hasClass('item-selected')) {
+                offlineItems.empty();
+                offlineItems.append("<br><h5 class='step-title-offline text-center'>انتخاب روز مورد نظر</h5><input type='hidden'  id='turn-offline' name='turn-offline' value='1'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
+                offlineItems.css('opacity', '1');
+            }
             Three(thisTag, turn);
             break;
         case 4:

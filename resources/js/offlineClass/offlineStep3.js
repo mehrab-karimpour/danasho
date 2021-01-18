@@ -25,6 +25,9 @@ class StepOffline_3 extends indexOffline {
     }
 
     handleStep = (url, data) => {
+        let goBack = $('.go-back-offline');
+        goBack.empty();
+        goBack.append("<button class='btn btn-secondary' onclick='itemHandle(3,window.offlineDate,3)'>بازگشت به عقب</button>");
         let circleSelect = $('.circle-select-offline span');
         circleSelect.removeClass("circle-select-active");
         circleSelect.eq(1).addClass("circle-select-active");
