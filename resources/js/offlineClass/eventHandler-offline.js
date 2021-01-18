@@ -1,6 +1,7 @@
 const stepOne = new StepOffline_1();
 const stepTwo = new StepOffline_2();
 const stepThree = new StepOffline_3();
+const stepFour = new StepOffline_4();
 
 /*
 * get turn for easy management steps and items
@@ -39,7 +40,8 @@ Three = (item) => {
 * go record request
 * */
 Four = () => {
-    alert('four')
+    stepFour.completing('get-record-offline');
+    stepFour.startStep();
 }
 
 itemHandle = (stepNumber, tag) => {
@@ -98,8 +100,9 @@ offlineRecorder = (tag, turn) => {
         case 7 :
             stepThree.handleStep('/offline/recordHandle', data);
             break;
-
-
+        case 8 :
+            stepFour.handleStep('/offline/recordHandle', data);
+            break;
     }
 }
 

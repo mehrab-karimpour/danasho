@@ -4,7 +4,16 @@ class StepOffline_3 extends indexOffline {
     }
 
     static endStep = (stepTitle) => {
-
+        indexOffline.completeEnd('.date-get-answer');
+        indexOffline.completedStep(stepTitle, '.date-get-answer');
+        let offlineItem = $('#offline-items');
+        $('.ajax-back').fadeOut();
+        offlineItem.css("opacity", "0");
+        offlineItem.empty();
+        offlineItem.append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden' id='turn-offline' name='turn-offline' value='1'><input type='hidden' id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_name' type='text' placeholder='نام'><label for='offline_name' class='col-12 text-right direction-rtl col-md-6'>نام و نام خانوادگی : </label></div><br><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_name' type='text' placeholder='شماره تماس  '><label for='offline_name' class='col-12 text-right direction-rtl col-md-6'>شماره موبایل خود را وارد کنید : </label></div><div class='col-12 d-flex justify-content-around'><br><br><br><br><br><br><br><button class='btn btn-primary' onclick='offlineRecorder(this,8)'>تایید</brbutton><button class='btn btn-secondary'>بازگشت به مرحله قبل</button></div><div class='col-12 d-flex justify-content-around' id='verify-code-offline'></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span></div><br><div class='go-back-offline text-right'></div><br/>");
+        setTimeout(() => {
+            $('#offline-items').fadeOut();
+        }, 1000);
     }
 
     startStep = () => {
@@ -28,6 +37,13 @@ class StepOffline_3 extends indexOffline {
                 firstItem.addClass('bg-danger');
             }
         });
+        if (data['turn'] === 6) {
+            window.dateOffline = data['step'];
+        }
+        if (data['turn'] === 7) {
+            let stepThreeTitle = window.dateOffline + data['step'];
+            StepOffline_3.endStep(stepThreeTitle);
+        }
     }
 
 }

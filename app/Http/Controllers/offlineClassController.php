@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class offlineClassController extends Controller
 {
+
+
     public function recordStepOne(Request $request)
     {
         switch ($request->turn) {
@@ -49,9 +52,24 @@ class offlineClassController extends Controller
                 // record get period answer
                 return $this->uploadGetPeriodAnswer($request);
                 break;
+            case "8":
+                // record get period answer
+                return $this->uploadVerifyToken($request);
+                break;
             default :
                 return "error";
         }
+    }
+
+    public function uploadVerifyToken(Request $request)
+    {
+        if (User::where('mobile', $request->mobile)->exists()) {
+            $verifyToken = rand(4000, 4999);
+        } else {
+            $verifyToken = rand(600000, 699999);
+        }
+        Session::put('verify-token-offline', $verifyToken);
+        return response(['status' => 'success', $verifyToken]);
     }
 
     public function uploadGetPeriodAnswer(Request $request)

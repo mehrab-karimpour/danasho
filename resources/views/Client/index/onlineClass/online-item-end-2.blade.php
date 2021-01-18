@@ -37,8 +37,8 @@
 
         <br>
         <div class="d-flex justify-content-center col-12 mt-2">
-            <button class="btn btn-primary mr-4 ml-4 last-record__submit">تایید</button>
-            <button onclick="goBackEnd()" class="btn btn-secondary mr-4 ml-4">مرحله قبل</button>
+            <button type="button" class="btn btn-primary mr-4 ml-4 last-record__submit">تایید</button>
+            <button type="button" onclick="goBackEnd()" class="btn btn-secondary mr-4 ml-4">مرحله قبل</button>
         </div>
     </form>
 </section>

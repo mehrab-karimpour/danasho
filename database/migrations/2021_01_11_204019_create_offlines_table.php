@@ -23,8 +23,8 @@ class CreateOfflinesTable extends Migration
             $table->string('question_file')->nullable();
             $table->string('get_answer_date')->nullable();
             $table->string('price')->nullable();
-            $table->string('day')->nullable();
             $table->string('get_answer_period')->nullable();
+
             $table->timestamps();
         });
     }

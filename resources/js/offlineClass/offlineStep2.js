@@ -50,7 +50,9 @@ class StepOffline_2 extends indexOffline {
                 fail: function (msg) {
                 }
             });
-            StepOffline_2.ajaxBackEnd();
+            setTimeout(() => {
+                StepOffline_2.ajaxBackEnd();
+            }, 400)
 
 
         } else {
