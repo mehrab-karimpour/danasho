@@ -843,14 +843,13 @@ class StepOffline_2 extends indexOffline {
                 success: function (msg) {
                     window.offlineDate = msg;
                     StepOffline_2.endStep(window.stepTwoText);
+                    setTimeout(() => {
+                        StepOffline_2.ajaxBackEnd();
+                    }, 400)
                 },
                 fail: function (msg) {
                 }
             });
-            setTimeout(() => {
-                StepOffline_2.ajaxBackEnd();
-            }, 400)
-
 
         } else {
             window.stepTwoText = data['step'];
@@ -1037,7 +1036,7 @@ Four = () => {
     stepFour.startStep();
 }
 
-itemHandle = (stepNumber, tag) => {
+itemHandle = (stepNumber, tag, edit = '') => {
     const thisTag = $(tag);
     const turn = Turn();
     let circleSelect = $('.circle-select-offline span');
@@ -1047,8 +1046,13 @@ itemHandle = (stepNumber, tag) => {
             One(thisTag, turn);
             break;
         case 2:
-            circleSelect.eq(0).remove();
-            circleSelect.eq(1).addClass("circle-select-active");
+            if (edit === '') {
+                circleSelect.eq(0).remove();
+                circleSelect.eq(1).addClass("circle-select-active");
+            } else {
+                $('#offline-items').empty();
+                $('#offline-items').append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden'  id='turn-offline' name='turn-offline' value='1'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
+            }
             Two(thisTag, turn);
             break;
         case 3:
@@ -1098,7 +1102,12 @@ offlineRecorder = (tag, turn) => {
             break;
         case 9 :
             const offline_verify_token = $("input[name='offline_verify_token']").val();
-            let dataWithPassword = {'offline_verify_token':offline_verify_token,'turn': turn, 'step': step, 'dataID': dataID};
+            let dataWithPassword = {
+                'offline_verify_token': offline_verify_token,
+                'turn': turn,
+                'step': step,
+                'dataID': dataID
+            };
             stepFour.endStep('/offline/recordHandle', dataWithPassword);
             break;
     }

@@ -46,14 +46,13 @@ class StepOffline_2 extends indexOffline {
                 success: function (msg) {
                     window.offlineDate = msg;
                     StepOffline_2.endStep(window.stepTwoText);
+                    setTimeout(() => {
+                        StepOffline_2.ajaxBackEnd();
+                    }, 400)
                 },
                 fail: function (msg) {
                 }
             });
-            setTimeout(() => {
-                StepOffline_2.ajaxBackEnd();
-            }, 400)
-
 
         } else {
             window.stepTwoText = data['step'];

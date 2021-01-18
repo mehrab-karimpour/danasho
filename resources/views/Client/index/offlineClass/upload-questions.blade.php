@@ -17,7 +17,7 @@
 </div>
 <br>
 <div class="go-back-offline text-right">
-
+    <button class='btn btn-secondary' onclick='itemHandle(2,window.offlineQuestions,"edit")'>بازگشت به عقب</button>
 </div>
 <br/>
 
