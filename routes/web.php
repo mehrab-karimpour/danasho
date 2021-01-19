@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // index page
+
+Route::get('/panel',function (){
+    return response()->view('panel.layout');
+});
+
 Route::get('/', [indexController::class, 'index']);
 
 Route::get('/s', [indexController::class, 'set']);

@@ -6,6 +6,7 @@
     "/css/index.css": "/css/index.css",
     "/js/custom.js": "/js/custom.js",
     "/js/index.js": "/js/index.js",
+    "/js/panel/panel.js": "/js/panel/panel.js",
     "/js/header.js": "/js/header.js",
     "/css/header.css": "/css/header.css"
 }

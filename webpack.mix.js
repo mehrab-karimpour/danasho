@@ -35,7 +35,19 @@ mix.combine([
     'resources/js/offlineClass/offlineStep4.js',
     'resources/js/offlineClass/eventHandler-offline.js',
 
-], 'public/js/index.js')
+], 'public/js/index.js');
+
+mix.combine([
+    'resources/js/panel/vendor.bundle.base.js',
+    'resources/js/panel/Chart.min.js',
+    'resources/js/panel/bootstrap-datepicker.min.js',
+    'resources/js/panel/off-canvas.js',
+    'resources/js/panel/hoverable-collapse.js',
+    'resources/js/panel/misc.js',
+    'resources/js/panel/settings.js',
+    'resources/js/panel/todolist.js',
+    'resources/js/panel/dashboard.js',
+], 'public/js/panel/panel.js');
 
 mix.combine([
     'resources/js/dependenci/header.js',
