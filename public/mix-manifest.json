@@ -4,9 +4,11 @@
     "/css/slider.css": "/css/slider.css",
     "/css/mobile.css": "/css/mobile.css",
     "/css/index.css": "/css/index.css",
+    "/css/panel/home.css": "/css/panel/home.css",
     "/js/custom.js": "/js/custom.js",
     "/js/index.js": "/js/index.js",
     "/js/panel/panel.js": "/js/panel/panel.js",
     "/js/header.js": "/js/header.js",
-    "/css/header.css": "/css/header.css"
+    "/css/header.css": "/css/header.css",
+    "/js/panel/home.js": "/js/panel/home.js"
 }

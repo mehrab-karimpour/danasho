@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // index page
 
 Route::get('/panel',function (){
-    return response()->view('panel.layout');
+    return response()->view('panel.home');
 });
 
 Route::get('/', [indexController::class, 'index']);

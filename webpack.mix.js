@@ -73,4 +73,14 @@ mix.copyDirectory('resources/image/', 'public/image/');
 // production
 
 
+/*  panel  link*/
+mix.sass('resources/sass/panel/home.scss', 'public/css/panel/home.css');
 
+
+/*
+* panel js
+* */
+
+mix.combine([
+    'resources/js/panel/home.js',
+], 'public/js/panel/home.js');

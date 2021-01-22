@@ -4,24 +4,15 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>مسؤول الأرجواني</title>
-    <!-- plugins:css -->
-
-    <link rel="stylesheet" href="{{asset('css/panel/vendor.bundle.base.css')}}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{asset('css/panel/font-awesome.min.css')}}"/>
+    <title>پنل کاربری </title>
     <link rel="stylesheet" href="{{asset('css/panel/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/panel/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous"/>
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="{{asset('css/panel/style.css')}}">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../../assets/images/favicon.png"/>
+    <link rel="stylesheet" href="{{asset('css/global.css')}}">
+
+    @yield('panel-link')
 </head>
 <body class="rtl">
 <div class="container-scroller">
@@ -37,7 +28,7 @@
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                <span class="mdi mdi-menu"></span>
+                <i class="fas fa-align-right"></i>
             </button>
             <div class="search-field d-none d-md-block">
                 <form class="d-flex align-items-center h-100" action="#">
@@ -59,7 +50,7 @@
                             <span class="availability-status online"></span>
                         </div>
                         <div class="nav-profile-text">
-                            <p class="mb-1 text-black">محراب کریم پور</p>
+                            <p class="mb-1 text-black">مهدی پازوکیان</p>
                         </div>
                         <i class="fas fa-caret-down"></i>
                     </a>
@@ -188,7 +179,7 @@
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-toggle="offcanvas">
-                <span class="mdi mdi-menu"></span>
+                <i class="fas fa-align-right"></i>
             </button>
         </div>
     </nav>
@@ -396,7 +387,7 @@
                         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item bg-secondary">
                     <a class="nav-link d-flex justify-content-between" href="../../index.html">
                         <span class="menu-title">
                             <i class="fas fa-house-user"></i>
@@ -586,26 +577,18 @@
         <!-- ends here -->
         <div class="main-panel">
             <div class="content-wrapper">
-                <div class="page-header">
-                    <h3 class="page-title"> ار تي ال </h3>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">تخطيطات الصفحة</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">ار تي ال</li>
-                        </ol>
-                    </nav>
-                </div>
 
+                @yield('panel-content')
 
             </div>
             <!-- content-wrapper ends -->
             <!-- footer starts here-->
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">حقوق الطبع والنشر © 2017 <a
-                            href="https://www.bootstrapdash.com/"
-                            target="_blank">BootstrapDash</a>. كل الحقوق محفوظة.</span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">مصنوعة يدويا ومصنوعة من <i
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">طراحی و توسعه توسط تیم IT داناشو  <a
+                            href="http://mehrabkarimpour.ir/"
+                            target="_blank">mehrabkarimpour.ir </a>( تمامی حقوق محفوظ است ) </span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">danasho<i
                             class="mdi mdi-heart text-danger"></i></span>
                 </div>
             </footer>
@@ -615,24 +598,9 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
-<script src="{{asset('js/panel/panel.js')}}"></script>
-<!-- container-scroller -->
-<!-- plugins:js -->
-{{--<script src="../../../assets/vendors/js/vendor.bundle.base.js"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<script src="../../../assets/vendors/chart.js/Chart.min.js"></script>
-<script src="../../../assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="../../../assets/js/off-canvas.js"></script>
-<script src="../../../assets/js/hoverable-collapse.js"></script>
-<script src="../../../assets/js/misc.js"></script>
-<script src="../../../assets/js/settings.js"></script>
-<script src="../../../assets/js/todolist.js"></script>
-<!-- endinject -->
-<!-- Custom js for this page -->
-<script src="../../../assets/js/dashboard.js"></script>--}}
-<!-- End custom js for this page -->
 </body>
+<link rel="stylesheet" href="{{asset('css/panel/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{asset('css/panel/font-awesome.min.css')}}"/>
+<script src="{{asset('js/panel/panel.js')}}"></script>
+@yield('panel-script')
 </html>
