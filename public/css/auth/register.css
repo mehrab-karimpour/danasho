@@ -139,6 +139,7 @@ body {
   margin: 0 auto;
   top: 0;
   position: absolute;
+  border-radius: 45%;
   opacity: 12%;
 }
 
