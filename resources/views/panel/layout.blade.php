@@ -11,6 +11,7 @@
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{asset('css/global.css')}}">
+    <link rel="stylesheet" href="{{asset('css/panel/panel.css')}}">
 
     @yield('panel-link')
 </head>
@@ -387,8 +388,8 @@
                         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                     </a>
                 </li>
-                <li class="nav-item bg-secondary">
-                    <a class="nav-link d-flex justify-content-between" href="../../index.html">
+                <li class="nav-item">
+                    <a class="d-flex justify-content-between" href="/panel">
                         <span class="menu-title">
                             <i class="fas fa-house-user"></i>
                             صفحه ی نخست
@@ -396,7 +397,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" href="../../index.html">
+                    <a class="d-block text-right" href="/panel/editProfile">
                         <span class="menu-title">
                             <i class="far fa-id-card"></i>
                             ویرایش پروفایل
@@ -589,7 +590,8 @@
                             href="http://mehrabkarimpour.ir/"
                             target="_blank">mehrabkarimpour.ir </a>( تمامی حقوق محفوظ است ) </span>
                     <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">danasho<i
-                            class="mdi mdi-heart text-danger"></i></span>
+                            class="mdi mdi-heart text-danger"></i>
+                    </span>
                 </div>
             </footer>
             <!-- ends here -->

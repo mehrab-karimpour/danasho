@@ -6,8 +6,12 @@
 
 }
 
-a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, strong, label, p {
+a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button,select, option, strong, label, p {
     font-family: Shabnam;
+}
+
+a{
+    text-decoration: none!important;
 }
 
 body {

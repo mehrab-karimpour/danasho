@@ -12,7 +12,6 @@ const mix = require('laravel-mix');
  */
 
 
-
 mix.combine([
     'resources/js/app/index.js',
     'resources/js/app/login.js'
@@ -74,8 +73,24 @@ mix.copyDirectory('resources/image/', 'public/image/');
 
 
 /*  panel  link*/
+mix.sass('resources/sass/panel/panel.scss', 'public/css/panel/panel.css');
 mix.sass('resources/sass/panel/home.scss', 'public/css/panel/home.css');
+mix.sass('resources/sass/panel/edit-profile.scss', 'public/css/panel/edit-profile.css');
 
+
+/*
+* auth section scss and js file
+* */
+
+mix.sass('resources/sass/auth/register.scss', 'public/css/auth/register.css');
+mix.sass('resources/sass/auth/login.scss', 'public/css/auth/login.css');
+
+mix.combine([
+    'resources/js/auth/register.js',
+], 'public/js/auth/register.js');
+mix.combine([
+    'resources/js/auth/login.js',
+], 'public/js/auth/login.js');
 
 /*
 * panel js

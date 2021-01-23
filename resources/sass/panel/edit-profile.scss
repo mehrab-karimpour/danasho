@@ -1,0 +1,30 @@
+#edit-profile {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px -2px;
+
+    input::placeholder {
+        color: #44474d;
+    }
+
+    input {
+        font-weight: bold;
+        font-family: Shabnam;
+    }
+
+    select {
+        color: #000!important;
+        font-weight: bold;
+        font-family:Shabnam;
+    }
+    button{
+        font-family: Shabnam;
+    }
+}
+
+i.checkmark {
+    color: #9ABC66;
+    font-size: 35px;
+    margin-left: -15px;
+}
+

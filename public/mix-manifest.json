@@ -4,11 +4,17 @@
     "/css/slider.css": "/css/slider.css",
     "/css/mobile.css": "/css/mobile.css",
     "/css/index.css": "/css/index.css",
+    "/css/panel/panel.css": "/css/panel/panel.css",
     "/css/panel/home.css": "/css/panel/home.css",
+    "/css/panel/edit-profile.css": "/css/panel/edit-profile.css",
+    "/css/auth/login.css": "/css/auth/login.css",
     "/js/custom.js": "/js/custom.js",
     "/js/index.js": "/js/index.js",
     "/js/panel/panel.js": "/js/panel/panel.js",
     "/js/header.js": "/js/header.js",
     "/css/header.css": "/css/header.css",
-    "/js/panel/home.js": "/js/panel/home.js"
+    "/js/auth/register.js": "/js/auth/register.js",
+    "/js/auth/login.js": "/js/auth/login.js",
+    "/js/panel/home.js": "/js/panel/home.js",
+    "/css/auth/register.css": "/css/auth/register.css"
 }

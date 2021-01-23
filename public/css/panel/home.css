@@ -1,1 +1,107 @@
-input.fab{display:none}figure{overflow:hidden}.img-profile{-webkit-clip-path:circle(52% at 70% 38%);-moz-clip-path:circle(52% at 70% 38%);clip-path:circle(52% at 70% 38%);transform:translatez(0);transition:all .3s linear}.img-profile:hover{-webkit-clip-path:circle(30% at 50% 50%);clip-path:circle(30% at 50% 50%);transform:scale(1.07) rotate(-5deg) translatez(0)}.profile-card-panel .fab+.toggle{top:63%;z-index:10;right:0;width:50px;height:50px;cursor:pointer;font-size:60px;line-height:50px;text-align:center;border-radius:50%;position:absolute;-webkit-user-select:none;box-shadow:0 4px 4px #666}.fab:checked+.toggle,.profile-card-panel .fab+.toggle{color:#fff;background:#f44336;transition:all .3s ease-in-out 0s}.fab:checked+.toggle{transform:rotate(135deg);box-shadow:2px -2px 4px #333}.profile-card-panel .img-fluid{max-height:20vh}#home>#home__item>div>div i{font-size:45px}.hover-shadow:hover{cursor:pointer;-webkit-animation-name:hover-shadow;animation-name:hover-shadow;-webkit-animation-duration:1.5s;animation-duration:1.5s;-webkit-animation-delay:.1s;animation-delay:.1s;-webkit-animation-timing-function:linear;animation-timing-function:linear;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-direction:alternate;animation-direction:alternate}@-webkit-keyframes hover-shadow{0%{transform:translateY(6px);opacity:.4}50%{transform:translateY(3px);opacity:1}to{transform:translateY(6px);opacity:.4}}@keyframes hover-shadow{0%{transform:translateY(6px);opacity:.4}50%{transform:translateY(3px);opacity:1}to{transform:translateY(6px);opacity:.4}}
+input.fab {
+  display: none;
+}
+
+figure {
+  overflow: hidden;
+}
+
+.img-profile {
+  -webkit-clip-path: circle(52% at 70% 38%);
+  -moz-clip-path: circle(52% at 70% 38%);
+  clip-path: circle(52% at 70% 38%);
+  transform: translatez(0);
+  transition: all .3s linear;
+}
+
+.img-profile:hover {
+  -webkit-clip-path: circle(30% at 50% 50%);
+  clip-path: circle(30% at 50% 50%);
+  transform: scale(1.07) rotate(-5deg) translatez(0);
+}
+
+.profile-card-panel .fab + .toggle {
+  top: 63%;
+  z-index: 10;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 60px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  color: #fff;
+  background: #F44336;
+  -webkit-user-select: none;
+  box-shadow: 0 4px 4px #666;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.fab:checked + .toggle {
+  color: #fff;
+  background: #F44336;
+  transform: rotate(135deg);
+  box-shadow: 2px -2px 4px #333;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.profile-card-panel .img-fluid {
+  max-height: 20vh;
+}
+
+#home > #home__item > div > div i {
+  font-size: 45px;
+}
+
+.hover-shadow:hover {
+  cursor: pointer;
+  -webkit-animation-name: hover-shadow;
+          animation-name: hover-shadow;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-delay: 100ms;
+          animation-delay: 100ms;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+@-webkit-keyframes hover-shadow {
+  0% {
+    transform: translateY(6px);
+    opacity: .4;
+  }
+
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(6px);
+    opacity: .4;
+  }
+}
+
+@keyframes hover-shadow {
+  0% {
+    transform: translateY(6px);
+    opacity: .4;
+  }
+
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(6px);
+    opacity: .4;
+  }
+}
+
