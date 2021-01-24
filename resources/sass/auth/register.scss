@@ -21,13 +21,33 @@ body {
     padding: 25px;
     color: rgb(192, 192, 192);
     font-size: 12px;
-
-
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+.myLeftCtn-login {
+    background: #5433FF !important; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF) !important; /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
+.login-back-first-child {
+    position: absolute;
+    width: 98%;
+    height: 109%;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    background-color: #ffffff;
+    z-index: 0;
+    border-radius: 5px;
+    transform: matrix3d(1, 0, 24, 0, -.09, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+.login-back-last-child{
+    @extend .login-back-first-child;
+    transform: matrix3d(1, 0, 24, 0, .09, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)!important;
 }
 
 .myLeftCtn {
@@ -168,6 +188,10 @@ body {
 
 #register-description {
     clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+}
+
+input[type=button]{
+    cursor: pointer;
 }
 
 

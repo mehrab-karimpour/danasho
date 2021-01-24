@@ -1,7 +1,1 @@
-@media (max-width: 768px) {
-  #select-class > div {
-    width: 100%;
-    margin-top: 1%;
-  }
-}
-
+@media (max-width:768px){#select-class>div{width:100%;margin-top:1%}}

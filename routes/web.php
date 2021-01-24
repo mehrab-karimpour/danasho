@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\loginController;
 use App\Http\Controllers\Auth\registerController;
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\offlineClassController;
@@ -29,7 +30,9 @@ Route::get('/', [indexController::class, 'index']);
 
 Route::get('/s', [indexController::class, 'set']);
 
+/*   Auth routes  */
 Route::get('register', [registerController::class, 'register']);
+Route::get('login', [loginController::class, 'login']);
 
 // routes select online class
 Route::prefix('/online')->group(function () {

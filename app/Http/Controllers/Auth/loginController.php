@@ -7,5 +7,13 @@ use Illuminate\Http\Request;
 
 class loginController extends Controller
 {
+    public function login()
+    {
+        return response()->view('Client.login.login');
+    }
 
+    public function doLogin(Request $request)
+    {
+
+    }
 }
