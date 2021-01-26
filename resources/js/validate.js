@@ -1,6 +1,6 @@
-class validate extends index {
+class validate {
     constructor(props) {
-        super(props);
+
     }
 
     addClassError = (item, classError) => {
@@ -27,20 +27,21 @@ class validate extends index {
                 }
             }
             if (param['type'] === "radio") {
-
                 $("body").find("input[type=radio]").each(function (key, value) {
                     if ($(this).prop('checked')) {
                         return window.radioValid = true;
+                    } else {
+                        return window.radioValid = false;
                     }
                 });
                 if (window.radioValid) {
-
                     this.removeClassError(item, 'form-danger');
                 } else {
                     let parent = item.parents(".form-item-parent");
                     parent.find('p.text-danger').remove();
-                    parent.append("<p class='text-danger'>" + param['message'] + "</p>");
-                    this.addClassError(item, 'form-danger')
+                    parent.find('p.alert-danger').remove();
+                    parent.append("<p class='alert alert-danger'>" + param['message'] + "</p>");
+                    this.addClassError(item, 'form-danger');
                 }
 
             }
@@ -73,7 +74,7 @@ class validate extends index {
             if (item.hasClass('form-danger')) {
                 parent.find('p.text-danger').remove();
                 parent.append("<p class='text-danger'>" + param['message'] + "</p>");
-            }else{
+            } else {
                 parent.find('p.text-danger').remove();
             }
         }

@@ -7,19 +7,19 @@
     <br>
 
     <section id="select-class">
-        <div class="grade">
+        <div class="grade" onclick="itemsStart(1,'.select-class')">
             <i class="fas fa-user-graduate ml-2"></i>
             پایه تحصیلی و عنوان درس
         </div>
-        <div class="time public-items">
+        <div class="time public-items" onclick="itemsStart(2,'.time')">
             <i class="fas fa-hourglass-start ml-2"></i>
             مدت زمان کلاس و هزینه
         </div>
-        <div class="date public-items">
+        <div class="date public-items" onclick="itemsStart(3,'.date')">
             <i class="fas fa-calendar-alt ml-2"></i>
             زمان برگزاری کلاس
         </div>
-        <div class="set-record">
+        <div class="set-record" onclick="itemsStart(4,'.set-record')">
             <i class="fas fa-edit ml-2"></i>
             ثبت درخواست
         </div>

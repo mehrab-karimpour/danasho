@@ -19,8 +19,8 @@ mix.combine([
 
 
 mix.combine([
-    'resources/js/onlineClass/index.js',
     'resources/js/validate.js',
+    'resources/js/onlineClass/index.js',
     'resources/js/onlineClass/step1.js',
     'resources/js/onlineClass/step2.js',
     'resources/js/onlineClass/step3.js',

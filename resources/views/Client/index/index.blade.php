@@ -67,17 +67,21 @@
             </div>
         </div>
     </div>
-    @include('Client.index.partials.slider')
+    <form action="" method="post" id="online-form-items">
 
-    @include('Client.index.onlineClass.index')
+        @include('Client.index.partials.slider')
 
-    @include('Client.index.partials.error-select')
+        @include('Client.index.onlineClass.index')
 
-    @include('Client.index.onlineClass.online-item-end-2')
+        @include('Client.index.partials.error-select')
 
-    @include('Client.index.onlineClass.online-item-end-1')
+        @include('Client.index.onlineClass.online-item-end-2')
 
-    @include('Client.index.onlineClass.online-items')
+        @include('Client.index.onlineClass.online-item-end-1')
+
+        @include('Client.index.onlineClass.online-items')
+
+    </form>
 
     @include('partials.ajax-loader')
 

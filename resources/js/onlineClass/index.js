@@ -1,21 +1,8 @@
-class index {
-    constructor() {
-
+class index extends validate{
+    constructor(props) {
+        super(props)
     }
 
-    //  in this function we checked before items has selected .appendItems
-    checkSelect = (step) => {
-
-        let constSelected = $('.online-selected').length;
-        if (step > constSelected + 1) {
-            $('.error-select').fadeIn();
-            setTimeout(function () {
-                $('.error-select').fadeOut();
-            }, 2000)
-            return false;
-        }
-        return true;
-    }
 
     //  handle post request
     post = (url = '', data = {}) => {
@@ -25,33 +12,34 @@ class index {
         );
     }
 
-    static appendItems = (result, turn = 1) => {
-
+    static appendItems = (result = '', turn = 1) => {
         let onlineItems = $('#online-items');
         onlineItems.fadeIn(200);
+        $('#turn').val(turn);
         $('#online-items>div>ul').empty();
         window.turn = turn;
-        $('#turn').val(turn);
         $.each(result, function (key, value) {
-            let tag = "<li onclick='recordEvent(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+            let tag = "<li onclick='recordHandle(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                 ">" + value['title'] + "</li>";
             $('#online-items>div>ul').append(tag);
         });
-        setTimeout(() => {
-            index.ajaxLoaderEnd();
-        }, 200);
 
-        if (turn === 5) {
-            let firstDateItem = $('#online-items>div>ul li').eq(0);
-            firstDateItem.removeAttr("onclick");
-            firstDateItem.addClass('bg-danger');
-        }
+    }
+
+    static stepsTitle = (text) => {
+        $('.step-online-title').text(text);
+    }
+
+    static appendInput = (className, name, value) => {
+        $('.' + className).remove();
+        $('#online-form-items').append("<input type='text' class='" + className + "' value='" + value + "'  name='" + name + "'>")
     }
 
     static disableTomorrowDate = () => {
         let TomorrowItem = $('#list-group>li').eq(0);
         TomorrowItem.eq(0).addClass("bg-danger");
         TomorrowItem.removeAttr("onClick");
+        $('#list-group>li').eq(1).addClass('after-day');
     }
 
     static ajaxBackStart = () => {
@@ -119,6 +107,8 @@ class index {
 
     static completeEnd = (stepItem) => {
         $(stepItem).removeClass('bg-warning');
+        $('#online-items').fadeOut();
+        $('.ajax-back').fadeOut();
     }
 
 

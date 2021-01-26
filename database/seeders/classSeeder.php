@@ -24,9 +24,9 @@ class classSeeder extends Seeder
         $gradeOne = new Grade();
         $gradeOne->title = 'ابتدایی';
         $gradeOne->save();
-        $grade = new Grade();
-        $grade->title = 'متوسطه اول';
-        $grade->save();
+        $gradeTwo = new Grade();
+        $gradeTwo->title = 'متوسطه اول';
+        $gradeTwo->save();
         $grade = new Grade();
         $grade->title = ' متوسطه دوم';
         $grade->save();
@@ -34,6 +34,12 @@ class classSeeder extends Seeder
         //  set  price
         $price = new Price();
         $price->grade_id = $gradeOne->id;
+        $price->type = "onlineClass";
+        $price->title = '7';
+        $price->save();
+
+        $price = new Price();
+        $price->grade_id = $gradeTwo->id;
         $price->type = "onlineClass";
         $price->title = '7';
         $price->save();

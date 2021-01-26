@@ -1,57 +1,60 @@
 class Step1 extends index {
     constructor() {
         super();
-        window.grades = {};
     }
 
-    gradeHandle = () => {
-        $('.step-title').text('انتخاب مقطع تحصیلی');
-        let turn = $("input[name='turn']").val();
-        step1.completing('.grade');
+    startStep = (actionType) => {
+        this.completing('.grade');
+        index.stepsTitle('انتخاب مقطع تحصیلی');
         this.ajaxStart();
-        this.post('/online/GetGrades', {}).done(function (result) {
-            index.ajaxBackEnd();
-            window.grades = result;
-            index.appendItems(result);
+
+        this.post('/online', {}).then((data) => {
+            window.grades = data.grades;
+            window.units = data.units;
+            window.lessons = data.lessons;
+            window.times = data.times;
+            window.prices = data.prices;
+            window.dates = data.dates;
+            window.periods = data.periods;
+            Step1.appendItems(window.grades, 1);
+            setTimeout(() => {
+                Step1.ajaxBackEnd();
+            }, 200)
         });
+
     }
 
-    goBack = () => {
-        let goBack = $('.go-back');
-        goBack.empty();
-        goBack.append("<button onclick='goBackGrade()' class='btn float-right btn-secondary mb-5'> قبلی</button>");
+    stepHandle = (turn, data) => {
+        switch (turn) {
+            case 1:
+                // record grade
+                window.grade_id = data.dataID;
+                index.stepsTitle('انتخاب پایه تحصیلی');
+                index.appendInput('grade-input', 'grade', data.value);
+                const units = window.units.filter((obg) => {
+                    return obg.grade_id === parseInt(data.dataID);
+                })
+                Step1.appendItems(units, 2);
+                break;
+            case 2:
+                index.stepsTitle('انتخاب درس');
+                index.appendInput('unit-input', 'unit', data.value);
+                const lessons = window.lessons.filter((obg) => {
+                    return obg.unit_id === parseInt(data.dataID);
+                })
+                Step1.appendItems(lessons, 3);
+                break;
+
+            case 3:
+                this.endStep(data);
+        }
     }
 
-    stepOneHandle = (url, data) => {
-        this.ajaxStart();
-        this.post(url, data).done(function (result) {
-            window.grades = result;
-            if (data['turn'] === 3) {
-                $("#online-items").fadeOut();
-                $('.ajax-back').fadeOut();
-                index.completeEnd('.grade');
-                index.completedStep(data['step'], '.grade');
-                window.time = result;
-            } else {
-                index.appendItems(result[0], result[1]);
-            }
+    endStep = (data) => {
+        index.appendInput('lesson-input', 'lesson', data.value);
+        Step1.completedStep(data.value, '.grade');
+        Step1.completeEnd('.grade');
 
-            let circleSelect = $('.circle-select span');
-            circleSelect.removeClass('circle-select-active');
-            const stepTitle=$('.step-title');
-            switch (data['turn']) {
-                case 1:
-                    circleSelect.eq(1).addClass("circle-select-active");
-                    stepTitle.text('انتخاب پایه  تحصیلی');
-                    break;
-                case 2:
-                    circleSelect.eq(2).addClass("circle-select-active");
-                    stepTitle.text('انتخاب درس');
-                    break;
-            }
-            index.ajaxBackEnd();
-        });
-        this.goBack();
     }
 
 

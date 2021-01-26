@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'online/*',
+        '/online',
         'offline/*'
     ];
 }

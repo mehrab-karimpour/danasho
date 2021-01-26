@@ -3,84 +3,34 @@ class Step3 extends index {
         super(props);
     }
 
-    dateHandle = () => {
-        $('.step-title').text('انتخاب روز  مورد نظر');
-        this.ajaxStart();
+    startStep = (actionType) => {
+        $('.ajax-back').fadeIn();
         this.completing('.date');
-        index.appendItems(window.date[0], window.date[1]);
-        this.showItem('#online-items');
-
+        index.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
+        Step2.appendItems(window.dates, 5);
+        index.disableTomorrowDate();
     }
 
-    stepTreeHandle = (url, data) => {
-        $('.step-title').text('انتخاب محدوده زمانی مورد نظر');
-        let firstDateSelected = $('#list-group li').eq(1).text();
-        let firstPeriodSelect = 0;
-        if (firstDateSelected === data['step']) {
-            firstPeriodSelect = 1;
-        }
-        this.ajaxStart();
-        this.post(url, data).done(function (result) {
-            window.grades = result;
-            if (data['turn'] === 6) {
-                index.ajaxLoaderEnd();
-                $("#online-items").fadeOut();
-                $('.ajax-back').fadeOut();
-                index.completeEnd('.date');
-                index.completedStep(result[0], '.date');
-                window.time = result;
-            } else {
-                index.appendItems(result[0], result[1]);
+    stepHandle = (tag, data) => {
+        if (tag === 6) {
+            data.value = window.dateTitle + data.value;
+            this.endStep(data);
+        } else {
+            index.appendInput('date-input', 'date', data.dataID);
+            Step2.appendItems(window.periods, 6);
+            if ($(tag).hasClass('after-day')) {
+                index.disableTomorrowDate();
             }
-
-            let circleSelect = $('.circle-select span');
-            circleSelect.removeClass('circle-select-active');
-            switch (data['turn']) {
-                case 5:
-                    circleSelect.eq(1).addClass("circle-select-active");
-                    break;
-            }
-            index.ajaxBackEnd();
-        });
-        this.goBack();
-        if (firstPeriodSelect === 1) {
-            setTimeout(() => {
-                const onePeriodItem=$('#list-group li').eq(0);
-                onePeriodItem.addClass('bg-danger');
-                onePeriodItem.removeAttr('onclick');
-
-            }, 300)
+            window.dateTitle = data.value;
         }
     }
 
-    goBack = () => {
-        let goBack = $('.go-back');
-        goBack.empty();
-        goBack.append("<button onclick='goBackDate()' class='btn float-right  btn-secondary mb-5'> قبلی</button>");
+
+    endStep = (data) => {
+        index.appendInput('period-input', 'period', data.value);
+        Step1.completedStep(data.value, '.date ');
+        Step1.completeEnd('.date');
     }
 
-    getDate = () => {
-        this.ajaxStart();
-        this.post('/online/getDate', {}).done(function (result) {
-            let onlineItems = $('#online-items');
-            onlineItems.fadeIn(200);
-            $('#online-items>div>ul').empty();
-
-            $('#turn').val(result[1]);
-            $.each(result[0], function (key, value) {
-                let tag = "<li onclick='beforeItemNotSelectedShowError()' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
-                    ">" + value['title'] + "</li>";
-                $('#online-items>div>ul').append(tag);
-            });
-            let firstDateItem = $('#online-items>div>ul li').eq(0);
-            firstDateItem.removeAttr("onclick");
-            firstDateItem.addClass('bg-danger');
-            setTimeout(() => {
-                index.ajaxLoaderEnd();
-            }, 200)
-            index.ajaxBackEnd();
-        });
-
-    }
 
 }

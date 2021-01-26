@@ -8,16 +8,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class indexController extends Controller
 {
 
+    public function img()
+    {
+        $img=Storage::get('offline/1/99_10_29.jpg');
+       $img= Image::make($img)->resize(23, 23);
+       return $img->response('png');
+
+    }
+
     public function index(): \Illuminate\Http\Response
     {
-        Session::remove('id');
-        Session::remove('offline-id');
-        Session::remove('offline-gradeId');
-        Session::remove('gradeId');
         return response()->view('Client.index.index');
     }
 

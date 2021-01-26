@@ -45,7 +45,7 @@
                       placeholder="لطفا توصیحات خود را وارد کنید"></textarea>
     </div>
     <div class="d-flex justify-content-around col-12 mt-2">
-        <button class="btn btn-primary next-record">مرحله بعد</button>
+        <button onclick="recordHandle(this,7)" class="btn btn-primary next-record">مرحله بعد</button>
 
     </div>
 
