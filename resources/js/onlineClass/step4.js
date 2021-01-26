@@ -86,6 +86,7 @@ class Step4 extends index {
 
 
     endStep = (data) => {
+        //ok
         index.appendInput('period-input', 'period', data.value);
         Step1.completedStep(data.value, '.date ');
         Step1.completeEnd('.date');
