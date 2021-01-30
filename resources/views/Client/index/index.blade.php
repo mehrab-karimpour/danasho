@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <form action="" method="post" id="online-form-items">
+    <form action="{{route('online-form')}}" method="post" id="online-form-items">
 
         @include('Client.index.partials.slider')
 

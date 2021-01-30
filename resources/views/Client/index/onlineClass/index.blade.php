@@ -25,3 +25,4 @@
         </div>
     </section>
 </fieldset>
+<input type="radio" id="val-empty" style="opacity: 0">

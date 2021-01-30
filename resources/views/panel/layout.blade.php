@@ -417,12 +417,17 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="../../pages/layout/boxed-layout.html">
-                                    صندوق
+                                    درخواست کلاس انلاین
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('panel.online-reserved')}}">
+                                    کلاس های رزرو شده
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../../pages/layout/rtl-layout.html">
-                                    ار تي ال
+                                    کلاس های برگزار شده
                                 </a>
                             </li>
                         </ul>

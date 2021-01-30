@@ -4,6 +4,8 @@ class Step3 extends index {
     }
 
     startStep = (actionType) => {
+        $('.go-back').empty();
+        this.circleSelect(2, 0);
         $('.ajax-back').fadeIn();
         this.completing('.date');
         index.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
@@ -12,6 +14,8 @@ class Step3 extends index {
     }
 
     stepHandle = (tag, data) => {
+        this.addButtonBack('.date');
+        this.circleSelect(2, 1);
         if (tag === 6) {
             data.value = window.dateTitle + data.value;
             this.endStep(data);

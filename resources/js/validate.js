@@ -27,21 +27,17 @@ class validate {
                 }
             }
             if (param['type'] === "radio") {
-                $("body").find("input[type=radio]").each(function (key, value) {
-                    if ($(this).prop('checked')) {
-                        return window.radioValid = true;
-                    } else {
-                        return window.radioValid = false;
-                    }
-                });
-                if (window.radioValid) {
-                    this.removeClassError(item, 'form-danger');
-                } else {
-                    let parent = item.parents(".form-item-parent");
+                let parent = item.parents(".form-item-parent");
+                const radioStatus = $('body input:radio:checked').val();
+                const valEmpty = $('.val-empty').val();
+                if (radioStatus === valEmpty) {
                     parent.find('p.text-danger').remove();
-                    parent.find('p.alert-danger').remove();
-                    parent.append("<p class='alert alert-danger'>" + param['message'] + "</p>");
+                    item.addClass('border border-danger');
+                    parent.append("<p class='alert alert-danger'>"+param['message']+"</p>");
                     this.addClassError(item, 'form-danger');
+                } else {
+                    $('.alert-danger').remove();
+                    this.removeClassError(item, 'form-danger');
                 }
 
             }
@@ -82,6 +78,7 @@ class validate {
         return !$('body *').hasClass('form-danger');
     }
 }
+
 
 
 /*let v = new validate();

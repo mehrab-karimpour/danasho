@@ -5,6 +5,8 @@ class Step2 extends index {
 
 
     startStep = (actionType) => {
+        $('.go-back').empty();
+        this.circleSelect(1, 0);
         $('.ajax-back').fadeIn();
         this.completing('.time');
         index.stepsTitle('انتخاب مدت زمان کلاس انلاین و هزینه آن');

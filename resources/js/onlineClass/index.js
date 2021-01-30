@@ -1,4 +1,4 @@
-class index extends validate{
+class index extends validate {
     constructor(props) {
         super(props)
     }
@@ -19,10 +19,47 @@ class index extends validate{
         $('#online-items>div>ul').empty();
         window.turn = turn;
         $.each(result, function (key, value) {
-            let tag = "<li onclick='recordHandle(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
-                ">" + value['title'] + "</li>";
+            let tag;
+            let k = key + 1;
+            if (turn === 'last') {
+                tag = "<li onclick='itemsStart(" + k+ ")' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+                    ">" + value['title'] + "</li>";
+            } else {
+                tag = "<li onclick='recordHandle(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+                    ">" + value['title'] + "</li>";
+            }
             $('#online-items>div>ul').append(tag);
         });
+
+    }
+
+    addButtonBack = (mainItem) => {
+        $('.go-back-button').remove();
+        window.mainItem = mainItem;
+        $('.go-back').append("<button class='btn go-back-button btn-primary mb-4' onclick='backHandle(window.mainItem)'>مرحله قبل</button>");
+    }
+
+    buttonBack = (mainItem) => {
+        $(mainItem).click();
+    }
+
+    circleSelect = (countStep, activeCircle) => {
+        const circleSelect = $('.circle-select');
+        circleSelect.empty();
+        let tag = "";
+        switch (countStep) {
+            case 1:
+                tag = "<span></span>";
+                break
+            case 2:
+                tag = "<span></span><span></span>";
+                break
+            case 3:
+                tag = "<span></span><span></span><span></span>";
+        }
+        circleSelect.append(tag);
+        circleSelect.find('span').eq(activeCircle).addClass('circle-select-active');
+
 
     }
 

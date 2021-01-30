@@ -4,6 +4,8 @@ class Step1 extends index {
     }
 
     startStep = (actionType) => {
+        $('.go-back').empty();
+        this.circleSelect(3, 0);
         this.completing('.grade');
         index.stepsTitle('انتخاب مقطع تحصیلی');
         this.ajaxStart();
@@ -25,8 +27,10 @@ class Step1 extends index {
     }
 
     stepHandle = (turn, data) => {
+        this.addButtonBack('.grade');
         switch (turn) {
             case 1:
+                this.circleSelect(3, 1);
                 // record grade
                 window.grade_id = data.dataID;
                 index.stepsTitle('انتخاب پایه تحصیلی');
@@ -34,9 +38,11 @@ class Step1 extends index {
                 const units = window.units.filter((obg) => {
                     return obg.grade_id === parseInt(data.dataID);
                 })
+                console.log(units);
                 Step1.appendItems(units, 2);
                 break;
             case 2:
+                this.circleSelect(3, 2);
                 index.stepsTitle('انتخاب درس');
                 index.appendInput('unit-input', 'unit', data.value);
                 const lessons = window.lessons.filter((obg) => {

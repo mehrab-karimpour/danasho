@@ -7,7 +7,7 @@
 }
 
 a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button,select, option, strong, label, p {
-    font-family: Shabnam;
+    font-family: Shabnam!important;
 }
 
 a{
@@ -123,4 +123,20 @@ body {
 }
 
 
+.display-none{
+    display: none;
+}
 
+
+.timer {
+    background: #3fee9b;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    width: 45px;
+    height: 45px;
+}

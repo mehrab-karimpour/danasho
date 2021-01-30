@@ -76,6 +76,7 @@ mix.copyDirectory('resources/image/', 'public/image/');
 mix.sass('resources/sass/panel/panel.scss', 'public/css/panel/panel.css');
 mix.sass('resources/sass/panel/home.scss', 'public/css/panel/home.css');
 mix.sass('resources/sass/panel/edit-profile.scss', 'public/css/panel/edit-profile.css');
+mix.sass('resources/sass/panel/online-reserved.scss', 'public/css/panel/online-reserved.css');
 
 
 /*
@@ -86,11 +87,11 @@ mix.sass('resources/sass/auth/register.scss', 'public/css/auth/register.css');
 mix.sass('resources/sass/auth/login.scss', 'public/css/auth/login.css');
 
 mix.combine([
-    'resources/js/auth/register.js',
-], 'public/js/auth/register.js');
+    'resources/js/register.js',
+], 'public/js/register.js');
 mix.combine([
-    'resources/js/auth/login.js',
-], 'public/js/auth/login.js');
+    'resources/js/login.js',
+], 'public/js/login.js');
 
 /*
 * panel js

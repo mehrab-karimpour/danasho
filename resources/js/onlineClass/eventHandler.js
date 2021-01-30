@@ -11,7 +11,7 @@ const updateOrCreate = (item) => {
     }
 }
 
-const itemsStart = (stepNumber, item) => {
+const itemsStart = (stepNumber, item = '') => {
     const actionType = updateOrCreate(item);
     switch (stepNumber) {
         case 1 :
@@ -59,7 +59,18 @@ const recordHandle = (tag, turn) => {
         case 8:
             step4.stepHandle(turn, data);
             break;
+        case 9:
+            step4.stepHandle(turn, data);
+            break;
     }
+}
+
+backHandle = (mainItem) => {
+    step1.buttonBack(mainItem);
+}
+
+const formSubmit = () => {
+    $('form').submit();
 }
 
 

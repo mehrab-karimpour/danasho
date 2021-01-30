@@ -10,6 +10,9 @@
             </li>
         </ul>
     </div>
+    <div class="form-submit">
+
+    </div>
     <div class="col-6 col-md-4 col-xl-2 circle-select">
         <span class="circle-select-active"></span>
         <span></span>

@@ -16,9 +16,10 @@ class indexController extends Controller
 
     public function img()
     {
-        $img=Storage::get('offline/1/99_10_29.jpg');
+        return Session::get('online-class-verify');
+       /* $img=Storage::get('offline/1/99_10_29.jpg');
        $img= Image::make($img)->resize(23, 23);
-       return $img->response('png');
+       return $img->response('png');*/
 
     }
 

@@ -20,6 +20,17 @@ use Illuminate\Support\Facades\Session;
 class onlineClassController extends Controller
 {
 
+    public function create(Request $request)
+    {
+        dd($request->all());
+    }
+
+
+    public function checkVerifyPassword(Request $request)
+    {
+        return Session::get('online-class-verify') == $request->checkVerifyPassword;
+    }
+
     public function mobileHandle(Request $request)
     {
         try {
@@ -31,7 +42,7 @@ class onlineClassController extends Controller
                     'name' => $request->name,
                     'password' => Hash::make($password),
                 ]);
-            }else{
+            } else {
                 $password = rand(6000, 9000);
             }
             Session::put('online-class-verify', $password);

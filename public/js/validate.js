@@ -2,7 +2,7 @@ class validate {
     constructor() {
     }
 
-    formValidation = async (formInfo = {}) => {
+    formValidation =  (formInfo = {}) => {
         let item;
         let param;
         for (let i = 0; i < Object.keys(formInfo).pop(); i++) {
@@ -13,32 +13,49 @@ class validate {
             if (param['required'] === "required") {
                 if (item.val() === '') {
                     item.addClass('form-danger');
+                }else {
+                    item.removeClass('form-danger');
                 }
             }
             if (param['type'] === "string") {
                 if ($.isNumeric(item.val())) {
                     item.addClass('form-danger');
+                }else {
+                    item.removeClass('form-danger');
                 }
             }
             if (param['type'] === "numeric") {
                 if (!$.isNumeric(item.val())) {
                     item.addClass('form-danger');
+                }else {
+                    item.removeClass('form-danger');
                 }
             }
+
             if (item.val().length > param['max']) {
                 item.addClass('form-danger');
+            }else {
+                item.removeClass('form-danger');
             }
+
             if (item.val().length < param['min']) {
                 item.addClass('form-danger');
+            }else {
+                item.removeClass('form-danger');
             }
-
+            let parent = item.parents(".form-item-parent");
             if (item.hasClass('form-danger')) {
-                let parent = item.parents(".form-item-parent");
-                parent.append("<p class='text-danger'>" + param['message'] + "</p>");
-
+                parent.find('.text-danger').remove();
+                parent.append("<p class='text-danger mt-2'>" + param['message'] + "</p>");
+            } else {
+                parent.find('.text-danger').remove();
             }
         }
+
+        return  !$('form input').hasClass('form-danger');
     }
+
+
 }
 
 
