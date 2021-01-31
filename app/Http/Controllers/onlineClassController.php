@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\sendVerify;
 use App\Models\DatePeriod;
 use App\Models\Lesson;
+use App\Models\Online;
 use App\Models\Price;
 use App\Models\Time;
 use App\Models\Unit;
@@ -20,9 +21,41 @@ use Illuminate\Support\Facades\Session;
 class onlineClassController extends Controller
 {
 
+    public function getPass()
+    {
+        return Session::get('online-class-verify');
+    }
+
     public function create(Request $request)
     {
-        dd($request->all());
+
+
+        try {
+            $time = Time::find($request->time)->title;
+            $date = explode('-', $request->date);
+            $day = Verta::createDate($date[0], $date[1], $date[2])->format('Y/m/d l');
+            $price = calculatePrice('onlineClass', $request->grade_id, $time);
+            $time = $time . " دقیقه";
+            $newOnlineClass=Online::create([
+                'user_id' => $request->user_id,
+                'grade' => $request->grade,
+                'unit' => $request->unit,
+                'lesson' => $request->lesson,
+                'time' => $time,
+                'price' => $price,
+                'date' => $request->date,
+                'day' => $day,
+                'period' => $request->period,
+                'level' => $request->level,
+                'name' => $request->name,
+                'description' => $request->unit,
+                'mobile' => $request->mobile,
+            ]);
+            return  $newOnlineClass;
+        } catch (\Exception $e) {
+            Log::error($e);
+            return $e;
+        }
     }
 
 
@@ -39,15 +72,16 @@ class onlineClassController extends Controller
                 $password = rand(600000, 900000);
                 User::create([
                     'mobile' => $request->mobile,
-                    'name' => $request->name,
+                    'fullName' => $request->name,
                     'password' => Hash::make($password),
                 ]);
             } else {
                 $password = rand(6000, 9000);
             }
             Session::put('online-class-verify', $password);
-            return response()->json('success');
+            return response()->json(['user_id' => $user->id]);
         } catch (\Exception $e) {
+            Log::error($e);
             return response()->json('error');
         }
     }
@@ -77,6 +111,18 @@ class onlineClassController extends Controller
             return response()->json(null);
         }
 
+    }
+
+    public function getDates(Request $request)
+    {
+        try {
+            $periods = DatePeriod::all();
+            $dates = $this->getDate();
+            return response()->json(['dates' => $dates, 'periods' => $periods]);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json('error');
+        }
     }
 
     public function getDate()

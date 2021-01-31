@@ -25,14 +25,6 @@ body {
   align-items: center;
 }
 
-.myLeftCtn-login {
-  background: #5433FF !important;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF) !important;
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
 .login-back-first-child,
 .login-back-last-child {
   position: absolute;

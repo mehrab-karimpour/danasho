@@ -146,6 +146,9 @@ const uploadQuestionFile = (tag) => {
 * */
 const offlineModalClose = () => {
     $("#offline-items").fadeOut();
+    $('#online-items').fadeOut();
+    $('#last-step-record').fadeOut();
+    $('#online-items-end-step').fadeOut();
     $('.ajax-back').fadeOut();
 }
 

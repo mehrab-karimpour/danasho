@@ -5,11 +5,16 @@ class Step4 extends index {
     }
 
     startStep = (actionType) => {
+        const descriptionLastItem = $('#online-items-end-step');
+        descriptionLastItem.css('opacity', 1);
+        descriptionLastItem.css('position', '');
+        descriptionLastItem.css('z-index', '2200');
+
         $('#online-items').fadeOut();
         $('#online-items-end-step .alert-danger').remove();
         $('.ajax-back').fadeIn();
         $('#last-step-record').fadeOut();
-        $('#online-items-end-step').fadeIn();
+        descriptionLastItem.fadeIn();
     }
 
     stepHandle = (turn, data) => {
@@ -34,7 +39,10 @@ class Step4 extends index {
                     }
                 }
                 if (this.formValidation(formInfo)) {
-                    $('#online-items-end-step').hide();
+                    const descriptionLastItem = $('#online-items-end-step');
+                    descriptionLastItem.css('opacity', 0);
+                    descriptionLastItem.css('position', 'absolute');
+                    descriptionLastItem.css('z-index', '1');
                     $('#last-step-record').fadeIn();
                 }
                 break;
@@ -65,9 +73,11 @@ class Step4 extends index {
                     const userData = {mobile: mobile, name: name};
                     window.mobile = mobile;
                     this.post('/online/mobileHandle', userData).then((response) => {
+
                         if (response === 'error') {
                             $('#last-step-record').prepend("<p class='alert direction-rtl alert-danger'>متاسفیم ! خطایی رخ داده است لطفا دوباره تلاش کنید . </p>");
                         } else {
+                            $('#online-form-items').append("<input type='hidden' name='user_id' value='"+response['user_id']+"'>");
                             $('.verify-password-button').attr("onclick", 'recordHandle(this,9)')
                             const passWordVerify = $('#password-verify-parent');
                             passWordVerify.removeClass('d-none');

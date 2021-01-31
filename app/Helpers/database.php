@@ -1,9 +1,10 @@
 <?php
 
 
-function calculatePrice($gradeId, $time)
+function calculatePrice($type, $gradeId, $time)
 {
-    $price = \App\Models\Price::where('grade_id', $gradeId)->first()->title;
+
+    $price = \App\Models\Price::where('type', $type)->where("grade_id", $gradeId)->first()->title;
     return ($time / 15) * intval($price);
 }
 
@@ -32,7 +33,6 @@ function getQuestions()
 {
     return \App\Models\Question::all();
 }
-
 
 
 function recordUpdate($classId, $item, $value)

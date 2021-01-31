@@ -115,8 +115,7 @@ class register extends validate {
 
 }
 
-const
-    registerClass = new register();
+const registerClass = new register();
 
 $(
     '.submit-register-form'

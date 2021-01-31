@@ -22,7 +22,7 @@ class index extends validate {
             let tag;
             let k = key + 1;
             if (turn === 'last') {
-                tag = "<li onclick='itemsStart(" + k+ ")' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+                tag = "<li onclick='itemsStart(" + k + ")' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                     ">" + value['title'] + "</li>";
             } else {
                 tag = "<li onclick='recordHandle(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
@@ -31,6 +31,60 @@ class index extends validate {
             $('#online-items>div>ul').append(tag);
         });
 
+    }
+
+    static alertOnlineClass = (step = 2, type = 'online-alert') => {
+        const date=$('.date');
+        const grade=$('.grade');
+        const time=$('.time');
+        const onlineClassModal = $("#online-class-modal");
+        let textAlert = '';
+        let exampleModalCenterTitle = '';
+        if (type === 'error') {
+            exampleModalCenterTitle = "خطا !";
+            textAlert = 'متاسفانه خطایی رخ داده است ! لطفا دوباره تلاش بفرمایید .';
+        } else {
+            exampleModalCenterTitle = "هشدار !";
+            switch (step) {
+                case 2:
+                    if (grade.hasClass('item-selected') && !grade.hasClass('bg-warning')) {
+                        window.gradeSelect = true;
+                    } else {
+                        textAlert = "لطفا پایه تحصیلی و عنوان درس را انتخاب کنید ";
+                        window.gradeSelect = false;
+                    }
+                    if (window.gradeSelect) {
+                        return true;
+                    }
+
+                case 4:
+                    if (!date.hasClass('item-selected') || date.hasClass('bg-warning')) {
+                        textAlert = "لطفا زمان برگزاری کلاس را انتخاب کنید";
+                        window.dateSelect = false;
+                    } else
+                        window.dateSelect = true;
+
+                    if (!time.hasClass('item-selected')|| time.hasClass('bg-warning')) {
+                        textAlert = "لطفا ایتم مدت کلاس و هزینه را انتخاب کنید";
+                        window.timeSelect = false;
+                    } else
+                        window.timeSelect = true;
+
+                    if (!grade.hasClass('item-selected') || grade.hasClass('bg-warning')) {
+                        textAlert = "لطفا پایه تحصیلی و عنوان درس را انتخاب کنید ";
+                        window.gradeSelect = false;
+                    } else
+                        window.gradeSelect = true;
+
+                    if (window.timeSelect && window.gradeSelect && window.dateSelect) {
+                        return true;
+                    }
+            }
+        }
+        onlineClassModal.find('.modal-body').text(textAlert);
+        $('#exampleModalCenterTitle').text(exampleModalCenterTitle);
+        onlineClassModal.modal();
+        return false;
     }
 
     addButtonBack = (mainItem) => {

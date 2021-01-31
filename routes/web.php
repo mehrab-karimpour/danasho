@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 // index page
 
-Route::get('/d', [indexController::class, 'img']);
+Route::get('/d', [onlineClassController::class, 'getPass']);
 
 Route::get('/panel', function () {
     return response()->view('panel.home');
@@ -38,6 +38,7 @@ Route::get('/panel/editProfile', function () {
 /*  online class select   */
 Route::prefix('/online')->group(function () {
     Route::get('/', [onlineClassController::class, 'index']);
+    Route::post('/getDates', [onlineClassController::class, 'getDates']);
     Route::post('/mobileHandle', [onlineClassController::class, 'mobileHandle']);
     Route::post('/check-verify-password', [onlineClassController::class, 'checkVerifyPassword']);
     Route::post('online-form', [onlineClassController::class, 'create'])->name('online-form');
@@ -47,10 +48,10 @@ Route::get('/', [indexController::class, 'index']);
 
 
 /*   Auth routes  */
-Route::get('register', [registerController::class, 'register']);
+Route::get('register', [registerController::class, 'register'])->name('register');
 Route::post('register', [registerController::class, 'create']);
-Route::post('/password-request',[registerController::class,'passwordRequest']);
-Route::get('login', [loginController::class, 'login']);
+Route::post('/password-request', [registerController::class, 'passwordRequest']);
+Route::get('login', [loginController::class, 'login'])->name('login');
 
 // routes select online class
 Route::prefix('/online')->group(function () {

@@ -18,15 +18,18 @@ const itemsStart = (stepNumber, item = '') => {
             step1.startStep(actionType);
             break
         case 2 :
-            step2.startStep(actionType);
+            if (index.alertOnlineClass()) {
+                step2.startStep(actionType);
+            }
             break
         case 3 :
             step3.startStep(actionType);
             break;
         case 4 :
-            step4.startStep(actionType);
+            if (index.alertOnlineClass(4)) {
+                step4.startStep(actionType);
+            }
             break
-
     }
 }
 

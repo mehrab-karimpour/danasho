@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         'online/*',
         '/online',
         'offline/*',
-        '/password-request'
+        '/password-request',
+        '/register'
     ];
 }

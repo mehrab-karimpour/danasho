@@ -13,11 +13,11 @@
                 <div class="col-12">
                     <nav class="navbar navbar-expand-md navbar-light">
 
-                        <a class="navbar-brand" href="" target="_blank">
+                        <a class="navbar-brand" href="{{route('login')}}">
                             ورود
                             <i class="fas fa-sign-in-alt"></i>
                         </a>
-                        <a class="navbar-brand" href="" target="_blank">
+                        <a class="navbar-brand" href="{{route('register')}}" >
                             ثبت نام
                             <i class="fa fa-user-plus"></i>
                         </a>
@@ -67,9 +67,9 @@
             </div>
         </div>
     </div>
-    <form action="{{route('online-form')}}" method="post" id="online-form-items">
 
-        @include('Client.index.partials.slider')
+    @include('Client.index.partials.slider')
+    <form action="{{route('online-form')}}" method="post" id="online-form-items" enctype="multipart/form-data">
 
         @include('Client.index.onlineClass.index')
 
@@ -81,9 +81,15 @@
 
         @include('Client.index.onlineClass.online-items')
 
+        {{--  online modal alert  --}}
+        @include('Client.index.partials.online-class-alert')
+
+        @include('partials.ajax-loader')
     </form>
 
-    @include('partials.ajax-loader')
+
+
+
 
     <br><br><br>
 

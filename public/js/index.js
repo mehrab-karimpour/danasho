@@ -125,7 +125,7 @@ class index extends validate {
             let tag;
             let k = key + 1;
             if (turn === 'last') {
-                tag = "<li onclick='itemsStart(" + k+ ")' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+                tag = "<li onclick='itemsStart(" + k + ")' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
                     ">" + value['title'] + "</li>";
             } else {
                 tag = "<li onclick='recordHandle(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
@@ -134,6 +134,60 @@ class index extends validate {
             $('#online-items>div>ul').append(tag);
         });
 
+    }
+
+    static alertOnlineClass = (step = 2, type = 'online-alert') => {
+        const date=$('.date');
+        const grade=$('.grade');
+        const time=$('.time');
+        const onlineClassModal = $("#online-class-modal");
+        let textAlert = '';
+        let exampleModalCenterTitle = '';
+        if (type === 'error') {
+            exampleModalCenterTitle = "خطا !";
+            textAlert = 'متاسفانه خطایی رخ داده است ! لطفا دوباره تلاش بفرمایید .';
+        } else {
+            exampleModalCenterTitle = "هشدار !";
+            switch (step) {
+                case 2:
+                    if (grade.hasClass('item-selected') && !grade.hasClass('bg-warning')) {
+                        window.gradeSelect = true;
+                    } else {
+                        textAlert = "لطفا پایه تحصیلی و عنوان درس را انتخاب کنید ";
+                        window.gradeSelect = false;
+                    }
+                    if (window.gradeSelect) {
+                        return true;
+                    }
+
+                case 4:
+                    if (!date.hasClass('item-selected') || date.hasClass('bg-warning')) {
+                        textAlert = "لطفا زمان برگزاری کلاس را انتخاب کنید";
+                        window.dateSelect = false;
+                    } else
+                        window.dateSelect = true;
+
+                    if (!time.hasClass('item-selected')|| time.hasClass('bg-warning')) {
+                        textAlert = "لطفا ایتم مدت کلاس و هزینه را انتخاب کنید";
+                        window.timeSelect = false;
+                    } else
+                        window.timeSelect = true;
+
+                    if (!grade.hasClass('item-selected') || grade.hasClass('bg-warning')) {
+                        textAlert = "لطفا پایه تحصیلی و عنوان درس را انتخاب کنید ";
+                        window.gradeSelect = false;
+                    } else
+                        window.gradeSelect = true;
+
+                    if (window.timeSelect && window.gradeSelect && window.dateSelect) {
+                        return true;
+                    }
+            }
+        }
+        onlineClassModal.find('.modal-body').text(textAlert);
+        $('#exampleModalCenterTitle').text(exampleModalCenterTitle);
+        onlineClassModal.modal();
+        return false;
     }
 
     addButtonBack = (mainItem) => {
@@ -289,6 +343,7 @@ class Step1 extends index {
                 this.circleSelect(3, 1);
                 // record grade
                 window.grade_id = data.dataID;
+                $('#online-form-items').append("<input type='hidden' name='grade_id' value='" + window.grade_id + "'>");
                 index.stepsTitle('انتخاب پایه تحصیلی');
                 index.appendInput('grade-input', 'grade', data.value);
                 const units = window.units.filter((obg) => {
@@ -365,13 +420,35 @@ class Step3 extends index {
     }
 
     startStep = (actionType) => {
-        $('.go-back').empty();
-        this.circleSelect(2, 0);
-        $('.ajax-back').fadeIn();
-        this.completing('.date');
-        index.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
-        Step2.appendItems(window.dates, 5);
-        index.disableTomorrowDate();
+        if (window.dates === window.periods) {
+            this.ajaxStart();
+           this.post('/online/getDates', {}).then((response) => {
+                if (response === 'error') {
+                    index.alertOnlineClass(0, 'error');
+                } else {
+                    window.dates = response['dates'];
+                    window.periods = response['periods'];
+                    $('.go-back').empty();
+                    this.circleSelect(2, 0);
+                    $('.ajax-back').fadeIn();
+                    this.completing('.date');
+                    index.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
+                    Step2.appendItems(window.dates, 5);
+                    index.disableTomorrowDate();
+                }
+                Step3.ajaxBackEnd();
+
+            })
+        }else {
+            $('.go-back').empty();
+            this.circleSelect(2, 0);
+            $('.ajax-back').fadeIn();
+            this.completing('.date');
+            index.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
+            Step2.appendItems(window.dates, 5);
+            index.disableTomorrowDate();
+        }
+
     }
 
     stepHandle = (tag, data) => {
@@ -407,11 +484,16 @@ class Step4 extends index {
     }
 
     startStep = (actionType) => {
+        const descriptionLastItem = $('#online-items-end-step');
+        descriptionLastItem.css('opacity', 1);
+        descriptionLastItem.css('position', '');
+        descriptionLastItem.css('z-index', '2200');
+
         $('#online-items').fadeOut();
         $('#online-items-end-step .alert-danger').remove();
         $('.ajax-back').fadeIn();
         $('#last-step-record').fadeOut();
-        $('#online-items-end-step').fadeIn();
+        descriptionLastItem.fadeIn();
     }
 
     stepHandle = (turn, data) => {
@@ -436,7 +518,10 @@ class Step4 extends index {
                     }
                 }
                 if (this.formValidation(formInfo)) {
-                    $('#online-items-end-step').hide();
+                    const descriptionLastItem = $('#online-items-end-step');
+                    descriptionLastItem.css('opacity', 0);
+                    descriptionLastItem.css('position', 'absolute');
+                    descriptionLastItem.css('z-index', '1');
                     $('#last-step-record').fadeIn();
                 }
                 break;
@@ -467,9 +552,11 @@ class Step4 extends index {
                     const userData = {mobile: mobile, name: name};
                     window.mobile = mobile;
                     this.post('/online/mobileHandle', userData).then((response) => {
+
                         if (response === 'error') {
                             $('#last-step-record').prepend("<p class='alert direction-rtl alert-danger'>متاسفیم ! خطایی رخ داده است لطفا دوباره تلاش کنید . </p>");
                         } else {
+                            $('#online-form-items').append("<input type='hidden' name='user_id' value='"+response['user_id']+"'>");
                             $('.verify-password-button').attr("onclick", 'recordHandle(this,9)')
                             const passWordVerify = $('#password-verify-parent');
                             passWordVerify.removeClass('d-none');
@@ -572,15 +659,18 @@ const itemsStart = (stepNumber, item = '') => {
             step1.startStep(actionType);
             break
         case 2 :
-            step2.startStep(actionType);
+            if (index.alertOnlineClass()) {
+                step2.startStep(actionType);
+            }
             break
         case 3 :
             step3.startStep(actionType);
             break;
         case 4 :
-            step4.startStep(actionType);
+            if (index.alertOnlineClass(4)) {
+                step4.startStep(actionType);
+            }
             break
-
     }
 }
 
@@ -1137,6 +1227,9 @@ const uploadQuestionFile = (tag) => {
 * */
 const offlineModalClose = () => {
     $("#offline-items").fadeOut();
+    $('#online-items').fadeOut();
+    $('#last-step-record').fadeOut();
+    $('#online-items-end-step').fadeOut();
     $('.ajax-back').fadeOut();
 }
 
@@ -1145,4 +1238,5 @@ $(() => {
         offlineModalClose();
     });
 })
+
 

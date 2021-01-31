@@ -17,10 +17,10 @@
 </head>
 <body class="hero-anime">
 
-
 @yield('client.content')
 
 @include('Client.index.partials.ajax-back')
 </body>
 @yield('client.script')
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 </html>

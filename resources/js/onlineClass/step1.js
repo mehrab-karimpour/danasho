@@ -33,6 +33,7 @@ class Step1 extends index {
                 this.circleSelect(3, 1);
                 // record grade
                 window.grade_id = data.dataID;
+                $('#online-form-items').append("<input type='hidden' name='grade_id' value='" + window.grade_id + "'>");
                 index.stepsTitle('انتخاب پایه تحصیلی');
                 index.appendInput('grade-input', 'grade', data.value);
                 const units = window.units.filter((obg) => {

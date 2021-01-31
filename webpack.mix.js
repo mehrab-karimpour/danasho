@@ -26,13 +26,13 @@ mix.combine([
     'resources/js/onlineClass/step3.js',
     'resources/js/onlineClass/step4.js',
     'resources/js/onlineClass/eventHandler.js',
-
     'resources/js/offlineClass/indexOffline.js',
     'resources/js/offlineClass/offlineStep1.js',
     'resources/js/offlineClass/offlineStep2.js',
     'resources/js/offlineClass/offlineStep3.js',
     'resources/js/offlineClass/offlineStep4.js',
     'resources/js/offlineClass/eventHandler-offline.js',
+    'resources/js/app.js',
 
 ], 'public/js/index.js');
 
