@@ -25,9 +25,9 @@
             <a class="navbar-brand brand-logo" href="../../index.html">
                 {{--<img src="../../../assets/images/logo.svg" alt="logo"/></a>--}}
 
-            <a class="navbar-brand brand-logo-mini" href="../../index.html">
-                {{--<img src="../../../assets/images/logo-mini.svg" alt="logo"/>--}}
-            </a>
+                <a class="navbar-brand brand-logo-mini" href="../../index.html">
+                    {{--<img src="../../../assets/images/logo-mini.svg" alt="logo"/>--}}
+                </a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -59,10 +59,14 @@
                     </a>
                     <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                         <a class="dropdown-item" href="#">
-                            <i class="mdi mdi-cached mr-2 text-success"></i> سجل النشاطات </a>
+                            <i class="mdi mdi-cached mr-2 text-success"></i>
+                            سجل النشاطات
+                        </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">
-                            <i class="mdi mdi-logout mr-2 text-primary"></i> خروج </a>
+                            <i class="mdi mdi-logout mr-2 text-primary"></i>
+                            خروج
+                        </a>
                     </div>
                 </li>
                 <li class="nav-item d-none d-lg-block full-screen-link">
@@ -407,7 +411,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#page-layouts" aria-expanded="false"
+                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#page-layouts"
+                       aria-expanded="false"
                        aria-controls="page-layouts">
                         <span class="menu-title">
                             <i class="fas fa-laptop"></i>
@@ -423,12 +428,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/panel/online-reserved">
+                                <a class="nav-link" href="{{route('panel.online-reserved')}}">
                                     کلاس های رزرو شده
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../pages/layout/rtl-layout.html">
+                                <a class="nav-link" href="{{route('panel.online-held')}}">
                                     کلاس های برگزار شده
                                 </a>
                             </li>
@@ -436,7 +441,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#apps" aria-expanded="false" aria-controls="apps">
+                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#apps"
+                       aria-expanded="false" aria-controls="apps">
                         <span class="menu-title">
                             <i class="far fa-newspaper"></i>
                             رفع اشکال افلاین
@@ -477,7 +483,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false"
+                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#sidebar-layouts"
+                       aria-expanded="false"
                        aria-controls="sidebar-layouts">
                         <span class="menu-title">
                             <i class="fas fa-headset"></i>
@@ -502,7 +509,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#ui-basic"
+                       aria-expanded="false"
                        aria-controls="ui-basic">
 
                         <span class="menu-title">
@@ -541,7 +549,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#ui-advanced" aria-expanded="false"
+                    <a class="nav-link d-flex justify-content-between" data-toggle="collapse" href="#ui-advanced"
+                       aria-expanded="false"
                        aria-controls="ui-advanced">
                         <span class="menu-title">
                             <i class="fas fa-bullseye"></i>

@@ -16,7 +16,7 @@ class CreateOnlinesTable extends Migration
         Schema::create('onlines', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            $table->boolean('pay-status');
+            $table->boolean('pay-status')->nullable();
             $table->string('grade')->nullable();
             $table->string('unit')->nullable();
             $table->string('lesson')->nullable();

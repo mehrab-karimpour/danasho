@@ -1,3 +1,22 @@
+.card > .card-body {
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.card .justify-content-between {
+  direction: rtl;
+}
+
+.card .justify-content-between p:last-child {
+  direction: rtl;
+  text-align: center;
+  color: #0a1327;
+}
+
+.card .justify-content-between p {
+  width: auto;
+}
+
 .card .justify-content-between .card-image p {
   width: 50%;
   text-align: justify;

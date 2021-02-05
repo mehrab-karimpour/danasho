@@ -1,19 +1,33 @@
-
 .card {
+    > .card-body {
+        overflow: auto;
+        max-height: 60vh;
+    }
+
     .justify-content-between {
-        .card-image{
+        direction: rtl;
+        p:last-child{
+            direction: rtl;
+            text-align: center;
+            color: #0a1327;
+        }
+
+        p{
+            width: auto;
+        }
+        .card-image {
             p {
                 width: 50%;
                 text-align: justify;
                 direction: rtl;
-
             }
         }
     }
 }
-.modal-body{
 
-    img{
-        max-height: 15vh!important;
+.modal-body {
+
+    img {
+        max-height: 15vh !important;
     }
 }

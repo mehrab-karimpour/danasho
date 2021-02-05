@@ -27,7 +27,8 @@ Route::get('/d', [onlineClassController::class, 'getPass']);
 Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::get('/', [panelController::class, 'home'])->name('panel.home');
     Route::get('/online-request', [panelController::class, 'onlineRequest']);
-    Route::get('/online-reserved', [panelController::class, 'onlineReserved']);
+    Route::get('/online-reserved', [panelController::class, 'onlineReserved'])->name('panel.online-reserved');
+    Route::get('/online-held', [panelController::class, 'onlineHeld'])->name('panel.online-held');
     Route::get('/edit-profile', [panelController::class, 'editProfile'])->name('panel.edit-profile');
     Route::post('/edit-profile', [panelController::class, 'updateProfile'])->name('panel.edit-profile-form');
     Route::post('/upload-image-profile', [panelController::class, 'uploadImageProfile']);

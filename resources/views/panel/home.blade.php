@@ -13,7 +13,7 @@
             <!--
         User Card
         -->
-            <div class="col-12 col-sm-10 col-md-10 col-lg-6  py-2 clearfix">
+            <div class="col-12 col-sm-10 col-md-10 py-2 clearfix">
 
                 <div class="profile-card-panel bg-white p-4 rounded row">
                     <div class="col-4 card">

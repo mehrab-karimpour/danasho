@@ -28,7 +28,6 @@ class onlineClassController extends Controller
 
     public function create(Request $request)
     {
-
         try {
             $time = Time::find($request->time)->title;
             $date = explode('-', $request->date);
@@ -48,7 +47,7 @@ class onlineClassController extends Controller
                 'period' => $request->period,
                 'level' => $request->level,
                 'name' => $request->name,
-                'description' => $request->unit,
+                'description' => $request->description,
                 'mobile' => $request->mobile,
             ]);
             return response()->view('Client.index.onlineClass.success-create', compact('newOnlineClass'));

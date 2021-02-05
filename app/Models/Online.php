@@ -10,6 +10,7 @@ class Online extends Model
     use HasFactory;
 
     protected $fillable = [
+        'pay-status',
         'user_id',
         'period',
         'price',

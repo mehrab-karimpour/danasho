@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Field;
 use App\Models\Grade;
+use App\Models\Score;
+use App\Models\Survey;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -95,7 +97,31 @@ class panelController extends Controller
     public function onlineReserved()
     {
         $user = Auth::user();
-        $allOnlineClass = $user->online;
-        return response()->view('panel.online-reserved',compact('allOnlineClass'));
+        $allOnlineClass = $user->onlineReserved;
+        return response()->view('panel.online-reserved', compact('allOnlineClass'));
+    }
+
+    public function onlineHeld()
+    {
+        $user = Auth::user();
+        $allOnlineClass = $user->onlineHeld;
+        $surveys = Survey::all();
+        $scores = Score::all();
+        $allSurveys = [];
+        $surveyType = [];
+        $i = 0;
+        foreach ($surveys as $key => $survey) {
+            if ($key > 0) {
+                if ($surveys[$key - 1]->type === $survey->type) {
+                    $allSurveys[$i][] = $survey;
+                } else {
+                    $i++;
+                }
+                $surveyType[$i]['type'] = $survey->type;
+            }
+        }
+
+        return response()->view('panel.online-held',
+            compact('allOnlineClass', 'allSurveys', 'scores','surveyType'));
     }
 }

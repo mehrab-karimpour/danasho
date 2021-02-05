@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,9 +53,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function online()
+    public function onlineReserved()
     {
-        return $this->hasMany(Online::class);
+        return $this->hasMany(Online::class)->where('date', '>', Carbon::now()->format('Y-m-d'));
+    }
+
+    public function onlineHeld()
+    {
+        return $this->hasMany(Online::class)->where('date', '<', Carbon::now()->format('Y-m-d'));
     }
 
 
