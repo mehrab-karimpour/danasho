@@ -6,7 +6,41 @@
 
 @section('client.content')
 
-    <div class="container">
+    <div class="container ">
+        @if(session('status')==='success')
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-success">
+                        <p class="text-center direction-rtl">
+                            ثبت شما با موفقیت انجام شد .
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if(session('status')==='filed')
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger">
+                        <p class="text-center direction-rtl">
+                            اطلاعات وارد شده صحیح نیست !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if(session('status')==='password')
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger">
+                        <p class="text-center direction-rtl">
+                            رمز عبور را اشتباه وارد کرده اید !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="myCard">
             <div class="row" id="login">
                 <div class="login-back-first-child"></div>
@@ -14,34 +48,39 @@
                 <div class="col-md-6">
                     <div class="myLeftCtn myLeftCtn-login">
 
-                        <form class="myForm text-center needs-validation" onsubmit="return validateForm(this)"
-                              novalidate>
+                        <form method="post" action="/login" class="myForm text-center needs-validation">
+                            @csrf
                             <header class="text-white">ورود به حساب کاربری</header>
 
-                            <div class="form-group direction-rtl">
+                            <div class="form-group form-item-parent direction-rtl">
                                 <i class="fas fa-user"></i>
-                                <input class="myInput text-center" type="text" placeholder="نام کاربری" id="username"
+                                <input class="myInput text-center" name="mobile" type="text" placeholder="شماره موبایل"
+                                       id="username"
                                        required>
                             </div>
 
 
-                            <div class="form-group direction-rtl">
+                            <div class="form-group form-item-parent direction-rtl">
                                 <i class="fas fa-lock"></i>
-                                <input class="myInput text-center" type="password" id="password" placeholder="رمز عبور"
+                                <input class="myInput text-center" name="password" type="password" id="password"
+                                       placeholder="رمز عبور"
                                        required>
                                 <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
 
                             <div class="form-group direction-rtl">
                                 <label class="direction-rtl">
-                                    <input id="check_1" name="check_1" type="checkbox" required/>
+                                    <input id="check_1" name="remember" type="checkbox" required/>
                                     <small><strong> مرا به خاطر بسپار</strong></small>
                                 </label>
                             </div>
 
-                            <input type="submit" class="butt" value="ورود">
+                            <button type="button" class="butt login-submit">ورود</button>
 
                         </form>
+                        <a class="text-primary text-center d-block direction-rtl cursor-pointer mt-3" href="/register">
+                            ثبت نام
+                        </a>
                     </div>
                 </div>
 
@@ -72,7 +111,7 @@
 @endsection
 
 
-
 @section('client.script')
-    <script href="{{asset('js/auth/register.js')}}"></script>
+    <script src="{{asset('js/validate.js')}}"></script>
+    <script src="{{asset('js/login.js')}}"></script>
 @endsection

@@ -36,17 +36,16 @@ mix.combine([
 
 ], 'public/js/index.js');
 
+/*  panel section   */
 mix.combine([
     'resources/js/panel/vendor.bundle.base.js',
-    'resources/js/panel/Chart.min.js',
-    'resources/js/panel/bootstrap-datepicker.min.js',
     'resources/js/panel/off-canvas.js',
-    'resources/js/panel/hoverable-collapse.js',
-    'resources/js/panel/misc.js',
-    'resources/js/panel/settings.js',
-    'resources/js/panel/todolist.js',
-    'resources/js/panel/dashboard.js',
+
 ], 'public/js/panel/panel.js');
+mix.combine([
+    'resources/js/panel/custom/edit-profile.js',
+], 'public/js/panel/editProfile.js')
+
 
 mix.combine([
     'resources/js/dependenci/header.js',
@@ -86,6 +85,9 @@ mix.sass('resources/sass/panel/online-reserved.scss', 'public/css/panel/online-r
 mix.sass('resources/sass/auth/register.scss', 'public/css/auth/register.css');
 mix.sass('resources/sass/auth/login.scss', 'public/css/auth/login.css');
 
+/*  online class successful created   */
+mix.sass('resources/sass/online-success.scss', 'public/css/online-success.css');
+
 mix.combine([
     'resources/js/register.js',
 ], 'public/js/register.js');
@@ -98,5 +100,5 @@ mix.combine([
 * */
 
 mix.combine([
-    'resources/js/panel/home.js',
+    'resources/js/panel/custom/home.js',
 ], 'public/js/panel/home.js');

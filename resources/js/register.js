@@ -29,14 +29,14 @@ class register extends validate {
                     'type': 'numeric',
                     'max': 12,
                     'min': 6,
-                    'message': "لطفا رمز ارسال شده را وارد نمایید"
+                    'message': "لطفا رمز عبور را وارد نمایید"
                 }, 3: {
                     'name': 'password',
                     'require': 'require',
                     'type': 'numeric',
                     'max': 12,
                     'min': 6,
-                    'message': "لطفا رمز ارسال شده را وارد نمایید"
+                    'message': "لطفا رمز عبور را وارد نمایید"
                 }
             }
         } else {
@@ -117,27 +117,21 @@ class register extends validate {
 
 const registerClass = new register();
 
-$(
-    '.submit-register-form'
-).click(
+$('.submit-register-form').click(
     function () {
         registerClass.sendForm();
     }
 )
 
 
-$(
-    '#send-password-request-click'
-).click(
+$('#send-password-request-click').click(
     function () {
 
         registerClass.passwordRequestHandle();
     }
 )
 
-$(
-    '.send-password-again'
-).click(
+$('.send-password-again').click(
     function () {
         const registerClass = new register();
         registerClass.passwordRequestHandle();
@@ -145,8 +139,7 @@ $(
 )
 
 
-$(
-    function () {
+$(function () {
         const carouselItem = $('.box-item');
         const countCarouselItem = carouselItem.length;
         carouselItem.eq(0).show(0);
@@ -164,3 +157,15 @@ $(
 )
 
 
+window.formatPersian = false;
+$('#birthDate').persianDatepicker({
+    initialValueType: 'gregorian',
+    responsive: true,
+    autoClose: true,
+    format: 'YYYY-MM-DD',
+    "toolbox": {
+        "calendarSwitch": {
+            "enabled": false
+        }
+    },
+});

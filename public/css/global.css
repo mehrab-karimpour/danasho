@@ -115,12 +115,16 @@ body {
   direction: rtl;
 }
 
+.form-validate-warning {
+  border: 1px solid #fffb0d !important;
+}
+
 .form-validate-error {
-  border: 1px solid #db3e45;
+  border: 1px solid #db3e45 !important;
 }
 
 .form-validate-success {
-  border: 1px solid #4cdb7c;
+  border: 1px solid #4cdb7c !important;
 }
 
 .form-danger {
@@ -155,5 +159,39 @@ body {
   font-weight: bold;
   width: 45px;
   height: 45px;
+}
+
+::-moz-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #8e8e9d !important;
+  font-size: 13px;
+  opacity: 0.8 !important;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #8e8e9d !important;
+  font-size: 13px;
+  opacity: 0.8 !important;
+  /* Firefox */
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #8e8e9d !important;
+  font-size: 13px;
+  opacity: 0.8 !important;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #8e8e9d !important;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #8e8e9d !important;
 }
 

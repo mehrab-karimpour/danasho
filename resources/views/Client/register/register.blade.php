@@ -18,8 +18,13 @@
 
                     <div class="myLeftCtn h-100 pt-5">
                         @if(session('status')==='error')
-                            <div class="alert alert-danger">
-                                با عرض پوزش ,  ثبت نام انجام نشد لطفا دوباره تلاش کنید !
+                            <div class="alert alert-danger direction-rtl text-right">
+                                با عرض پوزش , ثبت نام انجام نشد لطفا دوباره تلاش کنید !
+                            </div>
+                        @endif
+                        @if(session('status')==='mobile')
+                            <div class="alert alert-danger direction-rtl text-right">
+                                شماره موبایل وارد شده قبلا در داناشو ثبت شده است .
                             </div>
                         @endif
                         <form action="" method="post" class="myForm text-center pt-5 h-100 needs-validation"
@@ -50,18 +55,15 @@
                             </div>
 
                             <div class="col-12  d-block  d-md-block d-lg-flex justify-content-between">
-
-                                <div class="form-group col-6 d-flex justify-content-start align-items-center">
-                                    <div class="display-none form-item-parent insert-password">
-                                        <input class="myInput direction-rtl text-center  col-12" name="password"
-                                               placeholder="رمز عبور"
-                                               type="text" id="fullName" required>
+                                <div class="form-group d-flex justify-content-between align-items-center">
+                                    <div class="form-item-parent">
+                                        <input class="myInput  direction-rtl text-center  col-12" name="password"
+                                               placeholder="رمز عبور" type="password"
+                                               id="email" required>
                                         <i class="fas fa-envelope"></i>
                                     </div>
-                                    <button id="send-password-request-click" type="button" class="btn btn-secondary ">
-                                        ارسال رمز عبور
-                                    </button>
                                 </div>
+
 
                                 <div class="form-group d-flex justify-content-between align-items-center">
                                     <input class="myInput  direction-rtl text-center  col-12" name="email"
@@ -88,8 +90,12 @@
                             <button class="butt btn submit-register-form" type="button">
                                 ثبت نام
                             </button>
-
+                            <br>
+                            <a href="/login" class="text-primary mt-5 d-block">
+                                قبلا در داناشو ثبت نام کرده اید ؟ وارد شوید
+                            </a>
                         </form>
+
                     </div>
                 </div>
 

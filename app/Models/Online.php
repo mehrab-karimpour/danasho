@@ -10,6 +10,9 @@ class Online extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
+        'period',
+        'price',
         'grade',
         'unit',
         'lesson',
@@ -21,5 +24,6 @@ class Online extends Model
         'name',
         'mobile',
     ];
+
 
 }

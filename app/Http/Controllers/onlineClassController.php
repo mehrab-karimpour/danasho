@@ -29,15 +29,15 @@ class onlineClassController extends Controller
     public function create(Request $request)
     {
 
-
         try {
             $time = Time::find($request->time)->title;
             $date = explode('-', $request->date);
             $day = Verta::createDate($date[0], $date[1], $date[2])->format('Y/m/d l');
             $price = calculatePrice('onlineClass', $request->grade_id, $time);
             $time = $time . " دقیقه";
-            $newOnlineClass=Online::create([
-                'user_id' => $request->user_id,
+
+            $newOnlineClass = Online::create([
+                'user_id' => intval($request->user_id),
                 'grade' => $request->grade,
                 'unit' => $request->unit,
                 'lesson' => $request->lesson,
@@ -51,7 +51,7 @@ class onlineClassController extends Controller
                 'description' => $request->unit,
                 'mobile' => $request->mobile,
             ]);
-            return  $newOnlineClass;
+            return response()->view('Client.index.onlineClass.success-create', compact('newOnlineClass'));
         } catch (\Exception $e) {
             Log::error($e);
             return $e;

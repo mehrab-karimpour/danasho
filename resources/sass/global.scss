@@ -2,16 +2,16 @@
     font-family: 'Shabnam';
     src: url('../font/Shabnam.eot'); /* IE9 Compat Modes */
     src: url('../font/Shabnam.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-   url('../font/Shabnam.ttf') format('truetype'); /* Safari, Android, iOS */
+    url('../font/Shabnam.ttf') format('truetype'); /* Safari, Android, iOS */
 
 }
 
-a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button,select, option, strong, label, p {
-    font-family: Shabnam!important;
+a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, select, option, strong, label, p {
+    font-family: Shabnam !important;
 }
 
-a{
-    text-decoration: none!important;
+a {
+    text-decoration: none !important;
 }
 
 body {
@@ -98,19 +98,23 @@ body {
     direction: rtl;
 }
 
+.form-validate-warning{
+    border: 1px solid #fffb0d!important;
+}
+
 .form-validate-error {
-    border: 1px solid #db3e45;
+    border: 1px solid #db3e45!important;
 }
 
 .form-validate-success {
-    border: 1px solid #4cdb7c;
+    border: 1px solid #4cdb7c!important;
 }
 
 .form-danger {
     box-shadow: 0 0 10px 0 #db3e45;
 }
 
-.form-success{
+.form-success {
     box-shadow: 0 0 10px 0 #4cdb7c;
 }
 
@@ -123,7 +127,7 @@ body {
 }
 
 
-.display-none{
+.display-none {
     display: none;
 }
 
@@ -143,4 +147,21 @@ body {
 
 .offline-timer {
     @extend .timer;
+}
+
+
+
+$inputColor: #8e8e9d;
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $inputColor !important;
+    font-size: 13px;
+    opacity: 0.8!important; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $inputColor !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: $inputColor !important;
 }

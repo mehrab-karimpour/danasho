@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\DatePeriod;
+use App\Models\Field;
 use App\Models\Grade;
 use App\Models\Lesson;
 use App\Models\Price;
@@ -27,9 +28,25 @@ class classSeeder extends Seeder
         $gradeTwo = new Grade();
         $gradeTwo->title = 'متوسطه اول';
         $gradeTwo->save();
-        $grade = new Grade();
-        $grade->title = ' متوسطه دوم';
-        $grade->save();
+        $gradeTree = new Grade();
+        $gradeTree->title = ' متوسطه دوم';
+        $gradeTree->save();
+
+        // fields
+        $field = new Field();
+        $field->grade_id = $gradeTree->id;
+        $field->title = 'علوم تجربی';
+        $field->save();
+
+        $field = new Field();
+        $field->grade_id = $gradeTree->id;
+        $field->title = 'ریاضی فیزیک';
+        $field->save();
+        $field = new Field();
+        $field->grade_id = $gradeTree->id;
+        $field->title = 'علوم انسانی';
+        $field->save();
+
 
         //  set  price
         $price = new Price();

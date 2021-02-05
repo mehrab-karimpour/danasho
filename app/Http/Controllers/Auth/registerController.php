@@ -18,15 +18,22 @@ class registerController extends Controller
 
     public function create(Request $request)
     {
-
         try {
-            User::create([
-                'fullName' => $request->fullName,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]);
-            return redirect('/login');
+
+            if (User::where('mobile', $request->mobile)->exists()) {
+                return redirect()->back()->with('status', 'mobile');
+            } else {
+                User::create([
+                    'fullName' => $request->fullName,
+                    'mobile' => $request->mobile,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password)
+                ]);
+                return redirect('/login')->with('status', 'success');
+            }
+
         } catch (\Exception $e) {
+
             return redirect()->back()->with('status', 'error');
         }
     }

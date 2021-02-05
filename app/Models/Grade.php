@@ -10,7 +10,8 @@ class Grade extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title'
+        'title',
+        'key'
     ];
 
     public function units(): \Illuminate\Database\Eloquent\Relations\HasMany

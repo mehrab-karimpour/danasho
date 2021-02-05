@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>پنل کاربری </title>
-    <link rel="stylesheet" href="{{asset('css/panel/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/panel/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{asset('css/global.css')}}">
     <link rel="stylesheet" href="{{asset('css/panel/panel.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+
+    <script src="{{asset('js/jquery.min.js')}}"></script>
 
     @yield('panel-link')
 </head>
@@ -51,7 +53,7 @@
                             <span class="availability-status online"></span>
                         </div>
                         <div class="nav-profile-text">
-                            <p class="mb-1 text-black">مهدی پازوکیان</p>
+                            <p class="mb-1 text-black">{{authFullName()}}</p>
                         </div>
                         <i class="fas fa-caret-down"></i>
                     </a>
@@ -59,7 +61,7 @@
                         <a class="dropdown-item" href="#">
                             <i class="mdi mdi-cached mr-2 text-success"></i> سجل النشاطات </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="/logout">
                             <i class="mdi mdi-logout mr-2 text-primary"></i> خروج </a>
                     </div>
                 </li>
@@ -397,7 +399,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="d-block text-right" href="/panel/editProfile">
+                    <a class="d-block text-right" href="/panel/edit-profile">
                         <span class="menu-title">
                             <i class="far fa-id-card"></i>
                             ویرایش پروفایل
@@ -421,7 +423,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('panel.online-reserved')}}">
+                                <a class="nav-link" href="/panel/online-reserved">
                                     کلاس های رزرو شده
                                 </a>
                             </li>
@@ -569,7 +571,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" href="../../pages/ui-features/popups.html">
+                    <a class="nav-link d-flex justify-content-between" href="/logout">
                         <span class="menu-title">
                             <i class="fas fa-sign-out-alt"></i>
                             خروج
@@ -609,5 +611,6 @@
 <link rel="stylesheet" href="{{asset('css/panel/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{asset('css/panel/font-awesome.min.css')}}"/>
 <script src="{{asset('js/panel/panel.js')}}"></script>
+
 @yield('panel-script')
 </html>

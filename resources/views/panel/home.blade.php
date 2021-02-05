@@ -6,6 +6,7 @@
 
 @section('panel-content')
 
+    @include('partials.ajax-loader')
 
     <section id="home" class="container-fluid">
         <div class="row  flex-items-sm-center">
@@ -13,20 +14,22 @@
         User Card
         -->
             <div class="col-12 col-sm-10 col-md-10 col-lg-6  py-2 clearfix">
+
                 <div class="profile-card-panel bg-white p-4 rounded row">
-                    <div class="col-4">
-                        <input id="fab" type="checkbox" class="fab">
+                    <div class="col-4 card">
+                        <input id="fab" type="file" class="fab image-profile">
                         <label for="fab" class="toggle">+</label>
+                        @csrf
                         <img
-                            src="http://cps-static.rovicorp.com/3/JPG_400/MI0003/711/MI0003711195.jpg?partner=allrovi.com"
+                            src="/files/{{auth()->user()->img}}"
                             class="img-fluid img-profile" alt="Card image">
                     </div>
                     <div class="col-8">
                         <div class="col-12 h-50">
-                            <h4 class="text-right text-primary">مهدی پازوکیان عزیز خوش امدید</h4>
+                            <h4 class="text-right text-primary">{{authFullName()}} عزیز خوش امدید</h4>
                         </div>
                         <div class="col-12 h-50">
-                            <p>کد اشتراک شما در داناشو 465 میباشد</p>
+                            <p>کد اشتراک شما در داناشو {{subscriptionCode()}} میباشد</p>
                             <p>اعتبار کیف پول شما : 0 ریال </p>
                         </div>
                     </div>
@@ -89,6 +92,8 @@
         </div>
 
     </section>
+
+
 
 
 

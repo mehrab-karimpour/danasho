@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\loginController;
 use App\Http\Controllers\Auth\registerController;
+use App\Http\Controllers\fileController;
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\offlineClassController;
 use App\Http\Controllers\onlineClassController;
@@ -22,18 +23,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/d', [onlineClassController::class, 'getPass']);
 
-Route::get('/panel', function () {
-    return response()->view('panel.home');
+
+Route::prefix('/panel')->middleware('auth')->group(function () {
+    Route::get('/', [panelController::class, 'home'])->name('panel.home');
+    Route::get('/online-request', [panelController::class, 'onlineRequest']);
+    Route::get('/online-reserved', [panelController::class, 'onlineReserved']);
+    Route::get('/edit-profile', [panelController::class, 'editProfile'])->name('panel.edit-profile');
+    Route::post('/edit-profile', [panelController::class, 'updateProfile'])->name('panel.edit-profile-form');
+    Route::post('/upload-image-profile', [panelController::class, 'uploadImageProfile']);
 });
 
-Route::prefix('/panel')->group(function () {
-    Route::get('/online-request', [panelController::class, 'onlineRequest'])->name('panel.online-request');
-    Route::get('/online-reserved', [panelController::class, 'onlineReserved'])->name('panel.online-reserved');
-});
-
-Route::get('/panel/editProfile', function () {
-    return response()->view('panel.edit-profile');
-});
 
 /*  online class select   */
 Route::prefix('/online')->group(function () {
@@ -52,6 +51,8 @@ Route::get('register', [registerController::class, 'register'])->name('register'
 Route::post('register', [registerController::class, 'create']);
 Route::post('/password-request', [registerController::class, 'passwordRequest']);
 Route::get('login', [loginController::class, 'login'])->name('login');
+Route::post('login', [loginController::class, 'doLogin']);
+Route::get('/logout',[loginController::class,'logOut']);
 
 // routes select online class
 Route::prefix('/online')->group(function () {
@@ -62,4 +63,9 @@ Route::prefix('/online')->group(function () {
 Route::prefix('/offline')->group(function () {
     Route::post('/recordHandle', [offlineClassController::class, 'recordStepOne']);
 });
+
+
+/*  files section    */
+
+Route::get('/files/{img_name}',[fileController::class,'getFile']);
 

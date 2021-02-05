@@ -1,5 +1,15 @@
 <?php
 
+function authFullName()
+{
+    return auth()->user()->fullName;
+
+}
+
+function subscriptionCode()
+{
+    return intval(auth()->user()->id) + 4000;
+}
 
 function calculatePrice($type, $gradeId, $time)
 {
