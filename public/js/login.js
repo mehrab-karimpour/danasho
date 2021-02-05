@@ -74,7 +74,7 @@ class login extends validate {
 
     sendForm = () => {
         if (this.valid()) {
-            $('form').submit();
+            $('#login-form').submit();
         }
     }
 

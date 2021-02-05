@@ -48,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="myLeftCtn myLeftCtn-login">
 
-                        <form method="post" action="/login" class="myForm text-center needs-validation">
+                        <form method="post" id="login-form" action="/login" class="myForm text-center needs-validation">
                             @csrf
                             <header class="text-white">ورود به حساب کاربری</header>
 
