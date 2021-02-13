@@ -3,70 +3,38 @@ class StepOffline_2 extends indexOffline {
         super();
     }
 
-    /*
-    *    END
-    * */
-    static endStep = (stepTitle) => {
-        indexOffline.completeEnd('.question-count');
-        indexOffline.completedStep(stepTitle, '.question-count');
-        const offlineItem = $('#offline-items');
-        offlineItem.fadeOut();
-        $('.ajax-back').fadeOut();
-        offlineItem.empty();
-        offlineItem.append("<br><h5 class='step-title-offline text-center'>انتخاب روز مورد نظر</h5><input type='hidden'  id='turn-offline' name='turn-offline' value='6'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
-    }
-
-
-    startStep = (turn) => {
-        $('.step-title-offline').text('انتخاب تعداد سوال و هزینه آن ');
+    startStep = (actionType) => {
         $('.go-back-offline').empty();
+        this.circleSelect(2, 0);
         $('.ajax-back').fadeIn();
-        indexOffline.offlineAppendItems(window.offlineQuestions[0], window.offlineQuestions[1]);
+        this.completing('.question-count');
+        indexOffline.stepsTitle('انتخاب تعداد سوالات و هزینه آن');
+        const price = window.prices.filter((obg) => {
+            return obg.grade_id === parseInt(window.grade_id);
+        });
+        if (window.questions[0].title.length < 5) {
+            for (let i = 0; i < window.questions.length; i++) {
+                window.questions[i].title = "" +   window.questions[i].title  + " تا " +(parseInt(window.questions[i].title) + 3)+ " سوال " + (parseInt(window.questions[i].title)) * price[0].title + " هزار تومان ";
+                /*if (i < 1) {
+                    window.questions[i].title = window.questions[i].title + " سوال " + (parseInt(window.questions[i].title)) * price[0].title + "  هزار تومان ";
+                } else {
+                    window.questions[i].title = "" + (window.questions[i].title) - 3 + " تا " + window.questions[i].title + " سوال " + (parseInt(window.questions[i].title)) * price[0].title + " هزار تومان ";
+                }*/
+
+            }
+        }
+        console.log(window.questions)
+        Step2.appendItems(window.questions, 4);
     }
 
-    handleStep = (url, data, file = 0) => {
-        if (file === 1) {
-            /*
-            * upload image questions
-            * */
-            const question_file = data.files[0];
-            let formData = new FormData;
-            formData.append('question_file', question_file);
-            formData.append('turn', "5");
+    stepHandle = (turn, data) => {
+        this.endStep(data);
+    }
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                async: true,
-                dataType: 'json',
-                processData: false,
-                cache: false,
-                contentType: false,
-                success: function (msg) {
-                    window.offlineDate = msg;
-                    StepOffline_2.endStep(window.stepTwoText);
-                    setTimeout(() => {
-                        StepOffline_2.ajaxBackEnd();
-                    }, 400)
-                },
-                fail: function (msg) {
-                }
-            });
-
-        } else {
-            window.stepTwoText = data['step'];
-            $('#offline-items').empty();
-            window.uploadFileSection = "<h6>تصاویر سوالاتی که قصد رفع اشکال انها را دارید اپلود نمایید </h6><br><br><input " +
-                "class='form-control' type='file' name='question-file' />";
-
-            this.post('/offline/recordHandle', data).then(function (result) {
-                $('#turn-offline').val(result[1]);
-                $('#offline-items').append(result);
-                $('.step-title-offline').text('ارسال سوالات');
-                indexOffline.ajaxBackEnd();
-            });
-        }
+    endStep = (data) => {
+        index.appendInput('time-input', 'time', data.dataID);
+        Step1.completedStep(data.value, '.time');
+        Step1.completeEnd('.time');
     }
 
 }

@@ -10,6 +10,7 @@ class Step1 extends index {
         index.stepsTitle('انتخاب مقطع تحصیلی');
         this.ajaxStart();
 
+
         this.post('/online', {}).then((data) => {
             window.grades = data.grades;
             window.units = data.units;

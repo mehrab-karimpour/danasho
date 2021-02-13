@@ -1,0 +1,133 @@
+#list-ticket table tr,
+#list-ticket table td,
+#list-ticket table th {
+  font-size: 1rem;
+}
+
+#show-ticket {
+  position: relative;
+  overflow: auto;
+  max-height: 95vh;
+}
+
+#conversation {
+  padding: 5% 3px;
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+#conversation .conversation-body {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+#conversation > #conversation__item > #right-conversation {
+  border-top-right-radius: 66px;
+  border-bottom-left-radius: 45px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 1%;
+  background-color: #000000;
+}
+
+#conversation > #conversation__item > #right-conversation > .conversation-title {
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+  direction: rtl;
+}
+
+#conversation > #conversation__item > #right-conversation > .conversation-title h5 {
+  margin-right: 2%;
+}
+
+#conversation > #conversation__item > #right-conversation > .conversation-body {
+  margin-top: 1%;
+  text-align: justify;
+  direction: rtl;
+}
+
+#conversation > #conversation__item > #left-conversation {
+  border-top-right-radius: 45px;
+  border-bottom-left-radius: 66px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 1%;
+  margin-top: 1%;
+  float: left;
+}
+
+#conversation > #conversation__item > #left-conversation > .conversation-title {
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+  direction: ltr;
+}
+
+#conversation > #conversation__item > #left-conversation > .conversation-title h5 {
+  margin-left: 2%;
+}
+
+#conversation > #conversation__item > #left-conversation > .conversation-body {
+  margin-top: 1%;
+  text-align: justify;
+  direction: rtl;
+}
+
+#send-box-parent {
+  position: fixed;
+  bottom: 1%;
+  left: 0;
+  right: 0;
+}
+
+#send-box {
+  display: flex;
+  background-color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  direction: ltr;
+}
+
+#send-box > .select-file {
+  position: relative;
+  width: 8%;
+  border-radius: 1%;
+}
+
+#send-box > .select-file > i {
+  position: absolute;
+  font-size: 43px;
+  cursor: pointer;
+  left: 0;
+}
+
+#send-box > .select-file > input[type='file'] {
+  opacity: 0;
+}
+
+#send-box > .message-text {
+  width: 74%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#send-box > .message-text > input:focus {
+  outline: none;
+}
+
+#send-box > .message-text > input {
+  border: 0;
+  height: 5vh;
+  direction: rtl;
+  background-color: #f5f5f5;
+  width: 100%;
+  border-radius: 4px;
+}
+
+#send-box > .send-icon i {
+  font-size: 33px;
+  cursor: pointer;
+}
+

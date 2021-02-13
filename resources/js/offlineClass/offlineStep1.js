@@ -4,59 +4,65 @@ class StepOffline_1 extends indexOffline {
         window.grades = {};
     }
 
-    /*
-     * every step has two main method . 1:start  , 2:handle
-     * start method mey be constructor for every section .
-     * handle method handled other items .
-     * */
-    static endStep = (stepTitle) => {
-        indexOffline.completeEnd('.grade-offline');
-        indexOffline.completedStep(stepTitle, '.grade-offline');
-        $('#offline-items').fadeOut();
-        $('.ajax-back').fadeOut();
+    startStep = (actionType) => {
+
+        $('.go-back').empty();
+        this.circleSelect(3, 0);
+        this.completing('.grade-offline');
+        indexOffline.stepsTitle('انتخاب مقطع تحصیلی');
+        this.ajaxStart();
+        this.post('/offline', {}).then((data) => {
+            window.grades = data.grades;
+            window.units = data.units;
+            window.lessons = data.lessons;
+            window.questions = data.questions;
+            window.prices = data.prices;
+            window.dates = data.dates;
+            window.periods = data.periods;
+            console.log(window.questions)
+            StepOffline_1.appendItems(window.grades, 1);
+            setTimeout(() => {
+                Step1.ajaxBackEnd();
+            }, 200);
+        });
+
     }
 
-    startStep = (turn) => {
-        $('.step-title-offline').text("انتخاب مقطع تحصیلی");
-        $('.go-back-offline').empty();
-        this.ajaxStart();
-        const data = {'turn': turn};
-        this.post('/online/GetGrades', data).then(function (result) {
-            indexOffline.offlineAppendItems(result);
-        });
-        indexOffline.ajaxLoaderEnd();
-    }
-
-    handleStep = (url, data) => {
-        this.ajaxStart();
-        this.post('/offline/recordHandle', data).then(function (result) {
-            if (data['turn'] === 3) {
-                StepOffline_1.endStep(data['step']);
-
-                // saved all questions in window.offlineQuestions because step two we have handel questions
-                window.offlineQuestions = result;
-            } else {
-                indexOffline.offlineAppendItems(result[0], result[1]);
-            }
-        });
-        indexOffline.ajaxLoaderEnd();
-        /*
-        * handle circle select .
-        * */
-        let circleSelect = $('.circle-select-offline span');
-        circleSelect.removeClass('circle-select-active');
-        const stepTitle=$('.step-title-offline');
-        switch (data['turn']) {
+    stepHandle = (turn, data) => {
+        this.addButtonBack('.grade-offline');
+        switch (turn) {
             case 1:
-                circleSelect.eq(1).addClass("circle-select-active");
-                stepTitle.text('انتخاب پایه  تحصیلی');
+                this.circleSelect(3, 1);
+                // record grade
+                window.grade_id = data.dataID;
+                $('#online-form-items').append("<input type='hidden' name='grade_id' value='" + window.grade_id + "'>");
+                indexOffline.stepsTitle('انتخاب پایه تحصیلی');
+                indexOffline.appendInput('grade-input', 'grade', data.value);
+                const units = window.units.filter((obg) => {
+                    return obg.grade_id === parseInt(data.dataID);
+                })
+                indexOffline.appendItems(units, 2);
                 break;
             case 2:
-                circleSelect.eq(2).addClass("circle-select-active");
-                stepTitle.text('انتخاب درس');
+                this.circleSelect(3, 2);
+                indexOffline.stepsTitle('انتخاب درس');
+                indexOffline.appendInput('unit-input', 'unit', data.value);
+                const lessons = window.lessons.filter((obg) => {
+                    return obg.unit_id === parseInt(data.dataID);
+                })
+                indexOffline.appendItems(lessons, 3);
                 break;
+
+            case 3:
+                this.endStep(data);
         }
     }
 
+    endStep = (data) => {
+        indexOffline.appendInput('lesson-input', 'lesson', data.value);
+        indexOffline.completedStep(data.value, '.grade-offline');
+        indexOffline.completeEnd('.grade-offline');
+
+    }
 
 }

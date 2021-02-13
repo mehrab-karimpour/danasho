@@ -127,6 +127,18 @@
             display: flex;
             justify-content: flex-end;
 
+            > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                > p {
+                    margin-top: 0 !important;
+                    margin-right: 3px;
+                    padding: 0 !important;
+                }
+            }
+
             > input[type='radio'] {
                 transform: scale(1.6);
                 margin-right: 20% !important;

@@ -48,7 +48,6 @@ $("button[type='button']").click(function () {
     if (window.password && window.repeatPassword){
         $('#edit-profile').submit();
     }else{
-        alert("error")
     }
 
 })

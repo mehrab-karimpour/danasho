@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Field;
 use App\Models\Grade;
+use App\Models\PollSubject;
 use App\Models\Score;
 use App\Models\Survey;
 use App\Models\Unit;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 
 class panelController extends Controller
 {
+
 
     public function uploadImageProfile(Request $request)
     {
@@ -45,9 +47,9 @@ class panelController extends Controller
         }
     }
 
-
     public function updateProfile(Request $request)
     {
+
         try {
             $userID = \auth()->id();
             $birthDate = returnGregorian($request->birthDate, '-');
@@ -91,7 +93,7 @@ class panelController extends Controller
 
     public function onlineRequest()
     {
-
+        return response()->view('panel.online-create');
     }
 
     public function onlineReserved()
@@ -105,23 +107,9 @@ class panelController extends Controller
     {
         $user = Auth::user();
         $allOnlineClass = $user->onlineHeld;
-        $surveys = Survey::all();
         $scores = Score::all();
-        $allSurveys = [];
-        $surveyType = [];
-        $i = 0;
-        foreach ($surveys as $key => $survey) {
-            if ($key > 0) {
-                if ($surveys[$key - 1]->type === $survey->type) {
-                    $allSurveys[$i][] = $survey;
-                } else {
-                    $i++;
-                }
-                $surveyType[$i]['type'] = $survey->type;
-            }
-        }
-
+        $pollSubjects = PollSubject::all();
         return response()->view('panel.online-held',
-            compact('allOnlineClass', 'allSurveys', 'scores','surveyType'));
+            compact('allOnlineClass', 'scores', 'pollSubjects'));
     }
 }

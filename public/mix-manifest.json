@@ -9,6 +9,8 @@
     "/css/panel/edit-profile.css": "/css/panel/edit-profile.css",
     "/css/panel/online-reserved.css": "/css/panel/online-reserved.css",
     "/css/panel/online-held.css": "/css/panel/online-held.css",
+    "/css/panel/online-create.css": "/css/panel/online-create.css",
+    "/css/panel/new-ticket.css": "/css/panel/new-ticket.css",
     "/css/auth/register.css": "/css/auth/register.css",
     "/css/auth/login.css": "/css/auth/login.css",
     "/css/online-success.css": "/css/online-success.css",

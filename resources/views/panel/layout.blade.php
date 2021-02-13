@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>پنل کاربری </title>
     <link rel="stylesheet" href="{{asset('css/panel/style.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-          crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{asset('css/global.css')}}">
     <link rel="stylesheet" href="{{asset('css/panel/panel.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+          crossorigin="anonymous"/>
     <script src="{{asset('js/jquery.min.js')}}"></script>
 
     @yield('panel-link')
+
 </head>
 <body class="rtl">
 <div class="container-scroller">
@@ -423,18 +423,21 @@
                     <div class="collapse" id="page-layouts">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="../../pages/layout/boxed-layout.html">
-                                    درخواست کلاس انلاین
+                                <a class="nav-link" href="{{route('panel.online-create')}}">
+                                    <i class="fab fa-creative-commons-sampling-plus"></i>
+                                    <p>درخواست کلاس انلاین</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('panel.online-reserved')}}">
-                                    کلاس های رزرو شده
+                                    <i class="far fa-list-alt"></i>
+                                    <p>کلاس های رزرو شده</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('panel.online-held')}}">
-                                    کلاس های برگزار شده
+                                    <i class="fas fa-outdent"></i>
+                                    <p>کلاس های برگزار شده</p>
                                 </a>
                             </li>
                         </ul>
@@ -452,29 +455,27 @@
                     <div class="collapse" id="apps">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="../../pages/apps/kanban-board.html">
-                                    كانبان بحري
+                                <a class="nav-link" href="">
+                                    <i class="fab fa-creative-commons-share"></i>
+                                    <p>درخواست رفع اشکال افلاین</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../pages/apps/todo.html">
-                                    عمل قائمة
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-list-alt"></i>
+                                    <p>رفع اشکال افلاین رزرو شده</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../../pages/apps/tickets.html">
-                                    تذاكر
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../../pages/apps/chats.html">
-                                    دردشات
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-outdent"></i>
+                                    <p>رفع اشکال افلاین انجام شده</p>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-none">
                     <a class="nav-link d-flex justify-content-between" href="../../pages/samples/widgets.html">
                         <span class="menu-title">
                             <i class="fas fa-user-tie"></i>
@@ -494,17 +495,18 @@
                     </a>
                     <div class="collapse" id="sidebar-layouts">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="../../pages/layout/compact-menu.html">القائمة
-                                    المدمجة</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/layout/sidebar-collapsed.html">قائمة
-                                    الرموز</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/layout/sidebar-hidden.html">الشريط
-                                    الجانبي المخفية</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/layout/sidebar-hidden-overlay.html">تراكب الشريط
-                                    الجانبي</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/layout/sidebar-fixed.html">الشريط
-                                    الجانبي ثابت</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('panel.new-ticket')}}">
+                                    <i class="fas fa-comment-medical"></i>
+                                    <p>ارسال تیکت های جدید</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('panel.list-tickets')}}">
+                                    <i class="far fa-comments"></i>
+                                    <p>لیست تیکت ها</p>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -515,7 +517,7 @@
 
                         <span class="menu-title">
                             <i class="fas fa-file-invoice-dollar"></i>
-                            حسابداری
+                            کیف پول
                         </span>
                         <span>
                             <i class="fas fa-chevron-down"></i>
@@ -523,28 +525,18 @@
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/accordions.html">أكورديون</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                    <p>افزایش اعتبار</p>
+                                </a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/buttons.html">زر</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <p>لیست تراکنش ها</p>
+                                </a>
                             </li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/badges.html">شارات</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/breadcrumbs.html">فتات
-                                    الخبز</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/dropdowns.html">هبوط
-                                    قطرة</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/modals.html">نموذج</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/progress.html">شريط
-                                    التقدم</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/pagination.html">ترقيم
-                                    الصفحات</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/tabs.html">علامات
-                                    التبويب</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/typography.html">طباعة</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/tooltips.html">تلميح</a></li>
                         </ul>
                     </div>
                 </li>
@@ -560,22 +552,23 @@
                     </a>
                     <div class="collapse" id="ui-advanced">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/dragula.html">Dragula</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/clipboard.html">الحافظة</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                    <p>نحوه استفاده از خدمات</p>
+                                </a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/context-menu.html">قائمة
-                                    السياق</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/slider.html">المنزلق</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/colcade.html">Colcade</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/carousel.html">دائري</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="../../pages/ui-features/loaders.html">رافعات</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../pages/ui-features/treeview.html">عرض
-                                    الشجرة</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <i class="fas fa-question-circle"></i>
+                                    <p>سوالات متداول</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    <p>قوانین</p>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -605,8 +598,8 @@
                     <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">طراحی و توسعه توسط تیم IT داناشو  <a
                             href="http://mehrabkarimpour.ir/"
                             target="_blank">mehrabkarimpour.ir </a>( تمامی حقوق محفوظ است ) </span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">danasho<i
-                            class="mdi mdi-heart text-danger"></i>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                        <i class="mdi mdi-heart text-danger"></i>
                     </span>
                 </div>
             </footer>

@@ -6,13 +6,14 @@
 
 @section('panel-content')
 
-    @include('partials.ajax-loader')
+
+
 
     <section id="home" class="container-fluid">
         <div class="row  flex-items-sm-center">
             <!--
-        User Card
-        -->
+                    User Card
+            -->
             <div class="col-12 col-sm-10 col-md-10 py-2 clearfix">
 
                 <div class="profile-card-panel bg-white p-4 rounded row">
@@ -23,6 +24,9 @@
                         <img
                             src="/files/{{auth()->user()->img}}"
                             class="img-fluid img-profile" alt="Card image">
+                        <div class="col-1 position-relative">
+                            @include('partials.ajax-loader')
+                        </div>
                     </div>
                     <div class="col-8">
                         <div class="col-12 h-50">

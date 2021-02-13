@@ -59,34 +59,40 @@
                                     <div class="modal-content ">
 
                                         <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <div class="modal-header d-flex justify-content-between">
+                                            <h6 class="text-center direction-rtl">نظر شما برامون مهمه ...</h6>
+                                            <button type="button" class="close m-0 p-0" data-dismiss="modal">&times;
+                                            </button>
                                         </div>
 
                                         <!-- Modal body -->
                                         <div class="modal-body  ml-0 pl-0 mr-0 pr-0">
-                                            @foreach($allSurveys as $key=>$survey)
-                                                <div class="col-12 card-image">
-                                                    <h5 class="text-center">{{$surveyType[$key]['type']}}</h5>
-                                                    @foreach($survey as $row)
+                                            <form method="post">
+                                                @foreach($pollSubjects as $key=>$poll)
+                                                    <div class="col-12 card-image">
+                                                        <h5 class="text-center">{{$poll->title}}</h5>
+                                                        @foreach($poll->surveys as $row)
 
-                                                        <div class="col-12">
-                                                            <p><strong>{{$row->title}}  </strong> : </p>
-                                                            <div class="d-flex justify-content-between score">
-                                                                @foreach($scores as $score)
-                                                                    <label>
-                                                                        <input type="radio" value="{{$score->score_title}}"
-                                                                               name="{{$row->id}}">
-                                                                        <span class="design"></span>
-                                                                        <span class="text">{{$score->score_title}}</span>
-                                                                    </label>
-                                                                @endforeach
+                                                            <div class="col-12">
+                                                                <p><strong>{{$row->title}}  </strong> : </p>
+                                                                <div class="d-flex justify-content-between score">
+                                                                    @foreach($scores as $score)
+                                                                        <label>
+                                                                            <input type="radio"
+                                                                                   value="{{$score->score_title}}"
+                                                                                   name="{{$row->id}}">
+                                                                            <span class="design"></span>
+                                                                            <span
+                                                                                class="text">{{$score->score_title}}</span>
+                                                                        </label>
+                                                                    @endforeach
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <hr>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
+                                                            <hr>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </form>
                                         </div>
 
                                         <!-- Modal footer -->

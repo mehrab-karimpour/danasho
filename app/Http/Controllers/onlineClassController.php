@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ImageSize;
+use App\Events\resizeImage;
 use App\Events\sendVerify;
 use App\Models\DatePeriod;
 use App\Models\Lesson;
@@ -17,6 +19,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class onlineClassController extends Controller
 {
@@ -34,6 +38,12 @@ class onlineClassController extends Controller
             $day = Verta::createDate($date[0], $date[1], $date[2])->format('Y/m/d l');
             $price = calculatePrice('onlineClass', $request->grade_id, $time);
             $time = $time . " دقیقه";
+            $newName = null;
+            if ($request->has('img')) {
+                $file = $request->file('img');
+                $newName = Carbon::now()->format('Y_m_d') . '.' . $file->getClientOriginalExtension();
+
+            }
 
             $newOnlineClass = Online::create([
                 'user_id' => intval($request->user_id),
@@ -50,6 +60,15 @@ class onlineClassController extends Controller
                 'description' => $request->description,
                 'mobile' => $request->mobile,
             ]);
+            /*      upload image questions     */
+            if ($request->has('img')) {
+                $user_id = $request->user_id;
+                $path = 'users/' . $user_id . "/online/" . $newOnlineClass->id . "/";
+                $file->storeAs($path, $newName);
+                $format = $file->getClientOriginalExtension();
+                ImageSize::dispatch($path . $newName, $format);
+            }
+
             return response()->view('Client.index.onlineClass.success-create', compact('newOnlineClass'));
         } catch (\Exception $e) {
             Log::error($e);

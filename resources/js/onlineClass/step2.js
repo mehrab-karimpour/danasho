@@ -13,6 +13,7 @@ class Step2 extends index {
         const price = window.prices.filter((obg) => {
             return obg.grade_id === parseInt(window.grade_id);
         });
+
         if (window.times[0].title.length < 5) {
             for (let i = 0; i < window.times.length; i++) {
                 window.times[i].title = window.times[i].title + " دقیقه " + (parseInt(window.times[i].title) / 15) * price[0].title + "  هزار تومان ";

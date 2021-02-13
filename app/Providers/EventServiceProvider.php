@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\ImageSize;
+use App\Listeners\GoImageResizing;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use function Illuminate\Events\queueable;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,7 +20,8 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
+        ]
+
     ];
 
     /**
@@ -27,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen(ImageSize::class, [GoImageResizing::class, 'handle']);
+
     }
 }

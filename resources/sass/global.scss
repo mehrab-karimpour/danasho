@@ -6,7 +6,7 @@
 
 }
 
-a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, select, option, strong, label, p {
+a, div, li, ul, span, input, textarea, h1, h2, h3, h4, h5, h6, button, select, option, strong, label, p, tr, td, th {
     font-family: Shabnam !important;
 }
 
@@ -98,16 +98,16 @@ body {
     direction: rtl;
 }
 
-.form-validate-warning{
-    border: 1px solid #fffb0d!important;
+.form-validate-warning {
+    border: 1px solid #fffb0d !important;
 }
 
 .form-validate-error {
-    border: 1px solid #db3e45!important;
+    border: 1px solid #db3e45 !important;
 }
 
 .form-validate-success {
-    border: 1px solid #4cdb7c!important;
+    border: 1px solid #4cdb7c !important;
 }
 
 .form-danger {
@@ -150,12 +150,11 @@ body {
 }
 
 
-
 $inputColor: #8e8e9d;
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: $inputColor !important;
     font-size: 13px;
-    opacity: 0.8!important; /* Firefox */
+    opacity: 0.8 !important; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
@@ -164,4 +163,16 @@ $inputColor: #8e8e9d;
 
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: $inputColor !important;
+}
+
+.direction-ltr {
+    direction: ltr;
+}
+
+.min-h-30 {
+    min-height: 30vh;
+}
+
+.img-md{
+    max-width: 4rem;
 }

@@ -21,23 +21,51 @@ class Step4 extends index {
         let formInfo = {};
         switch (turn) {
             case 7:
-                formInfo = {
-                    0: {
-                        'name': 'level',
-                        'require': 'require',
-                        'type': 'radio',
-                        'max': 25,
-                        'min': 1,
-                        'message': "لطفا سطح بندی را انتخاب کنید "
-                    }, 1: {
-                        'name': 'description',
-                        'require': 'require',
-                        'type': 'string',
-                        'max': 255,
-                        'min': 1,
-                        'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
+                if ($("#questions")[0].files.length === 0) {
+                    formInfo = {
+                        0: {
+                            'name': 'level',
+                            'require': 'require',
+                            'type': 'radio',
+                            'max': 25,
+                            'min': 1,
+                            'message': "لطفا سطح بندی را انتخاب کنید "
+                        }, 1: {
+                            'name': 'description',
+                            'require': 'require',
+                            'type': 'string',
+                            'max': 255,
+                            'min': 1,
+                            'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
+                        }
+                    }
+                } else {
+                    formInfo = {
+                        0: {
+                            'name': 'level',
+                            'require': 'require',
+                            'type': 'radio',
+                            'max': 25,
+                            'min': 1,
+                            'message': "لطفا سطح بندی را انتخاب کنید "
+                        }, 1: {
+                            'name': 'description',
+                            'require': 'require',
+                            'type': 'string',
+                            'max': 255,
+                            'min': 1,
+                            'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
+                        }, 2: {
+                            'name': 'img',
+                            'require': 'require',
+                            'type': 'file',
+                            'max': 26214400, // 26214400 = 25 mb
+                            'min': 10,
+                            'message': "لطفا توجه فرمایید که حجم عکس باید کمتر از 25 مگابایت باشد"
+                        }
                     }
                 }
+
                 if (this.formValidation(formInfo)) {
                     const descriptionLastItem = $('#online-items-end-step');
                     descriptionLastItem.css('opacity', 0);
@@ -77,7 +105,7 @@ class Step4 extends index {
                         if (response === 'error') {
                             $('#last-step-record').prepend("<p class='alert direction-rtl alert-danger'>متاسفیم ! خطایی رخ داده است لطفا دوباره تلاش کنید . </p>");
                         } else {
-                            $('#online-form-items').append("<input type='hidden' name='user_id' value='"+response['user_id']+"'>");
+                            $('#online-form-items').append("<input type='hidden' name='user_id' value='" + response['user_id'] + "'>");
                             $('.verify-password-button').attr("onclick", 'recordHandle(this,9)')
                             const passWordVerify = $('#password-verify-parent');
                             passWordVerify.removeClass('d-none');
@@ -114,7 +142,8 @@ class Step4 extends index {
                 if (this.formValidation(formInfo)) {
                     const checkVerifyPassword = $("input[name='verify-token']").val();
                     const formData = {checkVerifyPassword: checkVerifyPassword};
-                    this.post('online/check-verify-password', formData).then((response) => {
+                    alert("ok")
+                    this.post('/online/check-verify-password', formData).then((response) => {
                         Step4.ajaxBackEnd();
 
                         if (response) {
@@ -143,11 +172,14 @@ class Step4 extends index {
                             const onlineItems = $('#online-items')
                             onlineItems.find('button').remove();
                             onlineItems.find('.form-submit').append("<button onclick='formSubmit()' class='btn btn-success'>تایید</button>");
-
+                        }else {
+                            const onlineClassModal = $("#online-class-modal");
+                            onlineClassModal.find('.modal-body').text("کد وارد شده صحیح نیست !");
+                            $('#exampleModalCenterTitle').text("هشدار !");
+                            onlineClassModal.modal();
                         }
                     })
                 }
-
         }
     }
 

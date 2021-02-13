@@ -63,5 +63,14 @@ class User extends Authenticatable
         return $this->hasMany(Online::class)->where('date', '<', Carbon::now()->format('Y-m-d'));
     }
 
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class)->OrderByDesc('updated_at');
+    }
 
 }

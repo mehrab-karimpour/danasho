@@ -77,6 +77,8 @@ mix.sass('resources/sass/panel/home.scss', 'public/css/panel/home.css');
 mix.sass('resources/sass/panel/edit-profile.scss', 'public/css/panel/edit-profile.css');
 mix.sass('resources/sass/panel/online-reserved.scss', 'public/css/panel/online-reserved.css');
 mix.sass('resources/sass/panel/online-held.scss', 'public/css/panel/online-held.css');
+mix.sass('resources/sass/panel/online-create.scss', 'public/css/panel/online-create.css');
+mix.sass('resources/sass/panel/new-ticket.scss', 'public/css/panel/new-ticket.css');
 
 
 /*

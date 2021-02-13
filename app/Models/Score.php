@@ -10,7 +10,8 @@ class Score extends Model
     use HasFactory;
 
     protected $fillable=[
-        'score_title'
+        'score_title',
+        'score_value'
     ];
 
 }

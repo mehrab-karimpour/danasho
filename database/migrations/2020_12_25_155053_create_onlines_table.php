@@ -29,6 +29,7 @@ class CreateOnlinesTable extends Migration
             $table->text('description')->nullable();
             $table->string('name')->nullable();
             $table->string('mobile')->nullable();
+            $table->boolean('poll-status')->default(false);
             $table->timestamps();
         });
     }

@@ -24,7 +24,10 @@ select,
 option,
 strong,
 label,
-p {
+p,
+tr,
+td,
+th {
   font-family: Shabnam !important;
 }
 
@@ -193,5 +196,17 @@ body {
 ::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #8e8e9d !important;
+}
+
+.direction-ltr {
+  direction: ltr;
+}
+
+.min-h-30 {
+  min-height: 30vh;
+}
+
+.img-md {
+  max-width: 4rem;
 }
 

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class sendVerify
+class ImageSize
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,9 +19,13 @@ class sendVerify
      *
      * @return void
      */
-    public function __construct()
+    public $fileName;
+    public $format;
+
+    public function __construct($fileName, $format)
     {
-        //
+        $this->fileName = $fileName;
+        $this->format = $format;
     }
 
     /**

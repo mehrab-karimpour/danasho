@@ -33,7 +33,7 @@ class validate {
                 if (radioStatus === valEmpty) {
                     parent.find('p.text-danger').remove();
                     item.addClass('border border-danger');
-                    parent.append("<p class='alert alert-danger'>"+param['message']+"</p>");
+                    parent.append("<p class='alert alert-danger'>" + param['message'] + "</p>");
                     this.addClassError(item, 'form-danger');
                 } else {
                     $('.alert-danger').remove();
@@ -55,15 +55,22 @@ class validate {
                     this.removeClassError(item, 'form-danger');
                 }
             }
-            if (valItem.length > param['max']) {
-                this.addClassError(item, 'form-danger')
+
+            if (param['type'] === 'file') {
+                item[0].files[0].size > param['max']
+                    ? this.addClassError(item, 'form-danger')
+                    : this.removeClassError(item, 'form-danger');
             } else {
-                this.removeClassError(item, 'form-danger');
-            }
-            if (valItem.length < param['min']) {
-                this.addClassError(item, 'form-danger')
-            } else {
-                this.removeClassError(item, 'form-danger');
+                if (valItem.length > param['max']) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
+                if (valItem.length < param['min']) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
             }
 
             let parent = item.parents(".form-item-parent");
@@ -78,7 +85,6 @@ class validate {
         return !$('body *').hasClass('form-danger');
     }
 }
-
 
 
 /*let v = new validate();
@@ -225,7 +231,7 @@ class index extends validate {
     }
 
     static appendInput = (className, name, value) => {
-        $('.' + className).remove();
+        $('#online-form-items .' + className).remove();
         $('#online-form-items').append("<input type='text' class='" + className + "' value='" + value + "'  name='" + name + "'>")
     }
 
@@ -237,6 +243,7 @@ class index extends validate {
     }
 
     static ajaxBackStart = () => {
+        alert("ok")
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
             $('#ajax-leader-back').fadeIn(200);
@@ -320,6 +327,7 @@ class Step1 extends index {
         index.stepsTitle('انتخاب مقطع تحصیلی');
         this.ajaxStart();
 
+
         this.post('/online', {}).then((data) => {
             window.grades = data.grades;
             window.units = data.units;
@@ -393,6 +401,7 @@ class Step2 extends index {
         const price = window.prices.filter((obg) => {
             return obg.grade_id === parseInt(window.grade_id);
         });
+
         if (window.times[0].title.length < 5) {
             for (let i = 0; i < window.times.length; i++) {
                 window.times[i].title = window.times[i].title + " دقیقه " + (parseInt(window.times[i].title) / 15) * price[0].title + "  هزار تومان ";
@@ -500,23 +509,51 @@ class Step4 extends index {
         let formInfo = {};
         switch (turn) {
             case 7:
-                formInfo = {
-                    0: {
-                        'name': 'level',
-                        'require': 'require',
-                        'type': 'radio',
-                        'max': 25,
-                        'min': 1,
-                        'message': "لطفا سطح بندی را انتخاب کنید "
-                    }, 1: {
-                        'name': 'description',
-                        'require': 'require',
-                        'type': 'string',
-                        'max': 255,
-                        'min': 1,
-                        'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
+                if ($("#questions")[0].files.length === 0) {
+                    formInfo = {
+                        0: {
+                            'name': 'level',
+                            'require': 'require',
+                            'type': 'radio',
+                            'max': 25,
+                            'min': 1,
+                            'message': "لطفا سطح بندی را انتخاب کنید "
+                        }, 1: {
+                            'name': 'description',
+                            'require': 'require',
+                            'type': 'string',
+                            'max': 255,
+                            'min': 1,
+                            'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
+                        }
+                    }
+                } else {
+                    formInfo = {
+                        0: {
+                            'name': 'level',
+                            'require': 'require',
+                            'type': 'radio',
+                            'max': 25,
+                            'min': 1,
+                            'message': "لطفا سطح بندی را انتخاب کنید "
+                        }, 1: {
+                            'name': 'description',
+                            'require': 'require',
+                            'type': 'string',
+                            'max': 255,
+                            'min': 1,
+                            'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
+                        }, 2: {
+                            'name': 'img',
+                            'require': 'require',
+                            'type': 'file',
+                            'max': 26214400, // 26214400 = 25 mb
+                            'min': 10,
+                            'message': "لطفا توجه فرمایید که حجم عکس باید کمتر از 25 مگابایت باشد"
+                        }
                     }
                 }
+
                 if (this.formValidation(formInfo)) {
                     const descriptionLastItem = $('#online-items-end-step');
                     descriptionLastItem.css('opacity', 0);
@@ -556,7 +593,7 @@ class Step4 extends index {
                         if (response === 'error') {
                             $('#last-step-record').prepend("<p class='alert direction-rtl alert-danger'>متاسفیم ! خطایی رخ داده است لطفا دوباره تلاش کنید . </p>");
                         } else {
-                            $('#online-form-items').append("<input type='hidden' name='user_id' value='"+response['user_id']+"'>");
+                            $('#online-form-items').append("<input type='hidden' name='user_id' value='" + response['user_id'] + "'>");
                             $('.verify-password-button').attr("onclick", 'recordHandle(this,9)')
                             const passWordVerify = $('#password-verify-parent');
                             passWordVerify.removeClass('d-none');
@@ -593,7 +630,8 @@ class Step4 extends index {
                 if (this.formValidation(formInfo)) {
                     const checkVerifyPassword = $("input[name='verify-token']").val();
                     const formData = {checkVerifyPassword: checkVerifyPassword};
-                    this.post('online/check-verify-password', formData).then((response) => {
+                    alert("ok")
+                    this.post('/online/check-verify-password', formData).then((response) => {
                         Step4.ajaxBackEnd();
 
                         if (response) {
@@ -622,11 +660,14 @@ class Step4 extends index {
                             const onlineItems = $('#online-items')
                             onlineItems.find('button').remove();
                             onlineItems.find('.form-submit').append("<button onclick='formSubmit()' class='btn btn-success'>تایید</button>");
-
+                        }else {
+                            const onlineClassModal = $("#online-class-modal");
+                            onlineClassModal.find('.modal-body').text("کد وارد شده صحیح نیست !");
+                            $('#exampleModalCenterTitle').text("هشدار !");
+                            onlineClassModal.modal();
                         }
                     })
                 }
-
         }
     }
 
@@ -728,21 +769,6 @@ class indexOffline {
 
     }
 
-    //  in this function we checked before items has selected .appendItems
-
-    checkSelect = (step) => {
-
-        let constSelected = $('.online-selected').length;
-        if (step > constSelected + 1) {
-            $('.error-select').fadeIn();
-            setTimeout(function () {
-                $('.error-select').fadeOut();
-            }, 2000)
-            return false;
-        }
-        return true;
-    }
-
     //  handle post request
     post = (url = '', data = {}) => {
         return $.post(
@@ -751,60 +777,184 @@ class indexOffline {
         );
     }
 
-    // append item in sections
-    static offlineAppendItems = (result, turn = 1) => {
-        let offlineItems = $('#offline-items'); // modal section .
-        offlineItems.fadeIn(200);               // show modal
-        $('#offline-items>div>ul').empty();     // list item may be empty . because we want append new item ans saved before items.
-        $('#turn-offline').val(turn);      // We took turns managing the items
+    static appendItems = (result = '', turn = 1) => {
+
+        let offlineItems = $('#offline-items');
+        offlineItems.fadeIn(200);
+        $('#turn-offline').val(turn);
+        $('#offline-items>div>ul').empty();
         window.turn = turn;
         $.each(result, function (key, value) {
-            let tag = "<li onclick='offlineRecorder(this,window.turn)' " +
-                "class='list-group-item indexOffline-items-select' data-id='" + value['id'] + "'" +
-                ">" + value['title'] + "</li>";
-            $('#list-group-offline').append(tag);
+            let tag;
+            let k = key + 1;
+            if (turn === 'last') {
+                tag = "<li onclick='itemsStartOffline(" + k + ")' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+                    ">" + value['title'] + "</li>";
+            } else {
+                tag = "<li onclick='recordHandleOffline(this,window.turn)' class='list-group-item online-items-select' data-id='" + value['id'] + "'" +
+                    ">" + value['title'] + "</li>";
+            }
+            $('#offline-items>div>ul').append(tag);
         });
-        setTimeout(() => {
-            indexOffline.ajaxLoaderEnd();
-        }, 200);
 
     }
 
-    /*
-    * ajaxBack : A black layer that is placed behind the modal .
-    * */
-    ajaxBack = () => {
-        $('.ajax-back').fadeIn(200);
+    static alertOnlineClass = (step = 2, type = 'online-alert') => {
+        const date=$('.date-get-answer');
+        const grade=$('.grade-offline');
+        const questionsCount=$('.question-count');
+        const onlineClassModal = $("#online-class-modal");
+
+        let textAlert = '';
+        let exampleModalCenterTitle = '';
+        if (type === 'error') {
+            exampleModalCenterTitle = "خطا !";
+            textAlert = 'متاسفانه خطایی رخ داده است ! لطفا دوباره تلاش بفرمایید .';
+        } else {
+            exampleModalCenterTitle = "هشدار !";
+            switch (step) {
+                case 2:
+                    if (grade.hasClass('item-selected') && !grade.hasClass('bg-warning')) {
+                        window.gradeSelect = true;
+                    } else {
+                        textAlert = "لطفا پایه تحصیلی و عنوان درس را انتخاب کنید ";
+                        window.gradeSelect = false;
+                    }
+                    if (window.gradeSelect) {
+                        return true;
+                    }
+
+                case 4:
+                    if (!date.hasClass('item-selected') || date.hasClass('bg-warning')) {
+                        textAlert = "لطفا زمان برگزاری کلاس را انتخاب کنید";
+                        window.dateSelect = false;
+                    } else
+                        window.dateSelect = true;
+
+                    if (!questionsCount.hasClass('item-selected')|| questionsCount.hasClass('bg-warning')) {
+                        textAlert = "لطفا ایتم مدت کلاس و هزینه را انتخاب کنید";
+                        window.timeSelect = false;
+                    } else
+                        window.timeSelect = true;
+
+                    if (!grade.hasClass('item-selected') || grade.hasClass('bg-warning')) {
+                        textAlert = "لطفا پایه تحصیلی و عنوان درس را انتخاب کنید ";
+                        window.gradeSelect = false;
+                    } else
+                        window.gradeSelect = true;
+
+                    if (window.timeSelect && window.gradeSelect && window.dateSelect) {
+                        return true;
+                    }
+            }
+        }
+        onlineClassModal.find('.modal-body').text(textAlert);
+        $('#exampleModalCenterTitle').text(exampleModalCenterTitle);
+        onlineClassModal.modal();
+        return false;
     }
 
-    /*
-    * show ajax loader and show background ajax loader
-    * */
+    addButtonBack = (mainItem) => {
+        $('.go-back-button').remove();
+        window.mainItem = mainItem;
+        $('.go-back').append("<button class='btn go-back-button btn-primary mb-4' onclick='backHandle(window.mainItem)'>مرحله قبل</button>");
+    }
+
+    buttonBack = (mainItem) => {
+        $(mainItem).click();
+    }
+
+    circleSelect = (countStep, activeCircle) => {
+        const circleSelect = $('.circle-select-offline');
+        circleSelect.empty();
+        let tag = "";
+        switch (countStep) {
+            case 1:
+                tag = "<span></span>";
+                break
+            case 2:
+                tag = "<span></span><span></span>";
+                break
+            case 3:
+                tag = "<span></span><span></span><span></span>";
+        }
+        circleSelect.append(tag);
+        circleSelect.find('span').eq(activeCircle).addClass('circle-select-active');
+    }
+
+    static stepsTitle = (text) => {
+        $('.step-title-offline').text(text);
+    }
+
+    static appendInput = (className, name, value) => {
+        $('#offline-form-items .' + className).remove();
+        $('#offline-form-items').append("<input type='text' class='" + className + "' value='" + value + "'  name='" + name + "'>")
+    }
+
+    static disableTomorrowDate = () => {
+        let TomorrowItem = $('#list-group>li').eq(0);
+        TomorrowItem.eq(0).addClass("bg-danger");
+        TomorrowItem.removeAttr("onClick");
+        $('#list-group>li').eq(1).addClass('after-day');
+    }
+
+    static ajaxBackStart = () => {
+        $(document).ajaxStart(function () {
+            $('#ajax-loader').fadeIn();
+            $('#ajax-leader-back').fadeIn(200);
+        })
+    }
+    static ajaxBackEnd = () => {
+        $('#ajax-loader').fadeOut();
+        $('#ajax-leader-back').fadeOut(200);
+    }
+
+    // show ajax items
     ajaxStart = () => {
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
             $('#ajax-leader-back').fadeIn(200);
             $('.ajax-back').fadeIn(200);
-        });
+        })
     }
 
-    /*
-    * ajax and . ajax loader icon and ajax main background
-    * */
+    lengthLi = () => {
+        return $('#offline-items>div>ul').find("li").length;
+    }
+
+    showItem = (item) => {
+        $('.ajax-back').fadeIn(200);
+        $(item).fadeIn();
+    }
+
+
     static ajaxLoaderEnd = () => {
         $('#ajax-loader').fadeOut();
-        $('#ajax-leader-back').fadeOut(200);
     }
+
+    static endRecordSteps = () => {
+        $('.online-steps-close').click();
+        $('.ajax-back').fadeIn(0);
+        $('#online-items-end-step').fadeIn(100);
+    }
+
+    endRecordManager = () => {
+        if ($('.set-record').hasClass('bg-warning')) {
+            $('.ajax-back').fadeIn(0);
+            $('#online-items-end-step').fadeIn(100);
+        }
+    }
+
+    closeItem = (item) => {
+        $(item).fadeOut();
+        $('.ajax-back').fadeOut();
+    }
+
 
     static completedStep = (stepTitle, stepItem) => {
         $(stepItem).text(stepTitle);
         $(stepItem).addClass('item-selected');
 
-    }
-
-    static ajaxBackEnd = () => {
-        $('#ajax-loader').fadeOut();
-        $('#ajax-leader-back').fadeOut(200);
     }
 
     completing = (stepItem) => {
@@ -813,7 +963,10 @@ class indexOffline {
 
     static completeEnd = (stepItem) => {
         $(stepItem).removeClass('bg-warning');
+        $('#offline-items').fadeOut();
+        $('.ajax-back').fadeOut();
     }
+
 
 
 }
@@ -824,60 +977,66 @@ class StepOffline_1 extends indexOffline {
         window.grades = {};
     }
 
-    /*
-     * every step has two main method . 1:start  , 2:handle
-     * start method mey be constructor for every section .
-     * handle method handled other items .
-     * */
-    static endStep = (stepTitle) => {
-        indexOffline.completeEnd('.grade-offline');
-        indexOffline.completedStep(stepTitle, '.grade-offline');
-        $('#offline-items').fadeOut();
-        $('.ajax-back').fadeOut();
+    startStep = (actionType) => {
+
+        $('.go-back').empty();
+        this.circleSelect(3, 0);
+        this.completing('.grade-offline');
+        indexOffline.stepsTitle('انتخاب مقطع تحصیلی');
+        this.ajaxStart();
+        this.post('/offline', {}).then((data) => {
+            window.grades = data.grades;
+            window.units = data.units;
+            window.lessons = data.lessons;
+            window.questions = data.questions;
+            window.prices = data.prices;
+            window.dates = data.dates;
+            window.periods = data.periods;
+            console.log(window.questions)
+            StepOffline_1.appendItems(window.grades, 1);
+            setTimeout(() => {
+                Step1.ajaxBackEnd();
+            }, 200);
+        });
+
     }
 
-    startStep = (turn) => {
-        $('.step-title-offline').text("انتخاب مقطع تحصیلی");
-        $('.go-back-offline').empty();
-        this.ajaxStart();
-        const data = {'turn': turn};
-        this.post('/online/GetGrades', data).then(function (result) {
-            indexOffline.offlineAppendItems(result);
-        });
-        indexOffline.ajaxLoaderEnd();
-    }
-
-    handleStep = (url, data) => {
-        this.ajaxStart();
-        this.post('/offline/recordHandle', data).then(function (result) {
-            if (data['turn'] === 3) {
-                StepOffline_1.endStep(data['step']);
-
-                // saved all questions in window.offlineQuestions because step two we have handel questions
-                window.offlineQuestions = result;
-            } else {
-                indexOffline.offlineAppendItems(result[0], result[1]);
-            }
-        });
-        indexOffline.ajaxLoaderEnd();
-        /*
-        * handle circle select .
-        * */
-        let circleSelect = $('.circle-select-offline span');
-        circleSelect.removeClass('circle-select-active');
-        const stepTitle=$('.step-title-offline');
-        switch (data['turn']) {
+    stepHandle = (turn, data) => {
+        this.addButtonBack('.grade-offline');
+        switch (turn) {
             case 1:
-                circleSelect.eq(1).addClass("circle-select-active");
-                stepTitle.text('انتخاب پایه  تحصیلی');
+                this.circleSelect(3, 1);
+                // record grade
+                window.grade_id = data.dataID;
+                $('#online-form-items').append("<input type='hidden' name='grade_id' value='" + window.grade_id + "'>");
+                indexOffline.stepsTitle('انتخاب پایه تحصیلی');
+                indexOffline.appendInput('grade-input', 'grade', data.value);
+                const units = window.units.filter((obg) => {
+                    return obg.grade_id === parseInt(data.dataID);
+                })
+                indexOffline.appendItems(units, 2);
                 break;
             case 2:
-                circleSelect.eq(2).addClass("circle-select-active");
-                stepTitle.text('انتخاب درس');
+                this.circleSelect(3, 2);
+                indexOffline.stepsTitle('انتخاب درس');
+                indexOffline.appendInput('unit-input', 'unit', data.value);
+                const lessons = window.lessons.filter((obg) => {
+                    return obg.unit_id === parseInt(data.dataID);
+                })
+                indexOffline.appendItems(lessons, 3);
                 break;
+
+            case 3:
+                this.endStep(data);
         }
     }
 
+    endStep = (data) => {
+        indexOffline.appendInput('lesson-input', 'lesson', data.value);
+        indexOffline.completedStep(data.value, '.grade-offline');
+        indexOffline.completeEnd('.grade-offline');
+
+    }
 
 }
 
@@ -886,70 +1045,38 @@ class StepOffline_2 extends indexOffline {
         super();
     }
 
-    /*
-    *    END
-    * */
-    static endStep = (stepTitle) => {
-        indexOffline.completeEnd('.question-count');
-        indexOffline.completedStep(stepTitle, '.question-count');
-        const offlineItem = $('#offline-items');
-        offlineItem.fadeOut();
-        $('.ajax-back').fadeOut();
-        offlineItem.empty();
-        offlineItem.append("<br><h5 class='step-title-offline text-center'>انتخاب روز مورد نظر</h5><input type='hidden'  id='turn-offline' name='turn-offline' value='6'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
-    }
-
-
-    startStep = (turn) => {
-        $('.step-title-offline').text('انتخاب تعداد سوال و هزینه آن ');
+    startStep = (actionType) => {
         $('.go-back-offline').empty();
+        this.circleSelect(2, 0);
         $('.ajax-back').fadeIn();
-        indexOffline.offlineAppendItems(window.offlineQuestions[0], window.offlineQuestions[1]);
+        this.completing('.question-count');
+        indexOffline.stepsTitle('انتخاب تعداد سوالات و هزینه آن');
+        const price = window.prices.filter((obg) => {
+            return obg.grade_id === parseInt(window.grade_id);
+        });
+        if (window.questions[0].title.length < 5) {
+            for (let i = 0; i < window.questions.length; i++) {
+                window.questions[i].title = "" +   window.questions[i].title  + " تا " +(parseInt(window.questions[i].title) + 3)+ " سوال " + (parseInt(window.questions[i].title)) * price[0].title + " هزار تومان ";
+                /*if (i < 1) {
+                    window.questions[i].title = window.questions[i].title + " سوال " + (parseInt(window.questions[i].title)) * price[0].title + "  هزار تومان ";
+                } else {
+                    window.questions[i].title = "" + (window.questions[i].title) - 3 + " تا " + window.questions[i].title + " سوال " + (parseInt(window.questions[i].title)) * price[0].title + " هزار تومان ";
+                }*/
+
+            }
+        }
+        console.log(window.questions)
+        Step2.appendItems(window.questions, 4);
     }
 
-    handleStep = (url, data, file = 0) => {
-        if (file === 1) {
-            /*
-            * upload image questions
-            * */
-            const question_file = data.files[0];
-            let formData = new FormData;
-            formData.append('question_file', question_file);
-            formData.append('turn', "5");
+    stepHandle = (turn, data) => {
+        this.endStep(data);
+    }
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                async: true,
-                dataType: 'json',
-                processData: false,
-                cache: false,
-                contentType: false,
-                success: function (msg) {
-                    window.offlineDate = msg;
-                    StepOffline_2.endStep(window.stepTwoText);
-                    setTimeout(() => {
-                        StepOffline_2.ajaxBackEnd();
-                    }, 400)
-                },
-                fail: function (msg) {
-                }
-            });
-
-        } else {
-            window.stepTwoText = data['step'];
-            $('#offline-items').empty();
-            window.uploadFileSection = "<h6>تصاویر سوالاتی که قصد رفع اشکال انها را دارید اپلود نمایید </h6><br><br><input " +
-                "class='form-control' type='file' name='question-file' />";
-
-            this.post('/offline/recordHandle', data).then(function (result) {
-                $('#turn-offline').val(result[1]);
-                $('#offline-items').append(result);
-                $('.step-title-offline').text('ارسال سوالات');
-                indexOffline.ajaxBackEnd();
-            });
-        }
+    endStep = (data) => {
+        index.appendInput('time-input', 'time', data.dataID);
+        Step1.completedStep(data.value, '.time');
+        Step1.completeEnd('.time');
     }
 
 }
@@ -1084,159 +1211,69 @@ const stepTwo = new StepOffline_2();
 const stepThree = new StepOffline_3();
 const stepFour = new StepOffline_4();
 
-/*
-* get turn for easy management steps and items
-* */
-
-const Turn = () => {
-    return $('#turn-offline').val();
-}
-
-/*
-* grades and units lessons .
-* */
-One = (item, turn) => {
-    stepOne.completing('.grade-offline');
-    // we have create it .
-    stepOne.startStep(turn);
-}
-/*
-* count questions and prices
-* */
-Two = (item) => {
-    stepTwo.completing('.question-count');
-    stepTwo.startStep();
-}
-
-/*
-* date get response questions
-* */
-Three = (item) => {
-    stepThree.completing('date-get-answer');
-    stepThree.startStep();
-}
-
-
-/*
-* go record request
-* */
-Four = () => {
-    alert("ok");
-    stepFour.completing('get-record-offline');
-    stepFour.startStep();
-}
-
-itemHandle = (stepNumber, tag, edit = '') => {
-    const thisTag = $(tag);
-    const turn = Turn();
-    let circleSelect = $('.circle-select-offline span');
-    const offlineItems = $('#offline-items');
+const itemsStartOffline = (stepNumber, item = '') => {
+    const actionType = '';//updateOrCreate(item);
     switch (stepNumber) {
-        case 1:
-            One(thisTag, turn);
-            break;
-        case 2:
-            if (edit === '') {
-                circleSelect.eq(0).remove();
-                circleSelect.eq(1).addClass("circle-select-active");
-            } else {
-                offlineItems.empty();
-                offlineItems.append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden'  id='turn-offline' name='turn-offline' value='1'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
-            }
-            Two(thisTag, turn);
-            break;
-        case 3:
-            if (edit === 3) {
-                circleSelect.removeClass("circle-select-active");
-                circleSelect.eq(0).addClass("circle-select-active");
-            } else {
-                circleSelect.eq(0).remove();
-                circleSelect.eq(1).addClass("circle-select-active");
-            }
-            if ($('.date-get-answer').hasClass('item-selected')) {
-                offlineItems.empty();
-                offlineItems.append("<br><h5 class='step-title-offline text-center'>انتخاب روز مورد نظر</h5><input type='hidden'  id='turn-offline' name='turn-offline' value='1'><input type='hidden'  id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='col-12 d-flex justify-content-center'><ul class='list-group m-0 p-0' id='list-group-offline'></ul></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span><span></span></div><br><div class='go-back-offline text-right'></div><br/>");
-                offlineItems.css('opacity', '1');
-            }
-            Three(thisTag, turn);
-            break;
-        case 4:
-            Four(thisTag, turn);
-            break;
-    }
-}
-
-/*
-* this method passed data to steps files for record all items .
-* */
-
-offlineRecorder = (tag, turn) => {
-    const step = $(tag).text();
-    const dataID = $(tag).attr('data-id');
-    const data = {'turn': turn, 'step': step, 'dataID': dataID};
-    const goBackButtonParent = $('.go-back-offline');
-    switch (turn) {
         case 1 :
-            window.offlineGrade = $('.grade-offline');
-            goBackButtonParent.empty();
-            goBackButtonParent.append("<button class='btn btn-secondary' onclick='itemHandle(1,window.offlineGrade)'>بازگشت به عقب</button>")
-            stepOne.handleStep('/offline/recordHandle', data);
-            break;
+            stepOne.startStep(actionType);
+            break
         case 2 :
-            stepOne.handleStep('/offline/recordHandle', data);
-            break;
+            if (indexOffline.alertOnlineClass()) {
+                stepTwo.startStep(actionType);
+            }
+            break
         case 3 :
-            stepOne.handleStep('/offline/recordHandle', data);
+            stepThree.startStep(actionType);
             break;
         case 4 :
-            stepTwo.handleStep('/offline/recordHandle', data);
+            if (indexOffline.alertOnlineClass(4)) {
+                stepFour.startStep(actionType);
+            }
+            break
+    }
+}
+
+const recordHandleOffline = (tag, turn) => {
+    const dataID = $(tag).attr('data-id');
+    const value = $(tag).text();
+    const data = {dataID: dataID, value: value};
+    switch (turn) {
+        case 1:
+            stepOne.stepHandle(turn, data);
             break;
-        case 6 :
-            stepThree.handleStep('/offline/recordHandle', data);
+        case 2:
+            stepOne.stepHandle(turn, data);
             break;
-        case 7 :
-            stepThree.handleStep('/offline/recordHandle', data);
+        case 3:
+            stepOne.stepHandle(turn, data);
             break;
-        case 8 :
-            stepFour.handleStep('/offline/recordHandle', data);
+        case 4:
+            stepTwo.stepHandle(turn, data);
             break;
-        case 9 :
-            const offline_verify_token = $("input[name='offline_verify_token']").val();
-            let dataWithPassword = {
-                'offline_verify_token': offline_verify_token,
-                'turn': turn,
-                'step': step,
-                'dataID': dataID
-            };
-            stepFour.endStep('/offline/recordHandle', dataWithPassword);
+        case 5:
+            stepThree.stepHandle(tag, data);
+            break;
+        case 6:
+            stepThree.stepHandle(turn, data);
+            break;
+        case 7:
+            stepFour.stepHandle(turn, data);
+            break;
+        case 8:
+            stepFour.stepHandle(turn, data);
+            break;
+        case 9:
+            stepFour.stepHandle(turn, data);
             break;
     }
 }
 
-/*
-* upload question file
-* */
-
-const uploadQuestionFile = (tag) => {
-    stepTwo.handleStep('/offline/recordHandle', tag, 1)
+backHandleOffline = (mainItem) => {
+    stepOne.buttonBack(mainItem);
 }
 
-
-/*
-* close modal offline
-* */
-const offlineModalClose = () => {
-    $("#offline-items").fadeOut();
-    $('#online-items').fadeOut();
-    $('#last-step-record').fadeOut();
-    $('#online-items-end-step').fadeOut();
-    $('.ajax-back').fadeOut();
+const formSubmitOffline = () => {
+    $('form').submit();
 }
-
-$(() => {
-    $('.ajax-back').click(() => {
-        offlineModalClose();
-    });
-})
 
 

@@ -33,7 +33,7 @@ class validate {
                 if (radioStatus === valEmpty) {
                     parent.find('p.text-danger').remove();
                     item.addClass('border border-danger');
-                    parent.append("<p class='alert alert-danger'>"+param['message']+"</p>");
+                    parent.append("<p class='alert alert-danger'>" + param['message'] + "</p>");
                     this.addClassError(item, 'form-danger');
                 } else {
                     $('.alert-danger').remove();
@@ -55,15 +55,22 @@ class validate {
                     this.removeClassError(item, 'form-danger');
                 }
             }
-            if (valItem.length > param['max']) {
-                this.addClassError(item, 'form-danger')
+
+            if (param['type'] === 'file') {
+                item[0].files[0].size > param['max']
+                    ? this.addClassError(item, 'form-danger')
+                    : this.removeClassError(item, 'form-danger');
             } else {
-                this.removeClassError(item, 'form-danger');
-            }
-            if (valItem.length < param['min']) {
-                this.addClassError(item, 'form-danger')
-            } else {
-                this.removeClassError(item, 'form-danger');
+                if (valItem.length > param['max']) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
+                if (valItem.length < param['min']) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
             }
 
             let parent = item.parents(".form-item-parent");
@@ -78,7 +85,6 @@ class validate {
         return !$('body *').hasClass('form-danger');
     }
 }
-
 
 
 /*let v = new validate();

@@ -14,7 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'online/*',
         '/online',
-        'offline/*',
+        '/offline/*',
+        '/offline',
         '/password-request',
         '/register'
     ];

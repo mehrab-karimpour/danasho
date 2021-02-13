@@ -3,9 +3,14 @@
 
 use Hekmatinasser\Verta\Verta;
 
-function returnJalali($gregorianDate)
+function returnCreatedAtJalali($gregorianDate, $delimiter)
 {
-
+    $mainDate=explode(' ',$gregorianDate);
+    $bD = explode("$delimiter", $mainDate[0]);
+    $y = to_en_numbers($bD[0]);
+    $m = to_en_numbers($bD[1]);
+    $d = to_en_numbers($bD[2]);
+    return implode('/', Verta::getJalali($y, $m, $d));
 }
 
 

@@ -122,7 +122,7 @@ class index extends validate {
     }
 
     static appendInput = (className, name, value) => {
-        $('.' + className).remove();
+        $('#online-form-items .' + className).remove();
         $('#online-form-items').append("<input type='text' class='" + className + "' value='" + value + "'  name='" + name + "'>")
     }
 
@@ -134,6 +134,7 @@ class index extends validate {
     }
 
     static ajaxBackStart = () => {
+        alert("ok")
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
             $('#ajax-leader-back').fadeIn(200);

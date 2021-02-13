@@ -10,15 +10,15 @@ class Survey extends Model
     use HasFactory;
 
     protected $fillable = [
-        'score_id',
-        'type',
+        'poll_subject_id',
         'title'
     ];
 
-    public function score()
+    public function pollSubject()
     {
-        return $this->hasOne(Score::class);
+        return $this->belongsTo(PollSubject::class);
     }
+
 
 
 }

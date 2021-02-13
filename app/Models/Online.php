@@ -24,6 +24,7 @@ class Online extends Model
         'description',
         'name',
         'mobile',
+        'poll-status'
     ];
 
 

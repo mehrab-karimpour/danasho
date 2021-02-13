@@ -3,7 +3,6 @@
 @section('client.css')
     <link rel="stylesheet" href="{{asset('css/header.css')}}">
     <link rel="stylesheet" href="{{asset('css/index.css')}}">
-
 @endsection
 
 @section('client.content')
@@ -87,15 +86,13 @@
         @include('partials.ajax-loader')
     </form>
 
-
-
-
-
     <br><br><br>
 
+    <form action="{{route('online-form')}}" method="post" id="offline-form-items"
+          enctype="multipart/form-data">
     @include('Client.index.offlineClass.index')
     @include('Client.index.offlineClass.offline-items')
-
+    </form>
     <br><br><br><br><br><br><br><br><br><br>
 
 @endsection
