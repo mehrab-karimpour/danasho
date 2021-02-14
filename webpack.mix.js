@@ -45,6 +45,9 @@ mix.combine([
 mix.combine([
     'resources/js/panel/custom/edit-profile.js',
 ], 'public/js/panel/editProfile.js')
+mix.combine([
+    'resources/js/ticket.js',
+], 'public/js/panel/ticket.js')
 
 
 mix.combine([

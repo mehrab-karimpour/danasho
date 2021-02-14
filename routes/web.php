@@ -37,6 +37,8 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::post('/new-ticket', [ticketController::class, 'create']);
     Route::get('/list-tickets', [ticketController::class, 'listTickets'])->name('panel.list-tickets');
     Route::get('/show-ticket/{id}',[ticketController::class,'showTicket'])->name('panel.show.ticket');
+    Route::post('/show-ticket',[ticketController::class,'sendTicket'])->name('panel.send.message');
+
 });
 
 

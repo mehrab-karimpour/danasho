@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             scoreSeeder::class,
             stateSeeder::class,
-            classSeeder::class
+            classSeeder::class,
+            userSeeder::class
         ]);
     }
 }

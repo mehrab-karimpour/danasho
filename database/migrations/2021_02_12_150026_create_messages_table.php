@@ -17,6 +17,7 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->foreignId('ticket_id')->nullable()->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('responder_id')->nullable();
+            $table->string('file')->nullable();
             $table->longText('message');
             $table->boolean('user_type')->nullable();// true : user is admin or agent . false : normal user
             $table->timestamps();

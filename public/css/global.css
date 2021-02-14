@@ -210,3 +210,7 @@ body {
   max-width: 4rem;
 }
 
+.opacity-low {
+  opacity: 60%;
+}
+

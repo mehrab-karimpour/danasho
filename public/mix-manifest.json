@@ -18,6 +18,7 @@
     "/js/index.js": "/js/index.js",
     "/js/panel/panel.js": "/js/panel/panel.js",
     "/js/panel/editProfile.js": "/js/panel/editProfile.js",
+    "/js/panel/ticket.js": "/js/panel/ticket.js",
     "/js/header.js": "/js/header.js",
     "/css/header.css": "/css/header.css",
     "/js/register.js": "/js/register.js",
