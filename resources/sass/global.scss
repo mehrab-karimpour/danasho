@@ -180,3 +180,15 @@ $inputColor: #8e8e9d;
 .opacity-low{
     opacity: 60%;
 }
+
+
+/* Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none!important;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield!important;
+}

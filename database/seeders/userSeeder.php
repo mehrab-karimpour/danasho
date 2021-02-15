@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Credit;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,10 @@ class userSeeder extends Seeder
         $admin->fullName = "داناشو";
         $admin->password = Hash::make('121212');
         $admin->save();
+        $credit = new Credit();
+        $credit->creditLevel = 0;
+        $credit->user_id = $admin->id;
+        $credit->save();
 
         $agent = new User();
         $agent->mobile = "09054603316";

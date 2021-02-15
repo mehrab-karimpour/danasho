@@ -1,0 +1,24 @@
+#increase-credit .credit-item {
+  cursor: pointer;
+  box-shadow: 0 0 16px 1px #ccc;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#increase-credit .active-credit-item {
+  background-color: #343a40 !important;
+}
+
+#increase-credit .active-credit-item p {
+  color: #ffffff;
+}
+
+#increase-credit form label {
+  font-weight: bold;
+}
+
+#increase-credit .amount-increase-item-show {
+  font-weight: bold;
+  font-size: 19px;
+}
+

@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             scoreSeeder::class,
             stateSeeder::class,
             classSeeder::class,
-            userSeeder::class
+            userSeeder::class,
+            creditItemSeeder::class
         ]);
     }
 }

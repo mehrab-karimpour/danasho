@@ -73,4 +73,9 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class)->OrderByDesc('updated_at');
     }
 
+    public function credit()
+    {
+        return $this->hasOne(Credit::class);
+    }
+
 }

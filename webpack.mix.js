@@ -49,6 +49,10 @@ mix.combine([
     'resources/js/ticket.js',
 ], 'public/js/panel/ticket.js')
 
+mix.combine([
+    'resources/js/panel/custom/increase-credit.js',
+], 'public/js/panel/increase-credit.js')
+
 
 mix.combine([
     'resources/js/dependenci/header.js',
@@ -82,6 +86,7 @@ mix.sass('resources/sass/panel/online-reserved.scss', 'public/css/panel/online-r
 mix.sass('resources/sass/panel/online-held.scss', 'public/css/panel/online-held.css');
 mix.sass('resources/sass/panel/online-create.scss', 'public/css/panel/online-create.css');
 mix.sass('resources/sass/panel/new-ticket.scss', 'public/css/panel/new-ticket.css');
+mix.sass('resources/sass/panel/increase-credit.scss', 'public/css/panel/increase-credit.css');
 
 
 /*

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CreditItem;
 use App\Models\Field;
 use App\Models\Grade;
 use App\Models\PollSubject;
@@ -20,6 +21,13 @@ use Illuminate\Support\Facades\Validator;
 class panelController extends Controller
 {
 
+    public function increaseCredit()
+    {
+        $userCredit = Auth::user()->credit;
+        $creditItems = CreditItem::all();
+        return response()->view('panel.increase-credit',
+            compact('creditItems','userCredit'));
+    }
 
     public function uploadImageProfile(Request $request)
     {
