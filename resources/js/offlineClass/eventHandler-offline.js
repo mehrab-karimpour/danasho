@@ -43,15 +43,16 @@ const recordHandleOffline = (tag, turn) => {
             stepTwo.stepHandle(turn, data);
             break;
         case 5:
-            stepThree.stepHandle(tag, data);
+            stepTwo.stepHandle(tag, data);
             break;
         case 6:
-            stepThree.stepHandle(turn, data);
+            stepThree.stepHandle(tag, data);
             break;
         case 7:
-            stepFour.stepHandle(turn, data);
+            stepThree.stepHandle(turn, data);
             break;
         case 8:
+
             stepFour.stepHandle(turn, data);
             break;
         case 9:

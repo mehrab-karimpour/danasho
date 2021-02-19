@@ -19,7 +19,6 @@ class StepOffline_1 extends indexOffline {
             window.prices = data.prices;
             window.dates = data.dates;
             window.periods = data.periods;
-            console.log(window.questions)
             StepOffline_1.appendItems(window.grades, 1);
             setTimeout(() => {
                 Step1.ajaxBackEnd();

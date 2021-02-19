@@ -1,52 +1,69 @@
 class StepOffline_3 extends indexOffline {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
-    static endStep = (stepTitle) => {
-        indexOffline.completeEnd('.date-get-answer');
-        indexOffline.completedStep(stepTitle, '.date-get-answer');
-        let offlineItem = $('#offline-items');
-        $('.ajax-back').fadeOut();
-        offlineItem.css("opacity", "0");
-        offlineItem.empty();
-        offlineItem.append("<br><h5 class='step-title-offline text-center'></h5><input type='hidden' id='turn-offline' name='turn-offline' value='1'><input type='hidden' id='edit-offline' name='edit-offline' value='0'><span onclick='offlineModalClose()' class='d-block mt-2 ml-1 '><i class='fas fa-times offline-steps-close cursor-pointer'></i></span><div id='list-parent'></div><div class='form-item-parent'><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' name='offline_name' id='offline_name' type='text' placeholder='نام '><label for='offline_name' class='col-12 text-right direction-rtl col-md-6'>نام و نام خانوادگی :</label></div></div><br><div class='form-item-parent'><div class='col-12 d-flex justify-content-around'><input class='form-control text-right col-12 col-md-5' id='offline_mobile' type='number' name='offline_mobile' placeholder='شماره موبایل '><label for='offline_mobile' class='col-12 text-right direction-rtl col-md-6'>شماره موبایل خود را وارد کنید : </label></div></div><br><div class='col-12' id='verify-code-offline'></div><br><div class='form-item-parent'></div><div class='timer-parent-offline form-item-parent'></div><div class='col-12 d-flex justify-content-around'><br><br><br><br><br><br><br><button class='btn btn-primary last-record__submit-offline' onclick='offlineRecorder(this,8)'>تایید</button><button class='btn btn-secondary'>بازگشت به مرحله قبل</button></div><div class='col-6 col-md-4 col-xl-2 circle-select-offline'><span class='circle-select-active'></span></div><br><div class='go-back-offline text-right'></div><br/>");
-        setTimeout(() => {
-            $('#offline-items').fadeOut();
-        }, 1000);
-    }
+    startStep = (actionType) => {
+        if (window.dates === window.periods) {
+            this.ajaxStart();
+            this.post('/online/getDates', {}).then((response) => {
+                if (response === 'error') {
+                    index.alertOnlineClass(0, 'error');
+                } else {
+                    window.dates = response['dates'];
+                    window.periods = response['periods'];
+                    $('.go-back').empty();
+                    this.circleSelect(2, 0);
+                    $('.ajax-back').fadeIn();
+                    this.completing('.date-get-answer');
+                    indexOffline.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
+                    indexOffline.appendItems(window.dates, 5);
+                    indexOffline.disableTomorrowDate();
+                }
+                indexOffline.ajaxBackEnd();
 
-    startStep = () => {
-        $('.ajax-back').fadeIn(0);
-        indexOffline.offlineAppendItems(window.offlineDate[0], window.offlineDate[1]);
-        let firstItem = $('#list-group-offline li').eq(0);
-        firstItem.removeAttr('onclick');
-        firstItem.addClass('bg-danger');
-    }
+            })
+        } else {
 
-    handleStep = (url, data) => {
-        let goBack = $('.go-back-offline');
-        goBack.empty();
-        goBack.append("<button class='btn btn-secondary' onclick='itemHandle(3,window.offlineDate,3)'>بازگشت به عقب</button>");
-        let circleSelect = $('.circle-select-offline span');
-        circleSelect.removeClass("circle-select-active");
-        circleSelect.eq(1).addClass("circle-select-active");
-        $('.step-title-offline').text('انتخاب محدوده زمانی مورد نظر');
-        this.post(url, data).then(function (result) {
-            indexOffline.offlineAppendItems(result[0], result[1]);
-            if (result[2] === 1) {
-                let firstItem = $('#list-group-offline li').eq(0);
-                firstItem.removeAttr('onclick');
-                firstItem.addClass('bg-danger');
+            console.log(window.periods);
+            if ($('#list-group-offline').length === 0) {
+                $('#main-parent-item-offline').append("<ul class='list-group m-0 p-0' id='list-group-offline'></ul>");
             }
-        });
-        if (data['turn'] === 6) {
-            window.dateOffline = data['step'];
+            $('.go-back-offline').empty();
+            this.circleSelect(2, 0);
+            $('.ajax-back').fadeIn();
+            this.completing('.date-get-answer');
+            indexOffline.stepsTitle('انتخاب روز و محدوده زمانی مورد نظر');
+            indexOffline.appendItems(window.dates, 6);
+            indexOffline.disableTomorrowDate();
         }
-        if (data['turn'] === 7) {
-            let stepThreeTitle = window.dateOffline + data['step'];
-            StepOffline_3.endStep(stepThreeTitle);
+
+    }
+
+    stepHandle = (tag, data) => {
+        this.addButtonBack('.date-get-answer');
+        this.circleSelect(2, 1);
+        if (tag === 7) {
+            alert("ok 7")
+            data.value = window.dateTitle + data.value;
+            this.endStep(data);
+        } else {
+            indexOffline.appendInput('date-offline-input', 'date-get-answer', data.dataID);
+            indexOffline.appendItems(window.periods, 7);
+            if ($(tag).hasClass('after-day')) {
+
+                indexOffline.disableTomorrowDate();
+            }
+            window.dateTitle = data.value;
         }
     }
+
+
+    endStep = (data) => {
+        indexOffline.appendInput('period-offline-input', 'period-offline', data.value);
+        indexOffline.completedStep(data.value, '.date-get-answer ');
+        indexOffline.completeEnd('.date-get-answer');
+    }
+
 
 }

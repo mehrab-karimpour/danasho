@@ -145,19 +145,23 @@ class classSeeder extends Seeder
         $period->save();
 
         $question = new Question();
-        $question->title = 1;
-        $question->save();
-
-        $question = new Question();
         $question->title = 3;
+        $question->description = '1 الی 3 سوال';
         $question->save();
 
         $question = new Question();
         $question->title = 6;
+        $question->description = '4 الی 6 سوال';
         $question->save();
 
         $question = new Question();
         $question->title = 9;
+        $question->description = '7 الی 9 سوال';
+        $question->save();
+
+        $question = new Question();
+        $question->title = 12;
+        $question->description = '10 الی 12 سوال';
         $question->save();
 
 

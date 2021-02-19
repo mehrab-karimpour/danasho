@@ -35,6 +35,7 @@ class indexOffline {
 
     static alertOnlineClass = (step = 2, type = 'online-alert') => {
         const date=$('.date-get-answer');
+
         const grade=$('.grade-offline');
         const questionsCount=$('.question-count');
         const onlineClassModal = $("#online-class-modal");
@@ -91,7 +92,7 @@ class indexOffline {
     addButtonBack = (mainItem) => {
         $('.go-back-button').remove();
         window.mainItem = mainItem;
-        $('.go-back').append("<button class='btn go-back-button btn-primary mb-4' onclick='backHandle(window.mainItem)'>مرحله قبل</button>");
+        $('.go-back-offline').append("<button type='button' class='btn go-back-button btn-primary mb-4' onclick='backHandleOffline(window.mainItem)'>مرحله قبل</button>");
     }
 
     buttonBack = (mainItem) => {
@@ -126,10 +127,10 @@ class indexOffline {
     }
 
     static disableTomorrowDate = () => {
-        let TomorrowItem = $('#list-group>li').eq(0);
+        let TomorrowItem = $('#list-group-offline>li').eq(0);
         TomorrowItem.eq(0).addClass("bg-danger");
         TomorrowItem.removeAttr("onClick");
-        $('#list-group>li').eq(1).addClass('after-day');
+        $('#list-group-offline>li').eq(1).addClass('after-day');
     }
 
     static ajaxBackStart = () => {

@@ -26,3 +26,28 @@
     </section>
 </fieldset>
 <input type="radio" id="val-empty" style="opacity: 0">
+
+<div class="modal fade" id="file-size-is-top" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content alert alert-danger">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                حجم عکس باید کمتر از 20 مگابایت باشد
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    متوجه شدم !
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
