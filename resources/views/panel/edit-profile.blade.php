@@ -19,6 +19,9 @@
                     اطلاعات شما با موفقیت بروز رسانی شد .
                 </div>
             @endif
+
+
+            @role('student')
             <form method="post" action="{{route('panel.edit-profile-form')}}" class="col-12 pt-3 pb-3"
                   id="edit-profile">
                 @csrf
@@ -28,14 +31,14 @@
                 </div>
                 <div class="col-12 d-block d-md-flex justify-content-between">
                     <div class="form-group">
-                        <label for="fullName"></label>
+                        <label for="fullName">نام و نام خانوادگی :</label>
                         <input type="text" class="form-control" id="fullName" aria-describedby="emailHelp"
                                name="fullName"
                                value="{{$user->fullName}}"
                                placeholder="نام و نام خانوادگی">
                     </div>
                     <div class="form-group">
-                        <label for="mobile"></label>
+                        <label for="mobile">شماره موبایل :</label>
                         <input type="text" class="form-control" id="mobile"
                                name="mobile"
                                value="{{$user->mobile}}"
@@ -66,13 +69,20 @@
 
                 </div>
                 <div class="col-12 d-flex justify-content-between">
-                    <div class="col-12 d-block d-md-flex justify-content-between">
-                        <div class="form-group">
-                            <label for="birthDate"></label>
-                            <input name="birthDate" type="text" class="form-control" id="birthDate"
-                                   placeholder="تاریخ تولد">
-                        </div>
+
+                    <div class="form-group">
+                        <label for="birthDate">تاریخ تولد :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="تاریخ تولد">
                     </div>
+
+
+                    <div class="form-group">
+                        <label for="birthDate"> شماره موبایل :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="شماره موبایل">
+                    </div>
+
                 </div>
 
                 <div class="col-12 d-flex justify-content-between">
@@ -208,6 +218,195 @@
                 <button type="button" class="btn btn-primary">ارسال</button>
                 <br>
             </form>
+            @endif
+
+
+            @role('professor')
+
+            <form method="post" action="{{route('panel.edit-profile-form')}}" class="col-12 pt-3 pb-3"
+                  id="edit-profile">
+                @csrf
+                <div class="col-12 col-sm-10 col-md-12 align-items-center d-flex justify-content-center ">
+                    <i class="checkmark ml-4 mb-3">✓</i>
+                    <h4>کد اشتراک شما در داناشو : {{subscriptionCode()}}</h4>
+                </div>
+                <div class="col-12 d-block d-md-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="fullName">نام و نام خانوادگی :</label>
+                        <input type="text" class="form-control" id="fullName" aria-describedby="emailHelp"
+                               name="fullName"
+                               value="{{$user->fullName}}"
+                               placeholder="نام و نام خانوادگی">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">شماره موبایل :</label>
+                        <input type="text" class="form-control" id="mobile"
+                               name="mobile"
+                               value="{{$user->mobile}}"
+                               placeholder="شماره موبایل">
+                    </div>
+                </div>
+
+
+                <div class="col-12 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="birthDate">تاریخ تولد :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="تاریخ تولد">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate"> شماره موبایل :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="شماره موبایل">
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="birthDate">کد ملی :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="کد ملی">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate"> تصویر کارت ملی :</label>
+                        <input name="birthDate" type="file" class="form-control" id="birthDate">
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="birthDate">میزان تحصیلات :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="میزان تحصیلات">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate"> رشته ی تحصیلی :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder=" رشته ی تحصیلی">
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="birthDate">اخرین دانشگاه محل تحصیلی :</label>
+                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                               placeholder="کد ملی">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate"> اخرین مدرک تحصیلی یا کارت دانشجویی:</label>
+                        <input name="birthDate" type="file" class="form-control" id="birthDate">
+                    </div>
+                </div>
+
+                <div class="col-12 d-block d-md-flex justify-content-between">
+                    <div class="form-group col-md-4 pl-0">
+                        <label for="addressState"></label>
+                        <select class="form-control" id="addressState" name="state">
+                            <option name="state" value="">استان</option>
+                            @foreach($states as $state)
+                                <option @if($user->state===$state->name){{'selected'}}@endif
+                                        data-id="{{$state->id}}" value="{{$state->name}}">{{$state->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-12 col-md-4 pl-0">
+                        <label for="addressCity"></label>
+                        <select name="city" class="form-control" id="addressCity">
+                            <option value="">شهر</option>
+                            @foreach($cities as $city)
+                                @if($user->city===$city->name)
+                                    <option selected value="{{$city->name}}">
+                                        {{$city->name}}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label for="birthDate">آپلود فایل pdf رزومه :</label>
+                        <input name="birthDate" type="file" class="form-control" id="birthDate">
+                    </div>
+                </div>
+
+                <div class="col-12 bg-light">
+                    <div class="form-group">
+                        <div class="card p-3 cursor-pointer direction-rtl" id="birthDate" disabled>
+
+                            به عنوان مثال :
+                            <br>
+                            علیرضا محمدی
+                            <br>
+                            فوق لیسانس مهندسی نرم افزار از دانشگاه صنعتی شریف
+                            <br>
+                            سابقه شیش ماه تدریس ریاضیات کنکور
+                            <br>
+                            دبیر دبیرستان علامه حلی و انرژی اتمی
+                            <br>
+                            مولف کتاب...
+                            <br>
+                            تدریس در آموزشگاه...
+                            <br>
+                            <strong class="text-danger">توجه :</strong>
+                            لطفا برای هرکدام از موارد فوق مدرکی دارید اسکن آنها را در قالب فایل pdf ارسال فرمایید
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tagFile"></label>
+                        <input type="file" id="tagFile" class="form-control">
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 bg-light">
+                    <div class="form-group">
+
+                        <div class="card p-3 cursor-pointer direction-rtl" id="birthDate" disabled>
+                            لطفا به انتخاب خود یک سوال نسبتا سخت از یکس از دروسی که تدریس می فرمایید را بر روی تخته وایت
+                            برد حل نموده و توضیح دهید وویدئوی خود را به ایدی تلگرام danasho_support@ ارسال فرمایید
+                            <br>
+                            همچنین میتوانید حل را در قالب فایل PDF یا PowerPoint توضیح دهید
+                            <br>
+                            <br>
+                            <strong class="text-danger">تذکر مهم :</strong>
+                            امتیاز اولیه شما بر اساس کیفیت ویدیو و واضح بودن آن و همچنین قدرت بیان در ارائه توضیحات و
+                            پاسخ سوال ، تعیین می کند.
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 d-flex justify-content-around">
+                    <label for="gender">جنسیت :</label>
+                    <label>
+                        <input type="radio" class="custom-radio" id="gender"
+                               @if($user->gender===1)  {{'checked'}} @endif
+                               value="1"
+                               name="gender"
+                               placeholder="">
+                        آقا
+                    </label>
+                    <label>
+                        <input type="radio" class="custom-radio" id="gender"
+                               @if($user->gender===2)  {{'checked'}} @endif
+                               value="2"
+                               name="gender"
+                               placeholder="">
+                        خانوم
+                    </label>
+                </div>
+
+
+                <button type="button" class="btn btn-primary">ارسال</button>
+                <br>
+            </form>
+
+            @endif
+
+
         </div>
     </div>
     <script>
@@ -280,4 +479,7 @@
 @section('panel-script')
     <script src="{{asset('js/dependencies/persian-datepicker.js')}}"></script>
     <script src="{{asset('js/panel/editProfile.js')}}"></script>
+    @role('professor')
+    <script src="{{asset('js/panel/editProfileProfessor.js')}}"></script>
+    @endif
 @endsection

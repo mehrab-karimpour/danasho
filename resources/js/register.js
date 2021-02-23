@@ -5,6 +5,7 @@ class register extends validate {
     }
 
     valid = (typeValidate = '') => {
+
         let formData = {};
 
         if (typeValidate === 'form') {
@@ -31,12 +32,12 @@ class register extends validate {
                     'min': 6,
                     'message': "لطفا رمز عبور را وارد نمایید"
                 }, 3: {
-                    'name': 'password',
+                    'name': 'user_type',
                     'require': 'require',
-                    'type': 'numeric',
-                    'max': 12,
-                    'min': 6,
-                    'message': "لطفا رمز عبور را وارد نمایید"
+                    'type': 'radio',
+                    'max': 120,
+                    'min': 1,
+                    'message': "لطفا مشخص نمایید که دانش آموز یا معلم هستید"
                 }
             }
         } else {

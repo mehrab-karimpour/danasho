@@ -26,7 +26,7 @@ class panelController extends Controller
         $userCredit = Auth::user()->credit;
         $creditItems = CreditItem::all();
         return response()->view('panel.increase-credit',
-            compact('creditItems','userCredit'));
+            compact('creditItems', 'userCredit'));
     }
 
     public function uploadImageProfile(Request $request)
@@ -94,10 +94,28 @@ class panelController extends Controller
             compact('user', 'states', 'cities', 'grades', 'units', 'fields'));
     }
 
+
+
     public function home()
     {
         return response()->view('panel.home');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function onlineRequest()
     {

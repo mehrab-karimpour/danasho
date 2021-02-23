@@ -21,6 +21,7 @@
     "/js/panel/editProfile.js": "/js/panel/editProfile.js",
     "/js/panel/ticket.js": "/js/panel/ticket.js",
     "/js/panel/increase-credit.js": "/js/panel/increase-credit.js",
+    "/js/panel/editProfileProfessor.js": "/js/panel/editProfileProfessor.js",
     "/js/header.js": "/js/header.js",
     "/css/header.css": "/css/header.css",
     "/js/register.js": "/js/register.js",

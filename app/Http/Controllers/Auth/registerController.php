@@ -19,16 +19,19 @@ class registerController extends Controller
     public function create(Request $request)
     {
         try {
-
             if (User::where('mobile', $request->mobile)->exists()) {
                 return redirect()->back()->with('status', 'mobile');
             } else {
-                User::create([
+                $user = User::create([
                     'fullName' => $request->fullName,
                     'mobile' => $request->mobile,
                     'email' => $request->email,
                     'password' => Hash::make($request->password)
                 ]);
+                if ($request->user_type === 'student')
+                    $user->assignRole('student');
+                $user->assignRole('professor');
+
                 return redirect('/login')->with('status', 'success');
             }
 

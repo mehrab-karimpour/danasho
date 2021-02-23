@@ -1,80 +1,92 @@
 class validate {
-    constructor() {
+    constructor(props) {
+
     }
 
-    formValidation =  (formInfo = {}) => {
+    addClassError = (item, classError) => {
+        item.addClass(classError);
+    }
+
+
+    removeClassError = (item, classError) => {
+        item.removeClass(classError);
+    }
+
+    formValidation = (formInfo = {}) => {
         let item;
         let param;
-        for (let i = 0; i < Object.keys(formInfo).pop(); i++) {
-
+        for (let i = 0; i <= Object.keys(formInfo).pop(); i++) {
             item = $("*[name='" + formInfo[i].name + "']");
+            let valItem = item.val();
             param = formInfo[i]; // parameter requirement is array . this array can be 'require' ,'string' ,'numeric'
-
             if (param['required'] === "required") {
-                if (item.val() === '') {
-                    item.addClass('form-danger');
-                }else {
-                    item.removeClass('form-danger');
+                if (valItem === '') {
+                    this.addClassError(item, 'form-danger');
+                } else {
+                    this.removeClassError(item, 'form-danger');
                 }
             }
+            if (param['type'] === "radio") {
+                let parent = item.parents(".form-item-parent");
+                const radioStatus = $('body input:radio:checked').val();
+                const valEmpty = $('.val-empty').val();
+                if (radioStatus === valEmpty) {
+                    parent.find('p.text-danger').remove();
+                    item.addClass('border border-danger');
+                    parent.append("<p class='alert alert-danger'>" + param['message'] + "</p>");
+                    this.addClassError(item, 'form-danger');
+                } else {
+                    $('.alert-danger').remove();
+                    this.removeClassError(item, 'form-danger');
+                }
+
+            }
             if (param['type'] === "string") {
-                if ($.isNumeric(item.val())) {
-                    item.addClass('form-danger');
-                }else {
-                    item.removeClass('form-danger');
+                if ($.isNumeric(valItem)) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
                 }
             }
             if (param['type'] === "numeric") {
-                if (!$.isNumeric(item.val())) {
-                    item.addClass('form-danger');
-                }else {
-                    item.removeClass('form-danger');
+                if (!$.isNumeric(valItem)) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
                 }
             }
 
-            if (item.val().length > param['max']) {
-                item.addClass('form-danger');
-            }else {
-                item.removeClass('form-danger');
+            if (param['type'] === 'file') {
+                item[0].files[0].size > param['max']
+                    ? this.addClassError(item, 'form-danger')
+                    : this.removeClassError(item, 'form-danger');
+            } else {
+                if (valItem.length > param['max']) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
+                if (valItem.length < param['min']) {
+                    this.addClassError(item, 'form-danger')
+                } else {
+                    this.removeClassError(item, 'form-danger');
+                }
             }
 
-            if (item.val().length < param['min']) {
-                item.addClass('form-danger');
-            }else {
-                item.removeClass('form-danger');
-            }
             let parent = item.parents(".form-item-parent");
             if (item.hasClass('form-danger')) {
-                parent.find('.text-danger').remove();
-                parent.append("<p class='text-danger mt-2'>" + param['message'] + "</p>");
+                parent.find('p.text-danger').remove();
+                parent.append("<p class='text-danger'>" + param['message'] + "</p>");
             } else {
-                parent.find('.text-danger').remove();
+                parent.find('p.text-danger').remove();
+            }
+
+            let countAlertDanger = parent.find('.alert-danger').length;
+            if (countAlertDanger > 1) {
+                parent.find('.alert-danger').eq(1).remove();
             }
         }
 
-        return  !$('form input').hasClass('form-danger');
+        return !$('body *').hasClass('form-danger') && !$('body *').hasClass('alert-danger');
     }
-
-
 }
-
-
-/*let v = new validate();
-v.formValidation({
-    0: {
-        'name': 'email',
-        'require': 'require',
-        'type': 'string',
-        'max': 15,
-        'min': 15,
-        'message': "لطفا فیلد ایمیل را به درستی وارد نمایید"
-    },
-    1: {
-        'name': 'mobile',
-        'require': 'require',
-        'type': 'numeric',
-        'max': 4,
-        'min': 1,
-        'message': "لطفا فیلد ایمیل را به درستی وارد نمایید"
-    }
-});*/

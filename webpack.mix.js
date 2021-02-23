@@ -53,6 +53,10 @@ mix.combine([
     'resources/js/panel/custom/increase-credit.js',
 ], 'public/js/panel/increase-credit.js')
 
+mix.combine([
+    'resources/js/panel/custom/editProfileProfessor.js',
+], 'public/js/panel/editProfileProfessor.js')
+
 
 mix.combine([
     'resources/js/dependenci/header.js',
@@ -102,9 +106,12 @@ mix.sass('resources/sass/online-success.scss', 'public/css/online-success.css');
 mix.combine([
     'resources/js/register.js',
 ], 'public/js/register.js');
+
+
 mix.combine([
     'resources/js/login.js',
-], 'public/js/login.js');
+],
+    'public/js/login.js');
 
 /*
 * panel js

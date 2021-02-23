@@ -44,7 +44,7 @@
             <div class="col-12 col-md-5 col-lg-4 m-auto m-0 card">
                 <div class="card-body d-flex justify-content-between">
                     <p>اعتبار فعلی شما :</p>
-                    <p>{{$userCredit->creditLevel}} ریال</p>
+                    <p>{{@$userCredit->creditLevel}} ریال</p>
                 </div>
                 <div class="card-body d-flex justify-content-between">
                     <p>مبلغ افزایش اعتبار :</p>

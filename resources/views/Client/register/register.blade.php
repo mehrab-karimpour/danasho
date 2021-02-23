@@ -71,8 +71,30 @@
                                            id="email" required>
                                     <i class="fas fa-envelope"></i>
                                 </div>
+                            </div>
+
+                            <div class="col-12  d-block  d-md-block d-lg-flex justify-content-between">
+                                <div class="form-group d-flex justify-content-between align-items-center">
+
+                                    <div class="form-item-parent m-0 ml-md-5">
+                                        <label for="user-type">
+                                            دانش آموز هستم
+                                        </label>
+                                        <input class="scale-1-3" id="user-type" type="radio" name="user_type"
+                                               value="student">
+                                    </div>
+                                </div>
 
 
+                                <div class="form-group d-flex justify-content-between align-items-center">
+                                    <div class="form-item-parent m-0 mr-md-5">
+                                        <label for="user-type">
+                                            مدرس هستم
+                                        </label>
+                                        <input class="scale-1-3" id="user-type" type="radio" name="user_type"
+                                               value="professor">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-12  display-none insert-password ">
@@ -86,6 +108,7 @@
                                 <br>
                                 <br>
                             </div>
+
 
                             <button class="butt btn submit-register-form" type="button">
                                 ثبت نام
