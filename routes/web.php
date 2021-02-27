@@ -31,8 +31,11 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::get('/online-reserved', [panelController::class, 'onlineReserved'])->name('panel.online-reserved');
     Route::get('/online-held', [panelController::class, 'onlineHeld'])->name('panel.online-held');
     Route::get('/online-create', [panelController::class, 'onlineRequest'])->name('panel.online-create');
+    Route::get('online-select-teaching', [panelController::class, 'onlineSelectTeaching'])->name('panel.online-select-teaching');
     // profile
     Route::get('/edit-profile', [panelController::class, 'editProfile'])->name('panel.edit-profile');
+    Route::post('/edit-profile-professor', [panelController::class, 'editProfileProfessor'])
+        ->name('panel.edit-profile-professor');
     Route::post('/edit-profile', [panelController::class, 'updateProfile'])->name('panel.edit-profile-form');
     Route::post('/upload-image-profile', [panelController::class, 'uploadImageProfile']);
     // ticket
@@ -59,7 +62,7 @@ Route::prefix('/online')->group(function () {
 Route::prefix('/offline')->group(function () {
     Route::post('/', [offlineClassController::class, 'index']);
     // Route::post('/getDates', [onlineClassController::class, 'getDates']);
-    // Route::post('/mobileHandle', [onlineClassController::class, 'mobileHandle']);
+    Route::post('/mobileHandle', [offlineClassController::class, 'mobileHandle']);
     // Route::post('/check-verify-password', [onlineClassController::class, 'checkVerifyPassword']);
     // Route::post('online-form', [onlineClassController::class, 'create'])->name('online-form');
 });

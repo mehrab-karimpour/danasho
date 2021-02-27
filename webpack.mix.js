@@ -19,6 +19,10 @@ mix.combine([
 
 
 mix.combine([
+    'resources/js/app.js',
+], 'public/js/global.js');
+
+mix.combine([
     'resources/js/validate.js',
     'resources/js/onlineClass/index.js',
     'resources/js/onlineClass/step1.js',
@@ -109,8 +113,8 @@ mix.combine([
 
 
 mix.combine([
-    'resources/js/login.js',
-],
+        'resources/js/login.js',
+    ],
     'public/js/login.js');
 
 /*

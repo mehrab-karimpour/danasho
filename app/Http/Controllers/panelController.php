@@ -10,6 +10,7 @@ use App\Models\Score;
 use App\Models\Survey;
 use App\Models\Unit;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Validator;
 
 class panelController extends Controller
 {
+
+    //  select online teaching professor
+    public function onlineSelectTeaching()
+    {
+        return response()->view('panel.professor.online.select.teaching');
+    }
 
     public function increaseCredit()
     {
@@ -82,6 +89,67 @@ class panelController extends Controller
         }
     }
 
+    public function editProfileProfessor(Request $request)
+    {
+
+        try {
+            $data = $request->except([
+                '_token',
+                'bank_card_image',
+                'professor_tags_image',
+                'cv_image',
+                'university_image',
+                'national_image'
+            ]);
+            $user = Auth::user();
+            $user_id = $user->id;
+            if ($request->national_image) {
+                $oldImage = $user->national_image;
+                $requestImage = "national_image";
+                $imageName = $this->uploadFilesProfessor($requestImage, $user_id, $oldImage, $request);
+                $data['national_image'] = $imageName;
+            }
+            if ($request->university_image) {
+                $oldImage = $user->university_image;
+                $requestImage = "university_image";
+                $imageName = $this->uploadFilesProfessor($requestImage, $user_id, $oldImage, $request);
+                $data['university_image'] = $imageName;
+            }
+            if ($request->cv_image) {
+                $oldImage = $user->cv_image;
+                $requestImage = "cv_image";
+                $imageName = $this->uploadFilesProfessor($requestImage, $user_id, $oldImage, $request);
+                $data['cv_image'] = $imageName;
+            }
+            if ($request->professor_tags_image) {
+                $oldImage = $user->professor_tags_image;
+                $requestImage = "professor_tags_image";
+                $imageName = $this->uploadFilesProfessor($requestImage, $user_id, $oldImage, $request);
+                $data['professor_tags_image'] = $imageName;
+            }
+            if ($request->bank_card_image) {
+                $oldImage = $user->bank_card_image;
+                $requestImage = "bank_card_image";
+                $imageName = $this->uploadFilesProfessor($requestImage, $user_id, $oldImage, $request);
+                $data['bank_card_image'] = $imageName;
+            }
+
+            $date = $request->birthDate;
+            $newDate = returnGregorian($date, '-');
+
+            $data['birthDate'] = $newDate;
+
+            $user = User::find(Auth::id())->update($data);
+
+            return redirect()->back()->with("status", "success");
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect()->back()->with("status", "error");
+        }
+
+
+    }
+
     public function editProfile()
     {
         $states = DB::table('states')->get();
@@ -94,28 +162,10 @@ class panelController extends Controller
             compact('user', 'states', 'cities', 'grades', 'units', 'fields'));
     }
 
-
-
     public function home()
     {
         return response()->view('panel.home');
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function onlineRequest()
     {
@@ -137,5 +187,17 @@ class panelController extends Controller
         $pollSubjects = PollSubject::all();
         return response()->view('panel.online-held',
             compact('allOnlineClass', 'scores', 'pollSubjects'));
+    }
+
+    public function uploadFilesProfessor($requestImage, $user_id, $oldImage, Request $request)
+    {
+        if (Storage::exists("/users/$user_id/profile/$oldImage")) {
+            Storage::delete("/users/$user_id/profile/$oldImage");
+        }
+        $path = $request->file("$requestImage")->getClientOriginalExtension();
+        $now = Carbon::now()->format('Y_m_d');
+        $imageName = "$requestImage" . '.' . $now . '.' . $path;
+        $request->file("$requestImage")->storeAs("/users/$user_id/profile/", $imageName);
+        return $imageName;
     }
 }

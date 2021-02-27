@@ -6,7 +6,7 @@ class StepOffline_4 extends indexOffline {
 
     startStep = (actionType) => {
         $("#list-group-offline").remove();
-        $("#offline-item-end-step").append("<br><br><div class='d-flex justify-content-between direction-rtl'><p class='col-5'>نام و نام خانوادگی :</p><input type='text' id='name' name='name' placeholder='نام و نام خانوادگی' class='form-control col-7'></div><br><div class='d-flex justify-content-between direction-rtl'><p class='col-5'>شماره تماس :</p><input type='text' id='name' name='name' placeholder='شماره تماس' class='form-control col-7'></div><br><button onclick='recordHandleOffline(this,8)' class='btn btn-primary' type='button'>ارسال</button>");
+        $("#offline-item-end-step").append("<br><br><div class='d-flex justify-content-between direction-rtl'><p class='col-5'>نام و نام خانوادگی :</p><input type='text' id='name' name='name-offline' placeholder='نام و نام خانوادگی' class='form-control col-7'></div><br><div class='d-flex justify-content-between direction-rtl'><p class='col-5'>شماره تماس :</p><input type='number' id='mobile' name='mobile-offline' placeholder='شماره تماس' class='form-control col-7'></div><br><button onclick='recordHandleOffline(this,8)' class='btn btn-primary' type='button'>ارسال</button>");
         $('.go-back-offline').empty();
         this.circleSelect(2, 0);
         this.completing('.get-record-offline');
@@ -18,61 +18,40 @@ class StepOffline_4 extends indexOffline {
     stepHandle = (turn, data) => {
         let formInfo = {};
         switch (turn) {
-            case 7:
-                if ($("#questions")[0].files.length === 0) {
-                    formInfo = {
-                        0: {
-                            'name': 'level',
-                            'require': 'require',
-                            'type': 'radio',
-                            'max': 25,
-                            'min': 1,
-                            'message': "لطفا سطح بندی را انتخاب کنید "
-                        }, 1: {
-                            'name': 'description',
-                            'require': 'require',
-                            'type': 'string',
-                            'max': 255,
-                            'min': 1,
-                            'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
-                        }
-                    }
-                } else {
-                    formInfo = {
-                        0: {
-                            'name': 'level',
-                            'require': 'require',
-                            'type': 'radio',
-                            'max': 25,
-                            'min': 1,
-                            'message': "لطفا سطح بندی را انتخاب کنید "
-                        }, 1: {
-                            'name': 'description',
-                            'require': 'require',
-                            'type': 'string',
-                            'max': 255,
-                            'min': 1,
-                            'message': "لطفا توضیحات خود را وارد نمایید (حداکثر 255 کاراکتر )"
-                        }, 2: {
-                            'name': 'img',
-                            'require': 'require',
-                            'type': 'file',
-                            'max': 26214400, // 26214400 = 25 mb
-                            'min': 10,
-                            'message': "لطفا توجه فرمایید که حجم عکس باید کمتر از 25 مگابایت باشد"
-                        }
+            case 8:
+                formInfo = {
+                    0: {
+                        'name': 'name-offline',
+                        'require': 'require',
+                        'type': 'string',
+                        'max': 25,
+                        'min': 1,
+                        'message': "لطفا نام کامل خود را وارد کنید "
+                    }, 1: {
+                        'name': 'mobile-offline',
+                        'require': 'require',
+                        'type': 'numeric',
+                        'max': 11,
+                        'min': 11,
+                        'message': "لطفا شماره موبایل خود را وارد کنید"
                     }
                 }
 
                 if (this.formValidation(formInfo)) {
-                    const descriptionLastItem = $('#online-items-end-step');
-                    descriptionLastItem.css('opacity', 0);
-                    descriptionLastItem.css('position', 'absolute');
-                    descriptionLastItem.css('z-index', '1');
-                    $('#last-step-record').fadeIn();
+                    const offline_item_end_step = $("#offline-item-end-step");
+                    this.post('offline/mobileHandle', formInfo).then(response => {
+                        offline_item_end_step.find("button").remove();
+                        offline_item_end_step.append("<br><div class='d-flex justify-content-between direction-rtl'><p class='col-5'>رمز ارشال شده :</p><input type='text' id='name' name='verify-password-offline' placeholder='رمز را وارد کنید' class='form-control col-7'></div><br><button onclick='recordHandleOffline(this,9)' class='btn btn-primary' type='button'>ارسال</button>");
+                        indexOffline.ajaxLoaderEnd();
+                        $("#ajax-leader-back").fadeOut();
+                    }).catch(error => {
+                        offline_item_end_step.find('.alert-danger').remove();
+                        offline_item_end_step.prepend("<div class='alert alert-danger'>با عرض پوزش خطایی رخ داده است ! لطفا دوباره تلاش فرمایید </div>")
+                        indexOffline.ajaxLoaderEnd();
+                    })
                 }
                 break;
-            case  8:
+            case  9:
                 formInfo = {
                     0: {
                         'name': 'name',
@@ -82,6 +61,13 @@ class StepOffline_4 extends indexOffline {
                         'min': 1,
                         'message': "لطفا نام و نام خانوادگی خود را وارد کنید"
                     }, 1: {
+                        'name': 'mobile',
+                        'require': 'require',
+                        'type': 'numeric',
+                        'max': 11,
+                        'min': 11,
+                        'message': "لطفا شماره موبایل خود را وارد کنید "
+                    }, 2: {
                         'name': 'mobile',
                         'require': 'require',
                         'type': 'numeric',
@@ -124,7 +110,7 @@ class StepOffline_4 extends indexOffline {
                     });
                 }
                 break
-            case 9:
+            case 10:
                 /*   check verify token  */
                 formInfo = {
                     0: {
@@ -140,7 +126,6 @@ class StepOffline_4 extends indexOffline {
                 if (this.formValidation(formInfo)) {
                     const checkVerifyPassword = $("input[name='verify-token']").val();
                     const formData = {checkVerifyPassword: checkVerifyPassword};
-                    alert("ok")
                     this.post('/online/check-verify-password', formData).then((response) => {
                         Step4.ajaxBackEnd();
 

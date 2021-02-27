@@ -24,12 +24,17 @@ class classSeeder extends Seeder
         // new grades
         $gradeOne = new Grade();
         $gradeOne->title = 'ابتدایی';
+        $gradeOne->hasField = false;
+
         $gradeOne->save();
         $gradeTwo = new Grade();
         $gradeTwo->title = 'متوسطه اول';
+        $gradeTwo->hasField = false;
         $gradeTwo->save();
+
         $gradeTree = new Grade();
         $gradeTree->title = ' متوسطه دوم';
+        $gradeTree->hasField = true;
         $gradeTree->save();
 
         // fields

@@ -223,7 +223,8 @@
 
             @role('professor')
 
-            <form method="post" action="{{route('panel.edit-profile-form')}}" class="col-12 pt-3 pb-3"
+            <form method="post" action="{{route('panel.edit-profile-professor')}}" class="col-12 pt-3 pb-3"
+                  enctype="multipart/form-data"
                   id="edit-profile">
                 @csrf
                 <div class="col-12 col-sm-10 col-md-12 align-items-center d-flex justify-content-center ">
@@ -248,53 +249,48 @@
                 </div>
 
 
-                <div class="col-12 d-flex justify-content-between">
+                <div class="col-12 d-block d-md-flex justify-content-between">
                     <div class="form-group">
                         <label for="birthDate">تاریخ تولد :</label>
                         <input name="birthDate" type="text" class="form-control" id="birthDate"
                                placeholder="تاریخ تولد">
                     </div>
-                    <div class="form-group">
-                        <label for="birthDate"> شماره موبایل :</label>
-                        <input name="birthDate" type="text" class="form-control" id="birthDate"
-                               placeholder="شماره موبایل">
-                    </div>
                 </div>
 
-                <div class="col-12 d-flex justify-content-between">
+                <div class="col-12 d-block d-md-flex justify-content-between">
                     <div class="form-group">
-                        <label for="birthDate">کد ملی :</label>
-                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                        <label for="national_code">کد ملی :</label>
+                        <input name="national_code" type="text" class="form-control" id="national_code"
                                placeholder="کد ملی">
                     </div>
-                    <div class="form-group">
-                        <label for="birthDate"> تصویر کارت ملی :</label>
-                        <input name="birthDate" type="file" class="form-control" id="birthDate">
+                    <div class="form-group form-item-parent">
+                        <label for="national_image"> تصویر کارت ملی :</label>
+                        <input name="national_image" type="file" class="form-control" id="national_image">
                     </div>
                 </div>
 
-                <div class="col-12 d-flex justify-content-between">
+                <div class="col-12 d-block d-md-flex justify-content-between">
                     <div class="form-group">
-                        <label for="birthDate">میزان تحصیلات :</label>
-                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                        <label for="education_level">میزان تحصیلات :</label>
+                        <input name="education_level" type="text" class="form-control" id="education_level"
                                placeholder="میزان تحصیلات">
                     </div>
                     <div class="form-group">
-                        <label for="birthDate"> رشته ی تحصیلی :</label>
-                        <input name="birthDate" type="text" class="form-control" id="birthDate"
+                        <label for="field_university"> رشته ی تحصیلی :</label>
+                        <input name="field_university" type="text" class="form-control" id="field_university"
                                placeholder=" رشته ی تحصیلی">
                     </div>
                 </div>
 
-                <div class="col-12 d-flex justify-content-between">
+                <div class="col-12 d-block d-md-flex justify-content-between">
                     <div class="form-group">
-                        <label for="birthDate">اخرین دانشگاه محل تحصیلی :</label>
-                        <input name="birthDate" type="text" class="form-control" id="birthDate"
-                               placeholder="کد ملی">
+                        <label for="university">اخرین دانشگاه محل تحصیلی :</label>
+                        <input name="university" type="text" class="form-control" id="university"
+                               placeholder="نام دانشگاه را وارد کنید">
                     </div>
-                    <div class="form-group">
-                        <label for="birthDate"> اخرین مدرک تحصیلی یا کارت دانشجویی:</label>
-                        <input name="birthDate" type="file" class="form-control" id="birthDate">
+                    <div class="form-group form-item-parent">
+                        <label for="university_image"> اخرین مدرک تحصیلی یا کارت دانشجویی:</label>
+                        <input name="university_image" type="file" class="form-control" id="university_image">
                     </div>
                 </div>
 
@@ -324,16 +320,26 @@
                     </div>
                 </div>
 
-                <div class="col-12 d-flex justify-content-between">
-                    <div class="form-group">
-                        <label for="birthDate">آپلود فایل pdf رزومه :</label>
-                        <input name="birthDate" type="file" class="form-control" id="birthDate">
+                <div class="col-12 d-block d-md-flex justify-content-between">
+                    <div class="form-group form-item-parent">
+                        <label for="cv_image">آپلود فایل pdf رزومه :</label>
+                        <input name="cv_image" type="file" class="form-control" id="cv_image">
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="form-group card pt-3">
+                        <label for="professor_tags" class="text-center">
+                            <strong>
+                                جملات معرفی کننده شما به دانش آموزان :
+                            </strong>
+                        </label>
+                        <div class="col-12">
+                            <textarea
+                                class="form-control" id="professor_tags" name="professor_tags"
+                                placeholder="جملات خود را اینجا بنویسید"></textarea>
+                        </div>
 
-                <div class="col-12 bg-light">
-                    <div class="form-group">
-                        <div class="card p-3 cursor-pointer direction-rtl" id="birthDate" disabled>
+                        <div class=" p-3 cursor-pointer direction-rtl" id="birthDate" disabled>
 
                             به عنوان مثال :
                             <br>
@@ -341,7 +347,7 @@
                             <br>
                             فوق لیسانس مهندسی نرم افزار از دانشگاه صنعتی شریف
                             <br>
-                            سابقه شیش ماه تدریس ریاضیات کنکور
+                            سابقه شش سال تدریس ریاضیات کنکور
                             <br>
                             دبیر دبیرستان علامه حلی و انرژی اتمی
                             <br>
@@ -352,34 +358,39 @@
                             <strong class="text-danger">توجه :</strong>
                             لطفا برای هرکدام از موارد فوق مدرکی دارید اسکن آنها را در قالب فایل pdf ارسال فرمایید
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="tagFile"></label>
-                        <input type="file" id="tagFile" class="form-control">
+                        <div class="form-group col-12 form-item-parent">
+                            <label for="professor_tags_image"></label>
+                            <input name="professor_tags_image" type="file" id="professor_tags_image" class="form-control" >
+                        </div>
                     </div>
                 </div>
 
 
-
-                <div class="col-12 bg-light">
-                    <div class="form-group">
-
-                        <div class="card p-3 cursor-pointer direction-rtl" id="birthDate" disabled>
+                <div class="col-12">
+                    <div class="form-group card pt-3">
+                        <div class="p-3 cursor-pointer direction-rtl" id="birthDate" disabled>
                             لطفا به انتخاب خود یک سوال نسبتا سخت از یکس از دروسی که تدریس می فرمایید را بر روی تخته وایت
                             برد حل نموده و توضیح دهید وویدئوی خود را به ایدی تلگرام danasho_support@ ارسال فرمایید
                             <br>
                             همچنین میتوانید حل را در قالب فایل PDF یا PowerPoint توضیح دهید
                             <br>
                             <br>
-                            <strong class="text-danger">تذکر مهم :</strong>
+                            {{--<strong class="text-danger">تذکر مهم :</strong>
                             امتیاز اولیه شما بر اساس کیفیت ویدیو و واضح بودن آن و همچنین قدرت بیان در ارائه توضیحات و
-                            پاسخ سوال ، تعیین می کند.
+                            پاسخ سوال ، تعیین می کند.--}}
                         </div>
                     </div>
                 </div>
 
+                <div class="col-12 d-block d-md-flex justify-content-between">
+                    <div class="form-group form-item-parent">
+                        <label for="bank_card_image">تصویر کارت بانکی :</label>
+                        <input name="bank_card_image" type="file" class="form-control" id="bank_card_image">
+                    </div>
+                </div>
 
-                <div class="col-12 d-flex justify-content-around">
+
+                <div class="col-12 d-block d-md-flex justify-content-between">
                     <label for="gender">جنسیت :</label>
                     <label>
                         <input type="radio" class="custom-radio" id="gender"
@@ -400,7 +411,7 @@
                 </div>
 
 
-                <button type="button" class="btn btn-primary">ارسال</button>
+                <div id="submit-form-professor"  class="btn btn-primary">ارسال</div>
                 <br>
             </form>
 
@@ -477,6 +488,7 @@
 
 
 @section('panel-script')
+    <script src="{{asset('js/validate.js')}}"></script>
     <script src="{{asset('js/dependencies/persian-datepicker.js')}}"></script>
     <script src="{{asset('js/panel/editProfile.js')}}"></script>
     @role('professor')

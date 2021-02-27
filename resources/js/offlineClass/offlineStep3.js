@@ -24,8 +24,6 @@ class StepOffline_3 extends indexOffline {
 
             })
         } else {
-
-            console.log(window.periods);
             if ($('#list-group-offline').length === 0) {
                 $('#main-parent-item-offline').append("<ul class='list-group m-0 p-0' id='list-group-offline'></ul>");
             }
@@ -44,9 +42,10 @@ class StepOffline_3 extends indexOffline {
         this.addButtonBack('.date-get-answer');
         this.circleSelect(2, 1);
         if (tag === 7) {
-            alert("ok 7")
             data.value = window.dateTitle + data.value;
+            $('#turn-offline').val(8);
             this.endStep(data);
+
         } else {
             indexOffline.appendInput('date-offline-input', 'date-get-answer', data.dataID);
             indexOffline.appendItems(window.periods, 7);

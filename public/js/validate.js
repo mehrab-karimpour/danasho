@@ -57,9 +57,15 @@ class validate {
             }
 
             if (param['type'] === 'file') {
-                item[0].files[0].size > param['max']
-                    ? this.addClassError(item, 'form-danger')
-                    : this.removeClassError(item, 'form-danger');
+                if (!item[0].files[0] === undefined) {
+                    if (item[0].files[0].size !== "undefined") {
+                        item[0].files[0].size > param['max']
+                            ? this.addClassError(item, 'form-danger')
+                            : this.removeClassError(item, 'form-danger');
+                    }
+                }
+
+
             } else {
                 if (valItem.length > param['max']) {
                     this.addClassError(item, 'form-danger')

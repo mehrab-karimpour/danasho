@@ -95,7 +95,7 @@ class offlineClassController extends Controller
             } else {
                 $password = rand(6000, 9000);
             }
-            Session::put('online-class-verify', $password);
+            Session::put('offline-class-verify', $password);
             return response()->json(['user_id' => $user->id]);
         } catch (\Exception $e) {
             Log::error($e);

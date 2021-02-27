@@ -45,9 +45,9 @@ $("input[type='password']").keyup(function () {
 
 
 $("button[type='button']").click(function () {
-    if (window.password && window.repeatPassword){
+    if (window.password && window.repeatPassword) {
         $('#edit-profile').submit();
-    }else{
+    } else {
     }
 
 })
@@ -83,6 +83,16 @@ $(function () {
             select.eq(key).addClass('form-validate-warning');
         } else {
             select.eq(key).addClass('form-validate-success');
+        }
+    });
+
+    const textarea = $("#edit-profile textarea");
+    textarea.each((key, item) => {
+        const valTextarea = textarea.eq(key).text();
+        if (valTextarea === "") {
+            textarea.eq(key).addClass('form-validate-warning');
+        } else {
+            textarea.eq(key).addClass('form-validate-success');
         }
     });
 

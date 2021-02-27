@@ -27,7 +27,7 @@ class onlineClassController extends Controller
 
     public function getPass()
     {
-        return Session::get('online-class-verify');
+        return ['online' => Session::get('online-class-verify'), 'offline' => Session::get('offline-class-verify')];
     }
 
     public function create(Request $request)

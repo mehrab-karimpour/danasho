@@ -21,181 +21,178 @@
 <div class="container-scroller">
     <!-- navbar starts here -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="../../index.html">
-                {{--<img src="../../../assets/images/logo.svg" alt="logo"/></a>--}}
+        <div class="text-center col-12 navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand h-100 col-md-2 d-none d-md-block  brand-logo" href="../../index.html">
+                <img style="height: 278%;width: 100%;position:absolute;right: -17px;top: -41px;"
+                     class="img-fluid" src="{{asset('/image/logo.png')}}" alt="brand">
+            </a>
 
-                <a class="navbar-brand brand-logo-mini" href="../../index.html">
-                    {{--<img src="../../../assets/images/logo-mini.svg" alt="logo"/>--}}
-                </a>
-
-
-                <div class="navbar-menu-wrapper d-flex align-items-stretch">
-                    <div type="button" class="navbar-toggler navbar-toggler align-self-center"
-                            data-toggle="minimize">
-                        <i class="fas fa-align-right"></i>
-                    </div>
-                    <div class="search-field d-none d-md-block">
-                        <form class="d-flex align-items-center h-100" action="#">
-                            <div class="input-group">
-                                <div class="input-group-prepend bg-transparent">
-                                    <i class="input-group-text border-0 mdi mdi-magnify"></i>
-                                </div>
-                                <input type="text" class="form-control border-0" placeholder="جستجو">
-                            </div>
-                        </form>
-                    </div>
-                    <ul class="navbar-nav navbar-nav-right pr-0">
-                        <li class="nav-item nav-profile dropdown">
-                            <a class="nav-link dropdown-toggle " id="profileDropdown" href="#" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <div class="nav-profile-img">
-                                    {{--<img src="../../../assets/images/faces/face1.jpg" alt="image">--}}
-                                    <i class="far fa-user"></i>
-                                    <span class="availability-status online"></span>
-                                </div>
-                                <div class="nav-profile-text">
-                                    <p class="mb-1 text-black">{{authFullName()}}</p>
-                                </div>
-                                <i class="fas fa-caret-down"></i>
-                            </a>
-                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-cached mr-2 text-success"></i>
-                                    سجل النشاطات
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/logout">
-                                    <i class="mdi mdi-logout mr-2 text-primary"></i>
-                                    خروج
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item d-none d-lg-block full-screen-link">
-                            <a class="nav-link">
-                                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
-                               data-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-comment-dollar"></i>
-                                <span class="count-symbol bg-warning"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                                 aria-labelledby="messageDropdown">
-                                <h6 class="p-3 mb-0">رسائل</h6>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <img src="../../../assets/images/faces/face4.jpg" alt="image"
-                                             class="profile-pic">
-                                    </div>
-                                    <div
-                                        class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="preview-subject ellipsis mb-1 font-weight-normal">مارك يرسل لك
-                                            رسالة</h6>
-                                        <p class="text-gray mb-0"> منذ 1 دقيقة </p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <img src="../../../assets/images/faces/face2.jpg" alt="image"
-                                             class="profile-pic">
-                                    </div>
-                                    <div
-                                        class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="preview-subject ellipsis mb-1 font-weight-normal">كريغ نرسل لك
-                                            رسالة</h6>
-                                        <p class="text-gray mb-0"> منذ 15 دقيقة </p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <img src="../../../assets/images/faces/face3.jpg" alt="image"
-                                             class="profile-pic">
-                                    </div>
-                                    <div
-                                        class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="preview-subject ellipsis mb-1 font-weight-normal">تحديث صورة الملف
-                                            الشخصي</h6>
-                                        <p class="text-gray mb-0"> منذ 18 دقيقة </p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="p-3 mb-0 text-center">4 رسائل جديدة</h6>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                               data-toggle="dropdown">
-                                <i class="far fa-envelope"></i>
-                                <span class="count-symbol bg-danger"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                                 aria-labelledby="notificationDropdown">
-                                <h6 class="p-3 mb-0">إخطارات</h6>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-success">
-                                            <i class="mdi mdi-calendar"></i>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="preview-subject font-weight-normal mb-1">حدث اليوم</h6>
-                                        <p class="text-gray ellipsis mb-0"> مجرد تذكير بأن لديك حدث اليوم </p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-warning">
-                                            <i class="fas fa-cog"></i>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="preview-subject font-weight-normal mb-1">الإعدادات</h6>
-                                        <p class="text-gray ellipsis mb-0"> تحديث لوحة القيادة </p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-info">
-                                            <i class="mdi mdi-link-variant"></i>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="preview-subject font-weight-normal mb-1">إطلاق المسؤول</h6>
-                                        <p class="text-gray ellipsis mb-0"> مشرف جديد نجاح باهر! </p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="p-3 mb-0 text-center">اطلع على جميع الإشعارات</h6>
-                            </div>
-                        </li>
-                        <li class="nav-item nav-logout d-none d-lg-block">
-                            <a class="nav-link" href="#">
-                                <i class="mdi mdi-power"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item nav-settings d-none d-lg-block">
-                            <a class="nav-link" href="#">
-                                <i class="mdi mdi-format-line-spacing"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                            data-toggle="offcanvas">
-                        <i class="fas fa-align-right"></i>
-                    </button>
+            <div class="navbar-menu-wrapper col-12 col-md-10 d-flex align-items-stretch">
+                <div type="button" class="d-block d-md-none navbar-toggler navbar-toggler align-self-center"
+                     data-toggle="minimize">
                 </div>
+                <div class="search-field d-none d-md-block">
+                    <form class="d-flex align-items-center h-100" action="#">
+                        <div class="input-group">
+                            <div class="input-group-prepend bg-transparent">
+                                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                            </div>
+                            <input type="text" class="form-control border-secondary rounded-lg" placeholder="جستجو">
+                        </div>
+                    </form>
+                </div>
+                <ul class="navbar-nav navbar-nav-right pr-0">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle " id="profileDropdown" href="#" data-toggle="dropdown"
+                           aria-expanded="false">
+                            <div class="nav-profile-img">
+                                {{--<img src="../../../assets/images/faces/face1.jpg" alt="image">--}}
+                                <i class="far fa-user"></i>
+                                <span class="availability-status online"></span>
+                            </div>
+                            <div class="nav-profile-text">
+                                <p class="mb-1 text-black">{{authFullName()}}</p>
+                            </div>
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="mdi mdi-cached mr-2 text-success"></i>
+                                سجل النشاطات
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">
+                                <i class="mdi mdi-logout mr-2 text-primary"></i>
+                                خروج
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item d-none d-lg-block full-screen-link">
+                        <a class="nav-link">
+                            <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
+                           data-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-comment-dollar"></i>
+                            <span class="count-symbol bg-warning"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                             aria-labelledby="messageDropdown">
+                            <h6 class="p-3 mb-0">رسائل</h6>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="../../../assets/images/faces/face4.jpg" alt="image"
+                                         class="profile-pic">
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">مارك يرسل لك
+                                        رسالة</h6>
+                                    <p class="text-gray mb-0"> منذ 1 دقيقة </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="../../../assets/images/faces/face2.jpg" alt="image"
+                                         class="profile-pic">
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">كريغ نرسل لك
+                                        رسالة</h6>
+                                    <p class="text-gray mb-0"> منذ 15 دقيقة </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="../../../assets/images/faces/face3.jpg" alt="image"
+                                         class="profile-pic">
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject ellipsis mb-1 font-weight-normal">تحديث صورة الملف
+                                        الشخصي</h6>
+                                    <p class="text-gray mb-0"> منذ 18 دقيقة </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="p-3 mb-0 text-center">4 رسائل جديدة</h6>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                           data-toggle="dropdown">
+                            <i class="far fa-envelope"></i>
+                            <span class="count-symbol bg-danger"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                             aria-labelledby="notificationDropdown">
+                            <h6 class="p-3 mb-0">إخطارات</h6>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-success">
+                                        <i class="mdi mdi-calendar"></i>
+                                    </div>
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject font-weight-normal mb-1">حدث اليوم</h6>
+                                    <p class="text-gray ellipsis mb-0"> مجرد تذكير بأن لديك حدث اليوم </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-warning">
+                                        <i class="fas fa-cog"></i>
+                                    </div>
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject font-weight-normal mb-1">الإعدادات</h6>
+                                    <p class="text-gray ellipsis mb-0"> تحديث لوحة القيادة </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-info">
+                                        <i class="mdi mdi-link-variant"></i>
+                                    </div>
+                                </div>
+                                <div
+                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                    <h6 class="preview-subject font-weight-normal mb-1">إطلاق المسؤول</h6>
+                                    <p class="text-gray ellipsis mb-0"> مشرف جديد نجاح باهر! </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="p-3 mb-0 text-center">اطلع على جميع الإشعارات</h6>
+                        </div>
+                    </li>
+                    <li class="nav-item nav-logout d-none d-lg-block">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-power"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-settings d-none d-lg-block">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-format-line-spacing"></i>
+                        </a>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                        data-toggle="offcanvas">
+                    <i class="fas fa-align-right"></i>
+                </button>
+            </div>
+        </div>
     </nav>
     <!-- ends here -->
     <div class="container-fluid page-body-wrapper">
@@ -396,7 +393,7 @@
                         <div class="nav-profile-text d-flex flex-column">
                             {{--<span class="font-weight-bold mb-2">ديفيد جراي. H</span>
                             <span class="text-secondary text-small">مدير المشروع</span>--}}
-                            <i class="fab fa-reddit" style="font-size: 42px"></i>
+
                         </div>
                         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                     </a>
@@ -676,6 +673,7 @@
 <link rel="stylesheet" href="{{asset('css/panel/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{asset('css/panel/font-awesome.min.css')}}"/>
 <script src="{{asset('js/panel/panel.js')}}"></script>
+<script src="{{asset('js/global.js')}}"></script>
 
 @yield('panel-script')
 </html>

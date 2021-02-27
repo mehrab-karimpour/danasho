@@ -1,6 +1,6 @@
-class indexOffline {
-    constructor() {
-
+class indexOffline extends validate{
+    constructor(props) {
+        super(props)
     }
 
     //  handle post request
