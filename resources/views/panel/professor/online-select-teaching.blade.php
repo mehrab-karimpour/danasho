@@ -9,15 +9,6 @@
 
 
 
-    <section id="home" class="container-fluid">
-
-
-    </section>
-
-
-
-
-
 
 
 @endsection
