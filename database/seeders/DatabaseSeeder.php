@@ -15,8 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             scoreSeeder::class,
+            bookSeeder::class,
+            fieldSeeder::class,
+            gradeSeeder::class,
             stateSeeder::class,
-            classSeeder::class,
+            unitSeeder::class,
+            lessonSeeder::class,
+            publicSeeder::class,
             permissionSeeder::class,
             userSeeder::class,
             creditItemSeeder::class,

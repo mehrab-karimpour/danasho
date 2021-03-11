@@ -1,4 +1,73 @@
-body {
-  background-color: red;
+.myaccordion {
+  max-width: 500px;
+  margin: 50px auto;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.myaccordion .card,
+.myaccordion .card:last-child .card-header {
+  border: none;
+}
+
+.myaccordion .card-header {
+  border-bottom-color: #EDEFF0;
+  background: transparent;
+}
+
+.myaccordion .fa-stack {
+  font-size: 18px;
+}
+
+.myaccordion .btn {
+  width: 100%;
+  font-weight: bold;
+  color: #004987;
+  padding: 0;
+}
+
+.myaccordion .btn-link:hover,
+.myaccordion .btn-link:focus {
+  text-decoration: none;
+}
+
+.myaccordion li + li {
+  margin-top: 10px;
+}
+
+.select-online-teaching-parents > li {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.select-online-teaching-parents > li:hover {
+  background-color: #dae5db;
+}
+
+/*.content-wrapper{
+    padding-top:0.37rem!important ;
+}*/
+
+#online-selected-teaching {
+  position: relative;
+}
+
+#online-selected-teaching > form {
+  padding: 1rem 0;
+  position: fixed;
+  z-index: 4000;
+  max-height: 28vh;
+  overflow: auto;
+}
+
+#online-selected-teaching > form > div {
+  width: auto;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  background-color: #1ce591;
+  color: #ffffff;
+  font-weight: bold;
+  margin-right: 0.3rem;
 }
 

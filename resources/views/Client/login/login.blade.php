@@ -2,6 +2,7 @@
 
 @section('client.css')
     <link rel="stylesheet" href="{{asset('css/auth/register.css')}}">
+    <link rel="stylesheet" href="{{asset('css/auth/login.css')}}">
 @endsection
 
 @section('client.content')
@@ -40,7 +41,7 @@
                 </div>
             </div>
         @endif
-
+        @csrf
         <div class="myCard">
             <div class="row" id="login">
                 <div class="login-back-first-child"></div>
@@ -48,8 +49,10 @@
                 <div class="col-md-6">
                     <div class="myLeftCtn myLeftCtn-login">
 
-                        <form action="/login"  method="post" id="login-form" class="myForm text-center needs-validation">
-                            @csrf
+
+
+                        <form action="/login" method="post" id="login-form" class="myForm text-center needs-validation">
+
                             <header class="text-white">ورود به حساب کاربری</header>
 
                             <div class="form-group form-item-parent direction-rtl">
@@ -74,6 +77,12 @@
                                     <input id="check_1" name="remember" type="checkbox" required/>
                                     <small><strong> مرا به خاطر بسپار</strong></small>
                                 </label>
+                            </div>
+
+                            <div class="form-group direction-rtl">
+                                <a class="text-primary cursor-pointer" id="recovery-password">
+                                    بازیابی رمز عبور
+                                </a>
                             </div>
 
                             <button type="button" class="butt login-submit">ورود</button>
@@ -108,6 +117,33 @@
             </div>
         </div>
     </div>
+
+    {{--    login modal    --}}
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        بستن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @include('partials.ajax-loader')
 
 @endsection
 

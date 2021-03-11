@@ -11,6 +11,7 @@ class Unit extends Model
 
     protected $fillable = [
         'title',
+        'field_id',
         'grade_id'
     ];
 

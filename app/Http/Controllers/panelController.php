@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Credit;
 use App\Models\CreditItem;
+
+use App\Models\DatePeriod;
 use App\Models\Field;
 use App\Models\Grade;
+use App\Models\LessonProfessor;
 use App\Models\PollSubject;
 use App\Models\Score;
 use App\Models\Survey;
+use App\Models\TeachingDates;
 use App\Models\Unit;
 use App\Models\User;
 use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,13 +29,82 @@ use Illuminate\Support\Facades\Validator;
 class panelController extends Controller
 {
 
-    //  select online teaching professor
-    public function onlineSelectTeaching()
+    public function updateTeachingDates(Request $request)//: \Illuminate\Http\RedirectResponse
     {
-        return response()->view('panel.professor.online.select.teaching');
+        $i = 0;
+        $items = [];
+        $user_id = Auth::id();
+        $data = $request->except('_token');
+        $persianNow = Carbon::now()->format('Y-m-d H:m:s');
+        foreach ($data as $item) {
+            foreach ($item as $key => $row) {
+                $explodeItems = explode('$', $row);
+                $date_period_id = $explodeItems[0];
+                $key = $explodeItems[1];
+                $datePersian = $explodeItems[2];
+                $index = $explodeItems[3];
+                $date = $explodeItems[4];
+                $items[$i]['date_period_id'] = $date_period_id;
+                $items[$i]['key'] = $key;
+                $items[$i]['datePersian'] = $datePersian;
+                $items[$i]['index'] = $index;
+                $items[$i]['date'] = $date;
+                $items[$i]['user_id'] = $user_id;
+                $items[$i]['created_at'] = $persianNow;
+                $items[$i]['updated_at'] = $persianNow;
+                $i++;
+            }
+        }
+
+        try {
+            TeachingDates::where('user_id', $user_id)->delete();
+            TeachingDates::insert($items);
+            return redirect()->back()->with('status', 'success');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('status', 'error');
+        }
+
     }
 
-    public function increaseCredit()
+    public function selectTeachingDates()//: \Illuminate\Http\Response
+    {
+
+        $teachingDates = [];
+        $teachingDates = $this->getDatesSelectWeekly($teachingDates);
+        $periodDateClasses = DatePeriod::all();
+
+        $teachingDatesSaved = TeachingDates::where('user_id', Auth::id())->with('datePeriods')->get();
+
+        return response()->view('panel.professor.dates-select-teaching',
+            compact('teachingDates', 'periodDateClasses', 'teachingDatesSaved'));
+    }
+
+    public function onlineSelectTeachingRecord(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        try {
+            $user_id = Auth::id();
+            $lessonProfessorRows = [];
+            foreach ($request->lesson as $item) {
+                $lessonProfessorRows[] = [
+                    'lesson_id' => $item,
+                    'professor_id' => $user_id
+                ];
+            }
+            LessonProfessor::insert($lessonProfessorRows);
+            return redirect()->back()->with('status', 'success');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('status', 'error');
+        }
+    }
+
+    //  select online teaching professor
+    public function onlineSelectTeaching(): \Illuminate\Http\Response
+    {
+        $books = Book::with('lessons')->get();
+        return response()->view('panel.professor.online-select-teaching', compact('books'));
+    }
+
+    public function increaseCredit(): \Illuminate\Http\Response
     {
         $userCredit = Auth::user()->credit;
         $creditItems = CreditItem::all();
@@ -199,5 +275,20 @@ class panelController extends Controller
         $imageName = "$requestImage" . '.' . $now . '.' . $path;
         $request->file("$requestImage")->storeAs("/users/$user_id/profile/", $imageName);
         return $imageName;
+    }
+
+    /**
+     * @param $teachingDates
+     * @return mixed
+     */
+    public function getDatesSelectWeekly($teachingDates)
+    {
+        for ($i = 1; $i < 8; $i++) {
+            $teachingDates[$i]['datePersian'] = Verta::now()->addDays($i)->format('Y/m/d l');
+            $teachingDates[$i]['date'] = Carbon::now()->addDays($i)->format('Y-m-d');
+            $teachingDates[$i]['key'] = Carbon::now()->addDays($i)->format('l');
+            $teachingDates[$i]['index'] = $i;
+        }
+        return $teachingDates;
     }
 }

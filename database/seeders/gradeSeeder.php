@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class gradeSeeder extends Seeder
 {
@@ -13,6 +14,19 @@ class gradeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('grades')->insert([
+            [
+                'title' => 'ابتدایی',
+                'hasField' => false
+            ],
+            [
+                'title' => 'متوسطه اول',
+                'hasField' => false
+            ],
+            [
+                'title' => 'متوسطه دوم',
+                'hasField' => true
+            ],
+        ]);
     }
 }

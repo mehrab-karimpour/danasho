@@ -12,6 +12,7 @@
     "/css/panel/online-create.css": "/css/panel/online-create.css",
     "/css/panel/new-ticket.css": "/css/panel/new-ticket.css",
     "/css/panel/increase-credit.css": "/css/panel/increase-credit.css",
+    "/css/panel/online-select-teaching.css": "/css/panel/online-select-teaching.css",
     "/css/auth/register.css": "/css/auth/register.css",
     "/css/auth/login.css": "/css/auth/login.css",
     "/css/online-success.css": "/css/online-success.css",
@@ -27,5 +28,6 @@
     "/css/header.css": "/css/header.css",
     "/js/register.js": "/js/register.js",
     "/js/login.js": "/js/login.js",
-    "/js/panel/home.js": "/js/panel/home.js"
+    "/js/panel/home.js": "/js/panel/home.js",
+    "/js/panel/online-select-teaching.js": "/js/panel/online-select-teaching.js"
 }

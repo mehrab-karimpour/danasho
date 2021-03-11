@@ -1,6 +1,5 @@
-class validate {
+class validate  {
     constructor(props) {
-
     }
 
     addClassError = (item, classError) => {
@@ -247,7 +246,6 @@ class index extends validate {
     }
 
     static ajaxBackStart = () => {
-        alert("ok")
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
             $('#ajax-leader-back').fadeIn(200);
@@ -1050,6 +1048,13 @@ class StepOffline_2 extends indexOffline {
     }
 
     startStep = (actionType) => {
+
+        const questionUploadLength = $('.upload-questions').find("input").length;
+        if (questionUploadLength === 1) {
+            $('.upload-questions').empty();
+            $("#main-parent-item-offline").append("<ul class='list-group m-0 p-0' id='list-group-offline'></ul>");
+        }
+
         $('.go-back-offline').empty();
         this.circleSelect(2, 0);
         $('.ajax-back').fadeIn();
@@ -1067,6 +1072,7 @@ class StepOffline_2 extends indexOffline {
     }
 
     stepHandle = (turn, data) => {
+        this.addButtonBack('.question-count');
         const mainParentItems = $("#main-parent-item-offline");
         if (turn === 4) {
             window.counQuestionsOffline = data;

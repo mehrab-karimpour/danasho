@@ -1,6 +1,5 @@
-class validate {
+class validate  {
     constructor(props) {
-
     }
 
     addClassError = (item, classError) => {

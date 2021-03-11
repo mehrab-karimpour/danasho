@@ -446,13 +446,13 @@
                     <div class="collapse" id="page-layouts">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('panel.online-create')}}">
+                                <a class="nav-link" href="{{route('panel.online-select-teaching')}}">
                                     <i class="fab fa-creative-commons-sampling-plus"></i>
                                     <p>دروس تدریس انلاین</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('panel.online-reserved')}}">
+                                <a class="nav-link" href="{{route('panel.select-teaching-dates')}}">
                                     <i class="far fa-calendar"></i>
                                     <p>زمان های تدریس</p>
                                 </a>

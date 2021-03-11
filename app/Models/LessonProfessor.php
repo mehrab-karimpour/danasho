@@ -5,20 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lesson extends Model
+class LessonProfessor extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'unit_id',
-        'book_id'
+        'lesson_id',
+        'professor_id'
     ];
-
-    public function unit()
-    {
-        return $this->belongsTo(Unit::class);
-
-    }
 
 }

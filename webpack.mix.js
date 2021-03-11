@@ -95,6 +95,7 @@ mix.sass('resources/sass/panel/online-held.scss', 'public/css/panel/online-held.
 mix.sass('resources/sass/panel/online-create.scss', 'public/css/panel/online-create.css');
 mix.sass('resources/sass/panel/new-ticket.scss', 'public/css/panel/new-ticket.css');
 mix.sass('resources/sass/panel/increase-credit.scss', 'public/css/panel/increase-credit.css');
+mix.sass('resources/sass/panel/online-select-teaching.scss', 'public/css/panel/online-select-teaching.css');
 
 
 /*
@@ -124,3 +125,7 @@ mix.combine([
 mix.combine([
     'resources/js/panel/custom/home.js',
 ], 'public/js/panel/home.js');
+
+mix.combine([
+    'resources/js/panel/custom/online-select-teaching.js',
+], 'public/js/panel/online-select-teaching.js');

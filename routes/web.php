@@ -31,7 +31,12 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::get('/online-reserved', [panelController::class, 'onlineReserved'])->name('panel.online-reserved');
     Route::get('/online-held', [panelController::class, 'onlineHeld'])->name('panel.online-held');
     Route::get('/online-create', [panelController::class, 'onlineRequest'])->name('panel.online-create');
+    // TODO: Teaching Status
     Route::get('online-select-teaching', [panelController::class, 'onlineSelectTeaching'])->name('panel.online-select-teaching');
+    Route::post('online-select-teaching', [panelController::class, 'onlineSelectTeachingRecord'])->name('panel.online-select-teaching-record');
+    Route::get('/teaching-dates', [panelController::class, 'selectTeachingDates'])->name('panel.select-teaching-dates');
+    Route::post('/teaching-dates', [panelController::class, 'updateTeachingDates'])->name('panel.update-teaching-dates');
+
     // profile
     Route::get('/edit-profile', [panelController::class, 'editProfile'])->name('panel.edit-profile');
     Route::post('/edit-profile-professor', [panelController::class, 'editProfileProfessor'])
@@ -46,6 +51,7 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::post('/show-ticket', [ticketController::class, 'sendTicket'])->name('panel.send.message');
     // credit
     Route::get('/increase-credit', [panelController::class, 'increaseCredit'])->name('panel.increase.credit');
+
 });
 
 
@@ -77,6 +83,8 @@ Route::post('register', [registerController::class, 'create']);
 Route::post('/password-request', [registerController::class, 'passwordRequest']);
 Route::get('login', [loginController::class, 'login'])->name('login');
 Route::post('login', [loginController::class, 'doLogin']);
+Route::post('/recovery-password', [loginController::class, 'recoveryPassword']);
+Route::post('/recovery-password-check-verify', [loginController::class, 'recoveryPasswordCheckVerify']);
 Route::get('/logout', [loginController::class, 'logOut']);
 
 

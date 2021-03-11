@@ -31,7 +31,8 @@ th {
   font-family: Shabnam !important;
 }
 
-a {
+a,
+button {
   text-decoration: none !important;
 }
 
@@ -233,5 +234,13 @@ input[type=number] {
 
 input[type='radio'] {
   cursor: pointer;
+}
+
+button.btn {
+  cursor: pointer;
+}
+
+li {
+  list-style: none !important;
 }
 

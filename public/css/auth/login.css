@@ -1,0 +1,7 @@
+#recovery-password {
+  display: grid;
+  grid-template-columns: auto;
+  height: 65%;
+  text-align: center;
+}
+

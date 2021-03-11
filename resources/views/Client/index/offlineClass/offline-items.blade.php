@@ -10,7 +10,7 @@
     <span onclick="offlineModalClose()" class="d-block mt-2 ml-1 "><i class="fas fa-times offline-steps-close cursor-pointer"></i></span>
     <div id="list-parent"></div>
     <div  id="main-parent-item-offline" class="col-12 d-flex justify-content-center">
-        <ul class='list-group m-0 p-0' id="list-group-offline"></ul>
+        <ul class='list-group m-0 p-0' id='list-group-offline'></ul>
     </div>
     <div id="offline-item-end-step"></div>
     <div class="col-6 col-md-4 col-xl-2 circle-select-offline">

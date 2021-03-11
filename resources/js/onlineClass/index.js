@@ -134,7 +134,6 @@ class index extends validate {
     }
 
     static ajaxBackStart = () => {
-        alert("ok")
         $(document).ajaxStart(function () {
             $('#ajax-loader').fadeIn();
             $('#ajax-leader-back').fadeIn(200);

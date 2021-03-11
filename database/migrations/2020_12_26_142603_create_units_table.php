@@ -15,7 +15,8 @@ class CreateUnitsTable extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grade_id')->constrained()->onDelete('cascade');
+            $table->integer('grade_id')->nullable();
+            $table->integer('field_id')->nullable();
             $table->string('title');
             $table->timestamps();
         });

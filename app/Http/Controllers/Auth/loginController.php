@@ -7,9 +7,38 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+
 
 class loginController extends Controller
 {
+    public function recoveryPasswordCheckVerify(Request $request)
+    {
+        if (Session::get("password-recovery-verify") == $request->verifyToken) {
+            return response()->json(['status' => 'success']);
+        } else {
+            return response()->json(['status' => 'error']);
+        }
+    }
+
+
+    public function recoveryPassword(Request $request)
+    {
+        try {
+            $user = User::where('mobile', $request->mobile)->first();
+            if ($user) {
+                $token = rand(4000, 9000);
+                Session::put('password-recovery-verify', $token);
+                return response()->json(['status' => 'success'], 200);
+            } else {
+                return response()->json(['status' => 'undefined'], 200);
+            }
+
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json(['status' => 'success'], 412);
+        }
+    }
 
     public function logOut()
     {
