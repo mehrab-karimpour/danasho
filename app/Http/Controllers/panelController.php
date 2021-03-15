@@ -25,11 +25,34 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use mysql_xdevapi\Exception;
 
 class panelController extends Controller
 {
+    public function getStudentUpdate(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        try {
+            $professorCanTeaching = false;
+            if ($request->getStudentStatus === "on") {
+                $professorCanTeaching = true;
+            }
+            User::find(Auth::id())->update([
+                'professor_active' => $professorCanTeaching
+            ]);
+            return redirect()->back()->with(['status' => 'success'], 201);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect()->back()->with(['status' => 'error'], 412);
+        }
+    }
 
-    public function updateTeachingDates(Request $request)//: \Illuminate\Http\RedirectResponse
+    public function getStudentStatus(): \Illuminate\Http\Response
+    {
+        $user = Auth::user();
+        return response()->view('panel.professor.getStudent', compact('user'));
+    }
+
+    public function updateTeachingDates(Request $request): \Illuminate\Http\RedirectResponse
     {
         $i = 0;
         $items = [];
@@ -66,7 +89,7 @@ class panelController extends Controller
 
     }
 
-    public function selectTeachingDates()//: \Illuminate\Http\Response
+    public function selectTeachingDates(): \Illuminate\Http\Response
     {
 
         $teachingDates = [];

@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\ImageSize' => $baseDir . '/app/Events/ImageSize.php',
+    'App\\Events\\onlineClassCreated' => $baseDir . '/app/Events/onlineClassCreated.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\loginController' => $baseDir . '/app/Http/Controllers/Auth/loginController.php',
     'App\\Http\\Controllers\\Auth\\registerController' => $baseDir . '/app/Http/Controllers/Auth/registerController.php',
@@ -29,6 +30,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Listeners\\GoImageResizing' => $baseDir . '/app/Listeners/GoImageResizing.php',
+    'App\\Listeners\\informProfessorOnlineCreated' => $baseDir . '/app/Listeners/informProfessorOnlineCreated.php',
     'App\\Models\\Book' => $baseDir . '/app/Models/Book.php',
     'App\\Models\\Credit' => $baseDir . '/app/Models/Credit.php',
     'App\\Models\\CreditItem' => $baseDir . '/app/Models/CreditItem.php',

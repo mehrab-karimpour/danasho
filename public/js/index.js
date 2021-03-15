@@ -433,7 +433,7 @@ class Step3 extends index {
     startStep = (actionType) => {
         if (window.dates === window.periods) {
             this.ajaxStart();
-           this.post('/online/getDates', {}).then((response) => {
+            this.post('/online/getDates', {}).then((response) => {
                 if (response === 'error') {
                     index.alertOnlineClass(0, 'error');
                 } else {
@@ -450,7 +450,7 @@ class Step3 extends index {
                 Step3.ajaxBackEnd();
 
             })
-        }else {
+        } else {
             $('.go-back').empty();
             this.circleSelect(2, 0);
             $('.ajax-back').fadeIn();
@@ -463,9 +463,11 @@ class Step3 extends index {
     }
 
     stepHandle = (tag, data) => {
+
         this.addButtonBack('.date');
         this.circleSelect(2, 1);
         if (tag === 6) {
+            Step2.appendInput('periodID', 'periodId', data.dataID);
             data.value = window.dateTitle + data.value;
             this.endStep(data);
         } else {

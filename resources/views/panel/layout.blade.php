@@ -452,13 +452,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('panel.select-teaching-dates')}}">
+                                <a class="nav-link" href="/panel/teaching-dates">
                                     <i class="far fa-calendar"></i>
                                     <p>زمان های تدریس</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('panel.online-reserved')}}">
+                                <a class="nav-link" href="{{route('panel.online-get-student-status')}}">
                                     <i class="fas fa-unlock-alt"></i>
                                     <p>دریافت شاگرد</p>
                                 </a>

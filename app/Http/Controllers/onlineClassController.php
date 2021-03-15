@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\ImageSize;
-use App\Events\resizeImage;
-use App\Events\sendVerify;
+use App\Events\onlineClassCreated;
 use App\Models\DatePeriod;
 use App\Models\Lesson;
+use App\Models\LessonProfessor;
 use App\Models\Online;
 use App\Models\Price;
+use App\Models\TeachingDates;
 use App\Models\Time;
 use App\Models\Unit;
 use App\Models\User;
@@ -21,20 +22,27 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\Permission\Models\Role;
 
 class onlineClassController extends Controller
 {
+
+    public function professorSelected()
+    {
+        return DB::table('test')->get();
+    }
 
     public function getPass()
     {
         return ['online' => Session::get('online-class-verify'),
             'offline' => Session::get('offline-class-verify'),
             'password-recovery-token' => Session::get('password-recovery-verify'),
-            ];
+        ];
     }
 
     public function create(Request $request)
     {
+
         try {
             $time = Time::find($request->time)->title;
             $date = explode('-', $request->date);
@@ -58,6 +66,7 @@ class onlineClassController extends Controller
                 'date' => $request->date,
                 'day' => $day,
                 'period' => $request->period,
+                'period_id' => $request->periodId,
                 'level' => $request->level,
                 'name' => $request->name,
                 'description' => $request->description,
@@ -71,6 +80,8 @@ class onlineClassController extends Controller
                 $format = $file->getClientOriginalExtension();
                 ImageSize::dispatch($path . $newName, $format);
             }
+
+            onlineClassCreated::dispatch($newOnlineClass->id);
 
             return response()->view('Client.index.onlineClass.success-create', compact('newOnlineClass'));
         } catch (\Exception $e) {

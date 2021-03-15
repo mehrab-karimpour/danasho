@@ -25,6 +25,7 @@ class CreateOnlinesTable extends Migration
             $table->string('day')->nullable();
             $table->date('date')->nullable();
             $table->string('period')->nullable();
+            $table->integer('period_id')->nullable();
             $table->string('level')->nullable();
             $table->text('description')->nullable();
             $table->string('name')->nullable();

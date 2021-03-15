@@ -536,6 +536,7 @@ class ComposerStaticInit3f72ec22ae14c8f9ad261d742088daca
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\ImageSize' => __DIR__ . '/../..' . '/app/Events/ImageSize.php',
+        'App\\Events\\onlineClassCreated' => __DIR__ . '/../..' . '/app/Events/onlineClassCreated.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\loginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/loginController.php',
         'App\\Http\\Controllers\\Auth\\registerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/registerController.php',
@@ -557,6 +558,7 @@ class ComposerStaticInit3f72ec22ae14c8f9ad261d742088daca
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Listeners\\GoImageResizing' => __DIR__ . '/../..' . '/app/Listeners/GoImageResizing.php',
+        'App\\Listeners\\informProfessorOnlineCreated' => __DIR__ . '/../..' . '/app/Listeners/informProfessorOnlineCreated.php',
         'App\\Models\\Book' => __DIR__ . '/../..' . '/app/Models/Book.php',
         'App\\Models\\Credit' => __DIR__ . '/../..' . '/app/Models/Credit.php',
         'App\\Models\\CreditItem' => __DIR__ . '/../..' . '/app/Models/CreditItem.php',

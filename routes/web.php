@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 // index page
 
 Route::get('/d', [onlineClassController::class, 'getPass']);
+Route::get('/test', [onlineClassController::class, 'professorSelected']);
 
 
 Route::prefix('/panel')->middleware('auth')->group(function () {
@@ -36,6 +37,8 @@ Route::prefix('/panel')->middleware('auth')->group(function () {
     Route::post('online-select-teaching', [panelController::class, 'onlineSelectTeachingRecord'])->name('panel.online-select-teaching-record');
     Route::get('/teaching-dates', [panelController::class, 'selectTeachingDates'])->name('panel.select-teaching-dates');
     Route::post('/teaching-dates', [panelController::class, 'updateTeachingDates'])->name('panel.update-teaching-dates');
+    Route::get('/get-student-status', [panelController::class, 'getStudentStatus'])->name('panel.online-get-student-status');
+    Route::post('/get-student-status', [panelController::class, 'getStudentUpdate']);
 
     // profile
     Route::get('/edit-profile', [panelController::class, 'editProfile'])->name('panel.edit-profile');

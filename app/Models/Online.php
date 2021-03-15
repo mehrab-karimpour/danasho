@@ -13,6 +13,7 @@ class Online extends Model
         'pay-status',
         'user_id',
         'period',
+        'period_id',
         'price',
         'grade',
         'unit',
