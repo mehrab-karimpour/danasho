@@ -8,6 +8,7 @@ use App\Http\Controllers\offlineClassController;
 use App\Http\Controllers\onlineClassController;
 use App\Http\Controllers\panelController;
 use App\Http\Controllers\ticketController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 // index page
 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
+});
 Route::get('/d', [onlineClassController::class, 'getPass']);
 Route::get('/test', [onlineClassController::class, 'professorSelected']);
 
